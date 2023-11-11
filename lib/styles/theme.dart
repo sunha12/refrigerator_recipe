@@ -3,8 +3,27 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color green = Color(0xFF19AC65);
+  static const Color green = Color(0xFF19AC65); // primary
+  static const Color green_light = Color(0xFFDEF5E9); // chat_bg
+  static const Color blue = Color(0xFF0000ED); // 확인 text
+  static const Color blue_light = Color(0xFFF3F7FB); // chat_미리알림_bg
+  static const Color red = Color(0xFFFF5449); // like_heart
+  static const Color dark_charcoal = Color(0xFF313033); // active_btn & font
+  static const Color gray_deep = Color(0xFF4A4A4A); // font_tit1
+  static const Color black_md = Color(0xFF323232); // font_tit2
+  static const Color gray_md = Color(0xFFA8A8A8); // font_cont1
+  static const Color sub_text = Color(0xFF737373); // font_cont2
+  static const Color gray_light = Color(0xFFD4D4D4); //deactivate_btn & btn_line
+  static const Color gray_white = Color(0xFFF2F3F5);
+  static const Color line_thin = Color(0xFFF5F5F5); // thin_line // 얇은 구분선
+  static const Color line_bold = Color(0xFFFAFAFA); // bold_line // 굵은 구분선
+
+  // Text, 구분선은 따로 한번 더 정의
   static const Color darkText1 = Color(0xFF4A4A4A);
+  static const Color darkText2 = Color(0xFF313033);
+  static const Color lightText = Color(0xFFA8A8A8);
+  static const Color boldLine = Color(0xFFF2F3F5);
+  static const Color thinLine = Color(0xFFD4D4D4);
 
   static const textTheme = TextTheme(
     headline5: headline5, // 24px
