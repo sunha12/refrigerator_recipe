@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:get/get.dart';
+import 'package:refrigerator_recipe_app/provider/time_update.dart';
 import 'package:refrigerator_recipe_app/screens/splash_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 
@@ -12,6 +14,7 @@ void main() {
         enabled: !kReleaseMode,
         builder: (context) => const MyApp()), //디바이스 패키지 관련 추가
   );
+  Get.put(TimerUpdate()); // TimerUpdate 클래스 등록
 }
 
 class MyApp extends StatelessWidget {

@@ -111,7 +111,7 @@ class _ShortWhiteButtonWidgetsState extends State<ShortWhiteButtonWidgets> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1.0, // 보더의 너비
-            color: AppTheme.gray_light,
+            color: AppTheme.gray_D4,
           ),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -125,13 +125,10 @@ class _ShortWhiteButtonWidgetsState extends State<ShortWhiteButtonWidgets> {
             ),
           ),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
-              Colors.white,
-            ),
-            overlayColor: MaterialStateProperty.all(
-              Colors.white,
-            ),
-          ),
+              // overlayColor: MaterialStateProperty.all(
+              //   Colors.white,
+              // ),
+              ),
         ),
       ),
     );
@@ -193,6 +190,7 @@ class _LongButtonWidgetsState extends State<LongButtonWidgets> {
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 style: ButtonStyle(
@@ -427,7 +425,7 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
                     : Transform.scale(
                         scale: 0.7,
                         child: CupertinoSwitch(
-                            activeColor: AppTheme.green,
+                            activeColor: AppTheme.orange,
                             value: switchValue,
                             onChanged: (value) {
                               setState(() {
@@ -671,7 +669,7 @@ class _SelectDateButtonWidgetsState extends State<SelectDateButtonWidgets> {
             ),
             side: MaterialStateProperty.all<BorderSide>(
               BorderSide(
-                color: AppTheme.gray_light,
+                color: AppTheme.gray_D4,
                 width: 1.0,
               ),
             ),
@@ -784,7 +782,7 @@ class _MoreButtonWidgetsState extends State<MoreButtonWidgets> {
             style: TextButton.styleFrom(
               backgroundColor: Colors.white,
               padding: EdgeInsets.zero,
-              side: BorderSide(color: AppTheme.gray_light, width: 1),
+              side: BorderSide(color: AppTheme.gray_D4, width: 1),
             ),
           ),
         ),

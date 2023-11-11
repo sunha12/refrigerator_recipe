@@ -140,14 +140,14 @@ class _CalendarWidgetsState extends State<CalendarWidgets> {
                     weekendTextStyle: TextStyle(color: Colors.black),
                     // selectedDay 모양 조정
                     selectedDecoration: const BoxDecoration(
-                      color: AppTheme.green,
+                      color: AppTheme.orange,
                       shape: BoxShape.circle,
                     ),
                     todayDecoration: BoxDecoration(
                       color: Colors.transparent,
                     ),
                     todayTextStyle: TextStyle(
-                      color: AppTheme.green,
+                      color: AppTheme.orange,
                     ),
                   ),
                   //선택 날짜 변경

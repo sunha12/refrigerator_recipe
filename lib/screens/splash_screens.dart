@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/screens/loing_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
 
@@ -67,6 +68,18 @@ class _SplashScreensState extends State<SplashScreens> {
     super.initState();
 
     // _tokenCheck();
+
+    // 설정한 시간(초)뒤에 HomeScreens 이동
+    // 2초로 임의 지정
+    Timer(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          // builder: (context) => SocialLoginScreens(),
+          // builder: (context) => HomeScreens(),
+          builder: (context) => LoingScreens(),
+        ),
+      );
+    });
   }
 
   // 설정한 시간(초)뒤에 HomeScreens 이동
