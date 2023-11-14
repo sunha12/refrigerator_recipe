@@ -86,8 +86,8 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 22,
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaWidth(context, 0.04),
                 vertical: 6,
               ),
               child: Text(

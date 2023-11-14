@@ -5,6 +5,7 @@ import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/notification_window_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/policy_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/size_box_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 import 'package:refrigerator_recipe_app/provider/time_update.dart';
@@ -81,8 +82,8 @@ class _SignupScreensState extends State<SignupScreens> {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 22,
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaWidth(context, 0.04),
                   vertical: 6,
                 ),
                 child: Text(
@@ -129,8 +130,8 @@ class _SignupScreensState extends State<SignupScreens> {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 22,
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaWidth(context, 0.04),
                   vertical: 6,
                 ),
                 child: Text(
@@ -191,8 +192,8 @@ class _SignupScreensState extends State<SignupScreens> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 22,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaWidth(context, 0.04),
                     vertical: 6,
                   ),
                   child: Text(
@@ -252,6 +253,12 @@ class _SignupScreensState extends State<SignupScreens> {
               ),
             ),
             //약관 동의
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
+              child: PolicyWidgets(),
+            ),
+            //가입하기 버튼
             Padding(
               padding: const EdgeInsets.only(
                 top: 30,
