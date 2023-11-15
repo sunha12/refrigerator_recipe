@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/screens/home_screens.dart';
 import 'package:refrigerator_recipe_app/screens/password_find_srceens.dart';
 import 'package:refrigerator_recipe_app/screens/signup_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
@@ -123,7 +124,12 @@ class _LoingScreensState extends State<LoingScreens> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
               child: LongButtonWidgets(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreens()),
+                  );
+                },
                 colorId: AppTheme.orange,
                 buttonText: "로그인",
                 iconUrl: "",

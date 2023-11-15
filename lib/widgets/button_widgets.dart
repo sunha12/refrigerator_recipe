@@ -228,67 +228,57 @@ class TextButtonWidgets extends StatefulWidget {
 class _TextButtonWidgetsState extends State<TextButtonWidgets> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 1,
-                  color: widget.bar == true
-                      ? AppTheme.line_thin
-                      : Colors.transparent,
-                ),
-              ),
-            ),
-            child: TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all<double>(0), // 그림자 제거
-                overlayColor: MaterialStateProperty.all<Color>(Colors.white),
-              ),
-              onPressed: widget.onPressed,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 15, horizontal: MediaWidth(context, 0.04)),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: widget.bar == true ? AppTheme.line_thin : Colors.transparent,
+          ),
+        ),
+      ),
+      child: TextButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double>(0), // 그림자 제거
+          overlayColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        onPressed: widget.onPressed,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: 15, horizontal: MediaWidth(context, 0.04)),
+            child: Row(
+              //위젯 양쪽 정렬
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
                   child: Row(
-                    //위젯 양쪽 정렬
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            widget.icon != ''
-                                ? Padding(
-                                    padding: EdgeInsets.only(
-                                        right: MediaWidth(context, 0.04)),
-                                    child: SvgPicture.asset(widget.icon,
-                                        height: 18,
-                                        width: 18,
-                                        fit: BoxFit.scaleDown),
-                                  )
-                                : Container(),
-                            Text(
-                              widget.buttonText,
-                              style: TextStyle(
-                                color: AppTheme.gray_deep,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                      widget.icon != ''
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                  right: MediaWidth(context, 0.04)),
+                              child: SvgPicture.asset(widget.icon,
+                                  height: 18, width: 18, fit: BoxFit.scaleDown),
+                            )
+                          : Container(),
+                      Text(
+                        widget.buttonText,
+                        style: TextStyle(
+                          color: AppTheme.gray_deep,
+                          fontSize: 14,
                         ),
                       ),
-                      SvgPicture.asset('assets/icons/ico_next.svg'),
                     ],
                   ),
                 ),
-              ),
+                SvgPicture.asset('assets/icons/ico_next.svg'),
+              ],
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
@@ -368,7 +358,82 @@ class _TextButtonNotBorderWidgetsState
   }
 }
 
-//업체 프로필 설정 위젯
+//정책 동의 버튼 위젯
+class TextButtonPolicyWidgets extends StatefulWidget {
+  final String buttonText;
+  final String icon;
+  final VoidCallback onPressed;
+  final bool isAgree;
+
+  const TextButtonPolicyWidgets(
+      {required this.icon,
+      required this.buttonText,
+      required this.onPressed,
+      required this.isAgree,
+      super.key});
+
+  @override
+  State<TextButtonPolicyWidgets> createState() =>
+      _TextButtonPolicyWidgetsState();
+}
+
+class _TextButtonPolicyWidgetsState extends State<TextButtonPolicyWidgets> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: TextButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double>(0), // 그림자 제거
+          overlayColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        onPressed: widget.onPressed,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaWidth(context, 0),
+            ),
+            child: Row(
+              //위젯 양쪽 정렬
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          right: MediaWidth(context, 0.02),
+                        ),
+                        child: Icon(
+                          Icons.check,
+                          color:
+                              widget.isAgree ? Colors.green : AppTheme.gray_md,
+                          size: MediaWidth(context, 0.04),
+                        ),
+                      ),
+                      Text(
+                        widget.buttonText,
+                        style: TextStyle(
+                          color: AppTheme.gray_deep,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                widget.icon != ''
+                    ? SizedBox()
+                    : SvgPicture.asset('assets/icons/ico_next.svg'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//설정 위젯
 class ProfileSettingWidgets extends StatefulWidget {
   final titleText;
   final bodyText;

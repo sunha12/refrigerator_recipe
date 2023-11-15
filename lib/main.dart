@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:get/get.dart';
 import 'package:refrigerator_recipe_app/provider/time_update.dart';
+import 'package:refrigerator_recipe_app/screens/home_screens.dart';
 import 'package:refrigerator_recipe_app/screens/splash_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 
@@ -38,7 +39,13 @@ class MyApp extends StatelessWidget {
 
       routes: {
         'Splash': (context) => SplashScreens(), // 스플래시
+        'home': (context) => HomeScreens(), // 홈
+        'refrigeratorConsumption': (context) => HomeScreens(), // 냉장고 파먹기
+        'refrigeratorRecipe': (context) => HomeScreens(), // 냉장고 속 레시피
+        'recipeCategory': (context) => HomeScreens(), // 레시피 카테고리
+        'MyPage': (context) => HomeScreens(), // 마이페이지
       },
+
       // 제일 처음 보일 화면
       initialRoute: 'Splash',
     );
