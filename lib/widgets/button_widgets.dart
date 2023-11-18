@@ -634,137 +634,6 @@ class _TimeButtonWidgetsState extends State<TimeButtonWidgets> {
   }
 }
 
-//* * 뒤로가기(back) 버튼 * *//
-class BackBtn extends StatefulWidget {
-  const BackBtn({super.key});
-
-  @override
-  State<BackBtn> createState() => _BackBtnState();
-}
-
-class _BackBtnState extends State<BackBtn> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 10, right: 0, top: 30),
-          child: AppBar(
-            brightness: Brightness.light, // 밝은 화면 배경
-            backgroundColor: Colors.transparent,
-            elevation: 0.0, // 그림자 제거
-            automaticallyImplyLeading: true,
-            leading: IconButton(
-              icon: SvgPicture.asset("assets/icons/btn_back.svg"),
-              //tooltip: 'back page',
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-//* * 뒤로가기(back) 버튼 * *//
-
-//날짜 선택 위젯
-class SelectDateButtonWidgets extends StatefulWidget {
-  final String buttonText;
-  final Color buttonColor;
-  final String selectedDay;
-  final Function(DateTime) onDaySelected;
-  const SelectDateButtonWidgets({
-    super.key,
-    required this.buttonText,
-    required this.selectedDay,
-    required this.buttonColor,
-    required this.onDaySelected,
-  });
-
-  @override
-  State<SelectDateButtonWidgets> createState() =>
-      _SelectDateButtonWidgetsState();
-}
-
-class _SelectDateButtonWidgetsState extends State<SelectDateButtonWidgets> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
-      child: Container(
-        //최대 길이 임의지정
-        constraints: BoxConstraints(maxWidth: MediaWidth(context, 0.5)),
-        child: TextButton(
-          onPressed: () {
-            setState(
-              () {
-                FocusScope.of(context).unfocus(); // 현재 포커스 해제
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 500,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20), // 모달 좌상단 라운딩 처리
-                          topRight: Radius.circular(20), // 모달 우상단 라운딩 처리
-                        ),
-                      ),
-                      child: CalendarWidgets(
-                        onDaySelected: widget.onDaySelected,
-                        selectedDay: widget.selectedDay,
-                      ),
-                    );
-                  },
-                  backgroundColor: Colors.transparent,
-                );
-                // assentTrue = 1;
-              },
-            );
-          },
-          style: ButtonStyle(
-            elevation: MaterialStateProperty.all(0), // 그림자 제거
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-            side: MaterialStateProperty.all<BorderSide>(
-              BorderSide(
-                color: AppTheme.gray_D4,
-                width: 1.0,
-              ),
-            ),
-            overlayColor: MaterialStateProperty.all(Colors.white),
-            foregroundColor: MaterialStateProperty.all(AppTheme.gray_md),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.2, horizontal: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.buttonText,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: widget.buttonColor,
-                  ),
-                ),
-                SvgPicture.asset(
-                  'assets/icons/ico_calendar.svg',
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 //더하기 버튼 위젯
 class PlusButtonWidgets extends StatefulWidget {
   final VoidCallback onPressed;
@@ -851,6 +720,77 @@ class _MoreButtonWidgetsState extends State<MoreButtonWidgets> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+//재료, 조미료 추가 버튼 위젯
+class IngredientAddButtonWidgets extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const IngredientAddButtonWidgets({
+    required this.text,
+    required this.onPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.05), 17,
+                    MediaWidth(context, 0.05), 7),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: AppTheme.gray_deep,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: MediaWidth(context, 0.045)),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white, // 배경 색상을 흰색으로 설정
+                    border: Border.all(width: 1, color: AppTheme.gray_D4),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                      overlayColor: MaterialStateProperty.all(Colors.white),
+                      minimumSize: MaterialStateProperty.all(Size.zero),
+                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(25),
+                      child: Icon(
+                        Icons.add_box_outlined,
+                        weight: 17,
+                        color: AppTheme.gray_deep,
+                      ),
+                    ),
+                    onPressed: onPressed,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          //추가된 재료가 보여질 영역
+        ],
       ),
     );
   }
