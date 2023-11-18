@@ -19,7 +19,7 @@ class BackButtonWidgets extends StatelessWidget {
           appBarText,
           style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -126,21 +126,46 @@ class SettingBackButtonWidgets extends StatelessWidget {
   }
 }
 
-// 취소, 닫기 뒤로가기 위젯
+// 앱 바 위젯
+class AppBerWidgets extends StatelessWidget {
+  final String appBarText;
+
+  const AppBerWidgets({required this.appBarText, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AppBar(
+        title: Text(
+          appBarText,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            // fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+    );
+  }
+}
+
+// 냉장고 홈 상단 위젯
 class CancellationBackButtonWidgets extends StatelessWidget {
   final String appBarText;
   final VoidCallback onPressed1;
   final VoidCallback onPressed2;
-  //임시 저장 활성화 (오른쪽 끝)
-  final bool isSave;
-  //닫기 버튼 활성화 (왼쪽 끝)
-  final bool isClose;
+  //(오른쪽 끝 영수증)
+  final bool isReceipt;
+  //(왼쪽 끝 조미료)
+  final bool isCondiment;
   const CancellationBackButtonWidgets(
       {required this.appBarText,
       required this.onPressed1,
       required this.onPressed2,
-      required this.isSave,
-      required this.isClose,
+      required this.isReceipt,
+      required this.isCondiment,
       super.key});
 
   @override
@@ -150,9 +175,9 @@ class CancellationBackButtonWidgets extends StatelessWidget {
         title: Text(
           appBarText,
           style: TextStyle(
-            fontSize: 16,
-            color: AppTheme.gray_deep,
-            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.black,
+            // fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.white,
@@ -161,20 +186,17 @@ class CancellationBackButtonWidgets extends StatelessWidget {
             overlayColor: MaterialStateProperty.all(Colors.white),
             foregroundColor: MaterialStateProperty.all(AppTheme.gray_deep),
           ),
-          child: isClose == false
+          child: isCondiment == true
               ? Text(
                   '취소',
                   style: TextStyle(fontSize: 14),
                 )
-              : Icon(
-                  Icons.close,
-                  size: 20,
-                ),
+              : SizedBox(),
           onPressed: onPressed1,
         ),
         elevation: 0,
         actions: [
-          isSave == true
+          isReceipt == true
               ? Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: TextButton(

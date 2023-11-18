@@ -36,7 +36,7 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(width: 1, color: AppTheme.gray_D4),
+                bottom: BorderSide(width: 1, color: AppTheme.gray_97),
               ),
             ),
             child: BackButtonWidgets(appBarText: '비밀번호 재설정'),

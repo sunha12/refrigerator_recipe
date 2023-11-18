@@ -16,6 +16,7 @@ class AppTheme {
   static const Color sub_text = Color(0xFF737373); // font_cont2
   static const Color gray_D4 = Color(0xFFD4D4D4); //deactivate_btn & btn_line
   static const Color gray_D9 = Color(0xFFD9D9D9); //deactivate_btn & btn_line
+  static const Color gray_97 = Color(0xFF979797); //deactivate_btn & btn_line
   static const Color gray_white = Color(0xFFF2F3F5);
   static const Color line_thin = Color(0xFFF5F5F5); // thin_line // 얇은 구분선
   static const Color line_bold = Color(0xFFFAFAFA); // bold_line // 굵은 구분선

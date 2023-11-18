@@ -6,34 +6,37 @@ import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
 
-class HomeScreens extends StatefulWidget {
-  const HomeScreens({super.key});
+class RecipeCategoryScreens extends StatefulWidget {
+  const RecipeCategoryScreens({super.key});
 
   @override
-  State<HomeScreens> createState() => _HomeScreensState();
+  State<RecipeCategoryScreens> createState() => _RecipeCategoryScreensState();
 }
 
-class _HomeScreensState extends State<HomeScreens> {
+class _RecipeCategoryScreensState extends State<RecipeCategoryScreens> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: //앱 상단 바
+            Column(
           children: [
-            //앱 상단 바
-            CancellationBackButtonWidgets(
-              appBarText: '냉장고',
-              onPressed1: () {},
-              onPressed2: () {},
-              isCondiment: true,
-              isReceipt: true,
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 1, color: AppTheme.gray_97),
+                ),
+              ),
+              child: AppBerWidgets(
+                appBarText: '레시피 카테고리',
+              ),
             ),
           ],
         ),
         bottomNavigationBar: Container(
           child: NavigationBarWidget(
-            selectedIndex: 0,
+            selectedIndex: 3,
             onItemTapped: _onItemTapped,
           ),
         ),
