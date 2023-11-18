@@ -3,33 +3,37 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/models/api_helper.dart';
-import 'package:refrigerator_recipe_app/screens/recipe_select_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/recipe_fild_widgets.dart';
 
-class RefrigeratorConsumptionScreens extends StatefulWidget {
-  const RefrigeratorConsumptionScreens({super.key});
+class RecipeSelectScreens extends StatefulWidget {
+  final title;
+
+  const RecipeSelectScreens({
+    super.key,
+    required this.title,
+  });
 
   @override
-  State<RefrigeratorConsumptionScreens> createState() =>
-      _RefrigeratorConsumptionScreensState();
+  State<RecipeSelectScreens> createState() => _RecipeSelectScreensState();
 }
 
-class _RefrigeratorConsumptionScreensState
-    extends State<RefrigeratorConsumptionScreens> {
+class _RecipeSelectScreensState extends State<RecipeSelectScreens> {
   // List<Map<String, dynamic>> listData = [];
   List<Map<String, dynamic>> listData = [
     {
       'title': '감자튀김',
       'file_nm': 'assets/images/img_cooking_book_select.png',
       'r_uuid': 'uuid1',
+      'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
     {
       'title': '요리이름',
       'file_nm': 'assets/images/img_cooking_book_select.png',
       'r_uuid': 'uuid2',
+      'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
   ];
 
@@ -49,18 +53,16 @@ class _RefrigeratorConsumptionScreensState
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: //앱 상단 바
-            Column(
+        body: Column(
           children: [
+            // 뒤로가기
             Container(
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
                 ),
               ),
-              child: AppBerWidgets(
-                appBarText: '냉장고 파먹기',
-              ),
+              child: BackButtonWidgets(appBarText: widget.title),
             ),
             // 레시피 리스트
             Expanded(
@@ -70,18 +72,20 @@ class _RefrigeratorConsumptionScreensState
                 itemCount: listData.length,
                 itemBuilder: (context, index) {
                   Map<String, dynamic> data = listData[index];
-                  return RecipeFildWidgets(
+                  return RecipeWidgets(
                     recipeName: data['title'],
                     images: data['file_nm'],
+                    info: data['info'],
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RecipeSelectScreens(
-                            title: data['title'],
-                          ),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => DetailScreens(
+                      //       parameter: data['p_uuid'],
+                      //       owner: true,
+                      //     ),
+                      //   ),
+                      // );
                     },
                   );
                 },
@@ -91,35 +95,7 @@ class _RefrigeratorConsumptionScreensState
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          child: NavigationBarWidget(
-            selectedIndex: 1,
-            onItemTapped: _onItemTapped,
-          ),
-        ),
       ),
     );
-  }
-
-//네비게이션 함수
-  void _onItemTapped(int index) {
-    // 선택한 아이템의 인덱스에 따라 화면 전환 처리
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, 'home');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, 'refrigeratorConsumption');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, 'refrigeratorRecipe');
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, 'recipeCategory');
-        break;
-      case 4:
-        Navigator.pushReplacementNamed(context, 'MyPage');
-        break;
-    }
   }
 }

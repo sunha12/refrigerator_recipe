@@ -37,7 +37,7 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(width: 1, color: AppTheme.gray_97),
+                bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
               ),
             ),
             child: BackButtonWidgets(appBarText: '비밀번호 찾기'),
