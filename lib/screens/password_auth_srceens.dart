@@ -47,7 +47,7 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
             child: Text(
               '가입한 이메일을 통해 비밀번호를 찾을 수 있습니다.',
               style: TextStyle(
-                color: AppTheme.gray_deep,
+                color: AppTheme.gray_4A,
                 fontSize: 14,
               ),
             ),
@@ -64,7 +64,7 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
                     '인증 번호',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.gray_deep,
+                      color: AppTheme.gray_4A,
                       fontSize: 12,
                     ),
                   ),

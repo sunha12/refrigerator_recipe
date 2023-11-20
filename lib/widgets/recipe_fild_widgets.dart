@@ -165,7 +165,7 @@ class _RecipeWidgetsState extends State<RecipeWidgets> {
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                         fontSize: 11,
-                        color: AppTheme.gray_deep,
+                        color: AppTheme.gray_4A,
                       ),
                     ),
                   ),

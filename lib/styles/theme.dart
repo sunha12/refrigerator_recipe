@@ -10,7 +10,7 @@ class AppTheme {
   static const Color blue_light = Color(0xFFF3F7FB); // chat_미리알림_bg
   static const Color red = Color(0xFFFF5449); // like_heart
   static const Color dark_charcoal = Color(0xFF313033); // active_btn & font
-  static const Color gray_deep = Color(0xFF4A4A4A); // font_tit1
+  static const Color gray_4A = Color(0xFF4A4A4A); // font_tit1
   static const Color black_md = Color(0xFF323232); // font_tit2
   static const Color gray_md = Color(0xFFA8A8A8); // font_cont1
   static const Color sub_text = Color(0xFF737373); // font_cont2

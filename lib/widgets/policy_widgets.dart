@@ -56,7 +56,7 @@ class _PolicyWidgetsState extends State<PolicyWidgets> {
                       overlayColor:
                           MaterialStateProperty.all(Colors.white), //배경색
                       foregroundColor:
-                          MaterialStateProperty.all(AppTheme.gray_deep), //글자색
+                          MaterialStateProperty.all(AppTheme.gray_4A), //글자색
                       //자동 패딩 제거
                       minimumSize: MaterialStateProperty.all(Size.zero),
                       padding: MaterialStateProperty.all(EdgeInsets.zero),

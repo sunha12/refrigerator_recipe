@@ -88,7 +88,7 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                                   text:
                                       '는\n선택한 재료만으로 만들 수 있는\n최적의 레시피를 추천해 드립니다.',
                                   style: TextStyle(
-                                    color: AppTheme.gray_deep,
+                                    color: AppTheme.gray_4A,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),

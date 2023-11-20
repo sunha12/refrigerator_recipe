@@ -93,13 +93,13 @@ class _CalendarWidgetsState extends State<CalendarWidgets> {
                 //             child: Icon(
                 //               Icons.navigate_before,
                 //               size: 25,
-                //               color: AppTheme.gray_deep,
+                //               color: AppTheme.gray_4A,
                 //             ),
                 //             style: ButtonStyle(
                 //               overlayColor:
                 //                   MaterialStateProperty.all(Colors.transparent),
                 //               foregroundColor:
-                //                   MaterialStateProperty.all(AppTheme.gray_deep),
+                //                   MaterialStateProperty.all(AppTheme.gray_4A),
                 //             ),
                 //           ),
                 //           TextButton(
@@ -107,13 +107,13 @@ class _CalendarWidgetsState extends State<CalendarWidgets> {
                 //             child: Icon(
                 //               Icons.navigate_next,
                 //               size: 25,
-                //               color: AppTheme.gray_deep,
+                //               color: AppTheme.gray_4A,
                 //             ),
                 //             style: ButtonStyle(
                 //               overlayColor:
                 //                   MaterialStateProperty.all(Colors.transparent),
                 //               foregroundColor:
-                //                   MaterialStateProperty.all(AppTheme.gray_deep),
+                //                   MaterialStateProperty.all(AppTheme.gray_4A),
                 //             ),
                 //           ),
                 //         ],
@@ -177,7 +177,7 @@ class _CalendarWidgetsState extends State<CalendarWidgets> {
                           //내용을 입력하세요
                           Navigator.pop(context);
                         },
-                        colorId: AppTheme.gray_deep,
+                        colorId: AppTheme.gray_4A,
                         buttonText: '확인',
                         iconUrl: ''),
                   ),

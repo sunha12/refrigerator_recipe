@@ -33,7 +33,7 @@ class NotificationWindowWidgets extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.close,
-                  color: AppTheme.gray_deep,
+                  color: AppTheme.gray_4A,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -173,7 +173,7 @@ class NotificationMultiWindowWidgets extends StatelessWidget {
                               overlayColor:
                                   MaterialStateProperty.all(Colors.white),
                               foregroundColor:
-                                  MaterialStateProperty.all(AppTheme.gray_deep),
+                                  MaterialStateProperty.all(AppTheme.gray_4A),
                             ),
                             child: Text(
                               buttonText1,
@@ -193,7 +193,7 @@ class NotificationMultiWindowWidgets extends StatelessWidget {
                               overlayColor:
                                   MaterialStateProperty.all(Colors.white),
                               foregroundColor:
-                                  MaterialStateProperty.all(AppTheme.gray_deep),
+                                  MaterialStateProperty.all(AppTheme.gray_4A),
                             ),
                             child: Text(
                               buttonText2,
@@ -252,7 +252,7 @@ class NotificationMultiRedWindowWidgets extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(
                       Icons.close,
-                      color: AppTheme.gray_deep,
+                      color: AppTheme.gray_4A,
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();

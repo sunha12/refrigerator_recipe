@@ -46,7 +46,7 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
             child: Text(
               '새로운 비밀번호를 입력해주세요.',
               style: TextStyle(
-                color: AppTheme.gray_deep,
+                color: AppTheme.gray_4A,
                 fontSize: 14,
               ),
             ),
@@ -63,7 +63,7 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
                     '비밀번호',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.gray_deep,
+                      color: AppTheme.gray_4A,
                       fontSize: 12,
                     ),
                   ),

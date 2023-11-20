@@ -266,7 +266,7 @@ class _TextButtonWidgetsState extends State<TextButtonWidgets> {
                       Text(
                         widget.buttonText,
                         style: TextStyle(
-                          color: AppTheme.gray_deep,
+                          color: AppTheme.gray_4A,
                           fontSize: 14,
                         ),
                       ),
@@ -338,7 +338,7 @@ class _TextButtonNotBorderWidgetsState
                             Text(
                               widget.buttonText,
                               style: TextStyle(
-                                color: AppTheme.gray_deep,
+                                color: AppTheme.gray_4A,
                                 fontSize: 14,
                               ),
                             ),
@@ -414,7 +414,7 @@ class _TextButtonPolicyWidgetsState extends State<TextButtonPolicyWidgets> {
                       Text(
                         widget.buttonText,
                         style: TextStyle(
-                          color: AppTheme.gray_deep,
+                          color: AppTheme.gray_4A,
                           fontSize: 14,
                         ),
                       ),
@@ -473,7 +473,7 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
                         widget.titleText,
                         style: TextStyle(
                           fontSize: 14,
-                          color: AppTheme.gray_deep,
+                          color: AppTheme.gray_4A,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -481,7 +481,7 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
                     Text(widget.bodyText,
                         style: TextStyle(
                           fontSize: 10,
-                          color: AppTheme.gray_deep,
+                          color: AppTheme.gray_4A,
                         )),
                   ],
                 ),
@@ -503,7 +503,7 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
           ),
           style: ButtonStyle(
             overlayColor: MaterialStateProperty.all(Colors.white),
-            foregroundColor: MaterialStateProperty.all(AppTheme.gray_deep),
+            foregroundColor: MaterialStateProperty.all(AppTheme.gray_4A),
           ),
         ),
       ),
@@ -626,7 +626,7 @@ class _TimeButtonWidgetsState extends State<TimeButtonWidgets> {
         child: Text(
           formattedTime,
           style: TextStyle(
-            color: AppTheme.gray_deep,
+            color: AppTheme.gray_4A,
           ),
         ),
       ),
@@ -750,7 +750,7 @@ class IngredientAddButtonWidgets extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: AppTheme.gray_deep,
+                    color: AppTheme.gray_4A,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
@@ -780,7 +780,7 @@ class IngredientAddButtonWidgets extends StatelessWidget {
                       child: Icon(
                         Icons.add_box_outlined,
                         weight: 17,
-                        color: AppTheme.gray_deep,
+                        color: AppTheme.gray_4A,
                       ),
                     ),
                     onPressed: onPressed,

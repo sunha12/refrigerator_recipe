@@ -40,7 +40,7 @@ class _PasswordFindScreensState extends State<PasswordFindScreens> {
             child: Text(
               '가입한 이메일로 인증번호를 발송하였습니다.',
               style: TextStyle(
-                color: AppTheme.gray_deep,
+                color: AppTheme.gray_4A,
                 fontSize: 14,
               ),
             ),
@@ -57,7 +57,7 @@ class _PasswordFindScreensState extends State<PasswordFindScreens> {
                     '인증 번호',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.gray_deep,
+                      color: AppTheme.gray_4A,
                       fontSize: 12,
                     ),
                   ),

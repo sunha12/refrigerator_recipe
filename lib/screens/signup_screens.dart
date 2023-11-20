@@ -59,7 +59,7 @@ class _SignupScreensState extends State<SignupScreens> {
                         '이메일',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: AppTheme.gray_deep,
+                          color: AppTheme.gray_4A,
                           fontSize: 12,
                         ),
                       ),
@@ -107,7 +107,7 @@ class _SignupScreensState extends State<SignupScreens> {
                       '인증 번호',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.gray_deep,
+                        color: AppTheme.gray_4A,
                         fontSize: 12,
                       ),
                     ),
@@ -166,7 +166,7 @@ class _SignupScreensState extends State<SignupScreens> {
                       '비밀번호',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.gray_deep,
+                        color: AppTheme.gray_4A,
                         fontSize: 12,
                       ),
                     ),
@@ -229,7 +229,7 @@ class _SignupScreensState extends State<SignupScreens> {
                       '닉네임',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.gray_deep,
+                        color: AppTheme.gray_4A,
                         fontSize: 12,
                       ),
                     ),

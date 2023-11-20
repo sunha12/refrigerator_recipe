@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/screens/recipe_select_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
@@ -21,13 +22,11 @@ class _RecipeCategoryScreensState extends State<RecipeCategoryScreens> {
       'title': '감자튀김',
       'file_nm': 'assets/images/img_cooking_book_select.png',
       'r_uuid': 'uuid1',
-      'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
     {
       'title': '요리이름',
       'file_nm': 'assets/images/img_cooking_book_select.png',
       'r_uuid': 'uuid2',
-      'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
   ];
 
@@ -98,20 +97,18 @@ class _RecipeCategoryScreensState extends State<RecipeCategoryScreens> {
                 itemCount: listData.length,
                 itemBuilder: (context, index) {
                   Map<String, dynamic> data = listData[index];
-                  return RecipeWidgets(
+                  return RecipeFildWidgets(
                     recipeName: data['title'],
                     images: data['file_nm'],
-                    info: data['info'],
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => DetailScreens(
-                      //       parameter: data['p_uuid'],
-                      //       owner: true,
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeSelectScreens(
+                            title: data['title'],
+                          ),
+                        ),
+                      );
                     },
                   );
                 },

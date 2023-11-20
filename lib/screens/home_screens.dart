@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/tab_bar_widgets.dart';
 
 class HomeScreens extends StatefulWidget {
   const HomeScreens({super.key});
@@ -19,15 +21,49 @@ class _HomeScreensState extends State<HomeScreens> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body: Stack(
           children: [
-            //앱 상단 바
-            CancellationBackButtonWidgets(
-              appBarText: '냉장고',
-              onPressed1: () {},
-              onPressed2: () {},
-              isCondiment: true,
-              isReceipt: true,
+            Column(
+              children: [
+                //앱 상단 바
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: CancellationBackButtonWidgets(
+                    appBarText: '냉장고  ',
+                    onPressed1: () {},
+                    onPressed2: () {},
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaWidth(context, 0.05)),
+                    child: Container(
+                      child: fourTabBarWidgets(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 20,
+              right: 20,
+              child: TextButton(
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  //보더 둥글게
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                  //자동 패딩 제거
+                  minimumSize: MaterialStateProperty.all(Size.zero),
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                ),
+                onPressed: () {},
+                child: Image.asset('assets/images/img_add.png'),
+              ),
             ),
           ],
         ),
