@@ -88,9 +88,9 @@ class SettingBackButtonWidgets extends StatelessWidget {
         title: Text(
           appBarText,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 20,
             color: AppTheme.gray_4A,
-            fontWeight: FontWeight.bold,
+            // fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.white,
@@ -114,6 +114,59 @@ class SettingBackButtonWidgets extends StatelessWidget {
               onPressed: onPressed,
               child: Text(
                 '저장',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: AppTheme.gray_4A,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//추가 기능있는 뒤로가기 위젯
+class AddBackButtonWidgets extends StatelessWidget {
+  final String appBarText;
+  final VoidCallback onPressed;
+  const AddBackButtonWidgets(
+      {required this.appBarText, required this.onPressed, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AppBar(
+        title: Text(
+          appBarText,
+          style: TextStyle(
+            fontSize: 20,
+            color: AppTheme.gray_4A,
+            // fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: SvgPicture.asset('assets/icons/ico_back.svg'),
+          iconSize: 26,
+          onPressed: () {
+            // 뒤로가기 버튼을 누르면 이전 화면으로 돌아가기
+            Navigator.pop(context);
+          },
+        ),
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.white),
+                foregroundColor: MaterialStateProperty.all(AppTheme.gray_4A),
+              ),
+              onPressed: onPressed,
+              child: Text(
+                '추가',
                 style: TextStyle(
                   fontSize: 14,
                   color: AppTheme.gray_4A,

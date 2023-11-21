@@ -795,3 +795,99 @@ class IngredientAddButtonWidgets extends StatelessWidget {
     );
   }
 }
+
+//날짜 선택 위젯
+class SelectDateButtonWidgets extends StatefulWidget {
+  final String buttonText;
+  final Color buttonColor;
+  final String selectedDay;
+  final Function(DateTime) onDaySelected;
+  const SelectDateButtonWidgets({
+    super.key,
+    required this.buttonText,
+    required this.selectedDay,
+    required this.buttonColor,
+    required this.onDaySelected,
+  });
+
+  @override
+  State<SelectDateButtonWidgets> createState() =>
+      _SelectDateButtonWidgetsState();
+}
+
+class _SelectDateButtonWidgetsState extends State<SelectDateButtonWidgets> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
+      child: Container(
+        //최대 길이 임의지정
+        constraints: BoxConstraints(maxWidth: MediaWidth(context, 0.5)),
+        child: TextButton(
+          onPressed: () {
+            setState(
+              () {
+                FocusScope.of(context).unfocus(); // 현재 포커스 해제
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: 500,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20), // 모달 좌상단 라운딩 처리
+                          topRight: Radius.circular(20), // 모달 우상단 라운딩 처리
+                        ),
+                      ),
+                      child: CalendarWidgets(
+                        onDaySelected: widget.onDaySelected,
+                        selectedDay: widget.selectedDay,
+                      ),
+                    );
+                  },
+                  backgroundColor: Colors.transparent,
+                );
+                // assentTrue = 1;
+              },
+            );
+          },
+          style: ButtonStyle(
+            elevation: MaterialStateProperty.all(0), // 그림자 제거
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            side: MaterialStateProperty.all<BorderSide>(
+              BorderSide(
+                color: AppTheme.gray_D4,
+                width: 1.0,
+              ),
+            ),
+            overlayColor: MaterialStateProperty.all(Colors.white),
+            foregroundColor: MaterialStateProperty.all(AppTheme.gray_md),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.2, horizontal: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.buttonText,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: widget.buttonColor,
+                  ),
+                ),
+                SvgPicture.asset(
+                  'assets/icons/ico_calendar.svg',
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

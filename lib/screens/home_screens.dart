@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/screens/condiment_screens.dart';
+import 'package:refrigerator_recipe_app/screens/receipt_add_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
@@ -30,8 +32,22 @@ class _HomeScreensState extends State<HomeScreens> {
                   padding: const EdgeInsets.only(top: 10),
                   child: CancellationBackButtonWidgets(
                     appBarText: '냉장고  ',
-                    onPressed1: () {},
-                    onPressed2: () {},
+                    onPressed1: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CondimentScreens(),
+                        ),
+                      );
+                    },
+                    onPressed2: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReceiptAddScreens(),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Flexible(
