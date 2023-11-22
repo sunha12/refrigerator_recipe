@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/mypage_widgets.dart';
@@ -30,85 +31,89 @@ class _MyPageScreensState extends State<MyPageScreens> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, right: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Settings()),
-                        );
-                      },
-                    ),
-                  ],
+        body: Column(
+          children: [
+            AppBar(
+              // 뒤로가기 숨김
+              automaticallyImplyLeading: false,
+              title: Text(
+                '마이페이지',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  // fontWeight: FontWeight.bold,
                 ),
               ),
-              BackButtonWidgets(appBarText: '마이페이지'),
-              SizedBox(height: 10.0),
-              Center(
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage("assets/profile_image.jpg"),
+              backgroundColor: Color(0xffffffff),
+              elevation: 0, // 그림자 제거
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    icon: SvgPicture.asset('assets/icons/ico_setting.svg'),
+                    iconSize: 26,
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+            Center(
+              child: CircleAvatar(
+                radius: 50.0,
+                backgroundImage: AssetImage("assets/profile_image.jpg"),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Center(
+              child: Text(
+                "사용자 닉네임",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10.0),
-              Center(
+            ),
+            SizedBox(height: 20.0),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(width: 0.5, color: AppTheme.gray_97),
+                  bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
-                  "사용자 닉네임",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  "레시피 스크랩",
+                  style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 20.0),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(width: 0.5, color: AppTheme.gray_97),
-                    bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "레시피 스크랩",
-                    style:
-                        TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
+            ),
+            MypageWidget(),
+            SizedBox(height: 20.0),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(width: 0.5, color: AppTheme.gray_97),
+                  bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
                 ),
               ),
-              MypageWidget(),
-              SizedBox(height: 20.0),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(width: 0.5, color: AppTheme.gray_97),
-                    bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "나의 레시피",
-                    style:
-                        TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "나의 레시피",
+                  style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 10.0),
-              GridView.builder(
+            ),
+            SizedBox(height: 10.0),
+            Expanded(
+              child: GridView.builder(
+                physics: ScrollPhysics(),
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: 1,
@@ -144,8 +149,8 @@ class _MyPageScreensState extends State<MyPageScreens> {
                   );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         bottomNavigationBar: Container(
           child: NavigationBarWidget(
