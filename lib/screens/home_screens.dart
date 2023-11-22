@@ -8,6 +8,7 @@ import 'package:refrigerator_recipe_app/screens/receipt_add_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/registration_mod_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/tab_bar_widgets.dart';
 
 class HomeScreens extends StatefulWidget {
@@ -77,7 +78,19 @@ class _HomeScreensState extends State<HomeScreens> {
                   minimumSize: MaterialStateProperty.all(Size.zero),
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SizedBox(
+                        height: MediaHeight(context, 0.88),
+                        child: AddIngredientsModalWidgets(),
+                      );
+                    },
+                  );
+                },
                 child: Image.asset('assets/images/img_add.png'),
               ),
             ),
