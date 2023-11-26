@@ -73,17 +73,20 @@ class _IngredientScreensState extends State<IngredientScreens> {
                 Padding(
                   padding: const EdgeInsets.only(top: 23),
                   child: Container(
+                    width: 170,
+                    height: 170,
                     decoration: BoxDecoration(
                       border: Border.all(width: 1, color: AppTheme.gray_D9),
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                     ),
-                    child: ClipOval(
-                      child: Image.network(
-                        // 'https://api.gooodall.com/files/${widget.images}',
-                        widget.img,
-                        fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
-                        width: 170,
-                        height: 170,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipOval(
+                        child: Image.network(
+                          // 'https://api.gooodall.com/files/${widget.images}',
+                          widget.img,
+                          // fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
+                        ),
                       ),
                     ),
                   ),

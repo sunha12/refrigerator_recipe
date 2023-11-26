@@ -25,32 +25,28 @@ class CondimentScreens extends StatefulWidget {
 class _CondimentScreensState extends State<CondimentScreens> {
   List<Map<String, dynamic>> listData1 = [
     {
-      'title': '감자',
-      'file_nm': 'assets/images/img_korean.webp',
+      'title': '소금',
+      'file_nm': 'assets/images/img_salt.png',
       'r_uuid': 'uuid1',
       'dete': '2023-11-13',
-      'count': '3'
     },
     {
-      'title': '고구마',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'title': '설탕',
+      'file_nm': 'assets/images/img_sugar.png',
       'r_uuid': 'uuid2',
       'dete': '2023-10-25',
-      'count': '2'
     },
     {
-      'title': '요거트',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'title': '간장',
+      'file_nm': 'assets/images/img_soysauce.png',
       'r_uuid': 'uuid3',
       'dete': '2023-10-25',
-      'count': '1'
     },
     {
-      'title': '소고기',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'title': '다시다',
+      'file_nm': 'assets/images/img_dasida.png',
       'r_uuid': 'uuid4',
       'dete': '2023-10-25',
-      'count': '1'
     },
   ];
 

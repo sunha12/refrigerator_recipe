@@ -43,14 +43,26 @@ class _IngredientWidgetsState extends State<IngredientWidgets> {
           children: [
             Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50), // 둥근 모서리 반지름 값
-                  child: Image.network(
-                    // 'https://api.gooodall.com/files/${widget.images}',
-                    widget.images,
-                    fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
-                    width: 45,
-                    height: 45,
+                Container(
+                  width: 45,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    border: Border.all(
+                      width: 1,
+                      color: Color(0xffEBEBEB),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50), // 둥근 모서리 반지름 값
+                      child: Image.network(
+                        // 'https://api.gooodall.com/files/${widget.images}',
+                        widget.images,
+                        // fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
+                      ),
+                    ),
                   ),
                 ),
                 Column(

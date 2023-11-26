@@ -25,28 +25,28 @@ class _fourTabBarWidgetsState extends State<fourTabBarWidgets>
   List<Map<String, dynamic>> listData1 = [
     {
       'title': '감자',
-      'file_nm': 'assets/images/img_korean.webp',
+      'file_nm': 'assets/images/img_potato.png',
       'r_uuid': 'uuid1',
       'dete': '2023-11-13',
       'count': '3'
     },
     {
       'title': '고구마',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_sweet_potato.png',
       'r_uuid': 'uuid2',
       'dete': '2023-10-25',
       'count': '2'
     },
     {
       'title': '요거트',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_icecream_sundae.png',
       'r_uuid': 'uuid3',
       'dete': '2023-10-25',
       'count': '1'
     },
     {
       'title': '소고기',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_kawaii_steak.png',
       'r_uuid': 'uuid4',
       'dete': '2023-10-25',
       'count': '1'
@@ -56,14 +56,14 @@ class _fourTabBarWidgetsState extends State<fourTabBarWidgets>
   List<Map<String, dynamic>> listData2 = [
     {
       'title': '감자',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_potato.png',
       'r_uuid': 'uuid1',
       'dete': '2023-11-13',
       'count': '3'
     },
     {
       'title': '고구마',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_sweet_potato.png',
       'r_uuid': 'uuid2',
       'dete': '2023-10-25',
       'count': '1'
@@ -73,7 +73,7 @@ class _fourTabBarWidgetsState extends State<fourTabBarWidgets>
   List<Map<String, dynamic>> listData3 = [
     {
       'title': '소고기',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_kawaii_steak.png',
       'r_uuid': 'uuid4',
       'dete': '2023-10-25',
       'count': '1'
@@ -83,7 +83,7 @@ class _fourTabBarWidgetsState extends State<fourTabBarWidgets>
   List<Map<String, dynamic>> listData4 = [
     {
       'title': '요거트',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_icecream_sundae.png',
       'r_uuid': 'uuid3',
       'dete': '2023-10-25',
       'count': '1'

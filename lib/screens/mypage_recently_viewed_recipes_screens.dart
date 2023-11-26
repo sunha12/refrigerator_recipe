@@ -8,12 +8,12 @@ class RecentlyViewedRecipes extends StatelessWidget {
   List<Map<String, dynamic>> listData = [
     {
       'title': '감자튀김',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_french_fries.jpeg',
       'r_uuid': 'uuid1',
     },
     {
       'title': '요리이름',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_dakbokkeumtang.jpeg',
       'r_uuid': 'uuid2',
     },
   ];

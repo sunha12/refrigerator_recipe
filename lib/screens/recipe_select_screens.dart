@@ -25,13 +25,13 @@ class _RecipeSelectScreensState extends State<RecipeSelectScreens> {
   List<Map<String, dynamic>> listData = [
     {
       'title': '감자튀김',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_french_fries.jpeg',
       'r_uuid': 'uuid1',
       'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
     {
       'title': '요리이름',
-      'file_nm': 'assets/images/img_cooking_book_select.png',
+      'file_nm': 'assets/images/img_dakbokkeumtang.jpeg',
       'r_uuid': 'uuid2',
       'info': '레시피 등록 시 입력한 짧은 요리 소개를 출력합니다. 최대 2줄까지 출력할 수 있습니다.',
     },
