@@ -76,78 +76,14 @@ class _NotificationSettingsScreensState
               ),
             ),
             buildNotificationSetting(
-              '알림 켜기',
-              notificationEnabled,
-              toggleNotification,
-              subTitle: '알람을 켜거나 끌 수 있습니다.',
-            ),
+                '알림 켜기', notificationEnabled, toggleNotification,
+                subTitle: '알람을 켜거나 끌 수 있습니다.'),
             buildNotificationSetting(
-              '이벤트 알림',
-              eventNotificationsEnabled,
-              toggleEventNotifications,
-              subTitle: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.',
-            ),
+                '이벤트 알림', eventNotificationsEnabled, toggleEventNotifications,
+                subTitle: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.'),
             buildNotificationSetting(
-              '방해 금지 설정',
-              doNotDisturbEnabled,
-              toggleDoNotDisturb,
-              subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        '시작 시간: ',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        doNotDisturbStartTime?.format(context) ?? '설정 없음',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.orange,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.access_time,
-                          color: Colors.orange,
-                        ),
-                        onPressed: () => selectDoNotDisturbStartTime(context),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '종료 시간: ',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        doNotDisturbEndTime?.format(context) ?? '설정 없음',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.orange,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.access_time,
-                          color: Colors.orange,
-                        ),
-                        onPressed: () => selectDoNotDisturbEndTime(context),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                '방해 금지 설정', doNotDisturbEnabled, toggleDoNotDisturb,
+                subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.'),
           ],
         ),
       ),

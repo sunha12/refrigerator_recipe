@@ -75,7 +75,7 @@ class Settings extends StatelessWidget {
                 children: [
                   Text("앱 버전"),
                   Text(
-                    "1.0.0",
+                    "1.1.1",
                     style: TextStyle(color: Colors.grey),
                   ),
                 ],
@@ -153,16 +153,16 @@ class Settings extends StatelessWidget {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            // TODO: 로그아웃 로직 추가
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("확인"),
-                        ),
-                        TextButton(
-                          onPressed: () {
                             Navigator.of(context).pop();
                           },
                           child: Text("취소"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // 로그아웃 로직 추가 필요
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("로그아웃"),
                         ),
                       ],
                     );

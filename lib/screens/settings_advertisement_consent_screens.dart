@@ -19,7 +19,12 @@ class AdvertisementConsentScreens extends StatelessWidget {
                 ),
               ),
             ),
-            // 화면 구성 요소
+            Container(
+              padding: EdgeInsets.all(20), // 여백을 추가
+              child: Text(
+                  "광고 수신 동의 광고 수신 동의 광고 수신 동의 광고 수신 동의 광고 수신 동의 광고 수신 동의 ",
+                  style: TextStyle(fontSize: 16)),
+            ),
           ],
         ),
       ),

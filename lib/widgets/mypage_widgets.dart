@@ -34,7 +34,7 @@ class MypageWidget extends StatelessWidget {
           icon: Icons.edit,
           label: "레시피 등록",
           onTap: () {
-            // 레시피 등록 페이지로 이동하는 코드
+            // 레시피 등록 페이지로 이동
           },
         ),
       ],
@@ -45,17 +45,23 @@ class MypageWidget extends StatelessWidget {
       {required IconData icon,
       required String label,
       required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
+    return TextButton(
+      onPressed: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 24.0),
-            Text(label),
+            Text(
+              label,
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
+      ),
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
       ),
     );
   }

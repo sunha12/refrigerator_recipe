@@ -18,7 +18,11 @@ class PrivacyPolicyScreens extends StatelessWidget {
                 ),
               ),
             ),
-            // 화면 구성 요소 추가
+            Container(
+              padding: EdgeInsets.all(20), // 여백을 추가
+              child: Text("개인정보 처리방침 개인정보 처리방침 개인정보 처리방침 개인정보 처리방침 ",
+                  style: TextStyle(fontSize: 16)),
+            ),
           ],
         ),
       ),

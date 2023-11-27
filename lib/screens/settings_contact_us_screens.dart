@@ -9,6 +9,27 @@ class ContactUsScreens extends StatefulWidget {
 
 class _ContactUsScreensState extends State<ContactUsScreens> {
   String selectedType = '앱 사용 관련'; // 기본 선택값
+  TextEditingController _inputController = TextEditingController();
+  int _inputLength = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _inputController.addListener(_updateInputLength);
+  }
+
+  void _updateInputLength() {
+    setState(() {
+      _inputLength = _inputController.text.length;
+    });
+  }
+
+  @override
+  void dispose() {
+    _inputController.removeListener(_updateInputLength);
+    _inputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +43,21 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(width: 0.5, color: AppTheme.gray_97),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '문의 유형 선택',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -65,10 +101,13 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
           });
         },
         decoration: InputDecoration(
-          labelText: '문의 유형 선택',
-          labelStyle: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
+          border: OutlineInputBorder(
+            // 기본 테두리 색상 설정
+            borderSide: BorderSide(color: Colors.orange),
+          ),
+          focusedBorder: OutlineInputBorder(
+            // 포커스 시 테두리 색상 설정
+            borderSide: BorderSide(color: Colors.orange),
           ),
         ),
       ),
@@ -78,36 +117,91 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
   Widget buildInputField(String hintText, double width, double height) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: AppTheme.gray_97,
-            width: 0.5,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppTheme.gray_97,
+                width: 0.5,
+              ),
+            ),
+            child: TextFormField(
+              controller: _inputController,
+              maxLength: 1000,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: InputBorder.none,
+                counterText: '', // 내장 카운터 비활성화
+              ),
+              style: TextStyle(
+                fontSize: 14.0,
+              ),
+            ),
           ),
-        ),
-        child: TextFormField(
-          maxLines: null,
-          keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: InputBorder.none,
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Text(
+              '$_inputLength / 1000', // 입력 글자 수 표시
+              style: TextStyle(
+                fontSize: 12.0,
+                color: Colors.grey,
+              ),
+            ),
           ),
-          style: TextStyle(
-            fontSize: 14.0,
-          ),
-        ),
+        ],
       ),
     );
   }
 
   Widget buildImageUploader() {
-    // 이미지 업로더 추가 로직 구현
-    return Container(
-        // 이미지 업로더 위젯 추가
-        // ...
-        );
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: InkWell(
+          onTap: () {
+            // 이미지 업로더 로직을 여기에 추가
+          },
+          child: Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.grey,
+                width: 2.0,
+              ),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.image, // 이미지 아이콘
+                  size: 24.0,
+                  color: Colors.grey,
+                ),
+                Positioned(
+                  bottom: 8.0,
+                  child: Text(
+                    '0/3', // 업로드된 이미지 수/최대 이미지 수
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildEmailInputField() {
@@ -119,7 +213,12 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
           labelStyle: TextStyle(
             fontSize: 14.0,
             fontWeight: FontWeight.bold,
+            color: Colors.grey, // 기본 레이블 색상
           ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.orange), // 포커스 시 테두리 색상
+          ),
+          focusColor: Colors.orange, // 포커스 시 레이블 색상
         ),
         style: TextStyle(
           fontSize: 14.0,
@@ -144,7 +243,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          primary: Colors.orange, // 주황색 배경
+          backgroundColor: Colors.orange,
           minimumSize: Size(double.infinity, 50.0), // 버튼 크기 설정
         ),
       ),
