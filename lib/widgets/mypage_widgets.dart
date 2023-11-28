@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_recently_viewed_recipes_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_scrap_screens.dart';
-// 레시피 등록 페이지를 import 예: import 'package:your_project/recipe_registration_page.dart';
+import 'package:refrigerator_recipe_app/screens/mypage_recipe_registration_screens.dart';
 
 class MypageWidget extends StatelessWidget {
   @override
@@ -34,7 +34,9 @@ class MypageWidget extends StatelessWidget {
           icon: Icons.edit,
           label: "레시피 등록",
           onTap: () {
-            // 레시피 등록 페이지로 이동
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => RecipeRegistrationPage()),
+            );
           },
         ),
       ],

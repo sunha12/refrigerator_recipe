@@ -10,6 +10,7 @@ import 'package:refrigerator_recipe_app/screens/settings_marketing_consent_scree
 import 'package:refrigerator_recipe_app/screens/settings_open_source_licenses_screens.dart';
 import 'package:refrigerator_recipe_app/screens/settings_developer_screens.dart';
 import 'package:refrigerator_recipe_app/screens/settings_withdrawal_screens.dart';
+import 'package:refrigerator_recipe_app/screens/loing_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 
@@ -159,8 +160,11 @@ class Settings extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            // 로그아웃 로직 추가 필요
-                            Navigator.of(context).pop();
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => LoingScreens(),
+                              ),
+                            );
                           },
                           child: Text("로그아웃"),
                         ),

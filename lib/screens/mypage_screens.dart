@@ -34,7 +34,6 @@ class _MyPageScreensState extends State<MyPageScreens> {
         body: Column(
           children: [
             AppBar(
-              // 뒤로가기 숨김
               automaticallyImplyLeading: false,
               title: Text(
                 '마이페이지',
@@ -52,7 +51,13 @@ class _MyPageScreensState extends State<MyPageScreens> {
                   child: IconButton(
                     icon: SvgPicture.asset('assets/icons/ico_setting.svg'),
                     iconSize: 26,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Settings(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -91,7 +96,11 @@ class _MyPageScreensState extends State<MyPageScreens> {
                 ),
               ),
             ),
-            MypageWidget(),
+            MouseRegion(
+              // 호버 상태에서의 색상 설정
+              onHover: (_) {},
+              child: MypageWidget(),
+            ),
             SizedBox(height: 20.0),
             Container(
               width: double.infinity,

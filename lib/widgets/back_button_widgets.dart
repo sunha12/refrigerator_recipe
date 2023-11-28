@@ -400,3 +400,95 @@ class temporaryStorageBackButtonWidgets extends StatelessWidget {
     );
   }
 }
+
+//취소 버튼이 있는 위젯
+class CancleButtonWidgets extends StatelessWidget {
+  final String appBarText;
+  const CancleButtonWidgets({required this.appBarText, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AppBar(
+        title: Text(
+          appBarText,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xffffffff),
+        leading: TextButton(
+          onPressed: () => _showCancelDialog(context),
+          child: Text(
+            '취소',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        elevation: 0,
+      ),
+    );
+  }
+
+  void _showCancelDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // 바깥쪽을 눌러서 다이얼로그를 닫을 수 없게 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0), // 다이얼로그 모서리를 둥글게
+          ),
+          titlePadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0), // 타이틀 패딩 조정
+          title: Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              icon: Icon(Icons.close, size: 20.0), // X 아이콘
+              onPressed: () {
+                Navigator.of(context).pop(); // 알림창 닫기
+              },
+            ),
+          ),
+          content: Text(
+            '작성 중인 글을 취소하시겠습니까?\n작성 취소 선택 시 작성된 글은 저장되지 않습니다.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16.0,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 24.0, vertical: 20.0), // 컨텐츠 패딩 조정
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
+                side: BorderSide(color: Colors.grey, width: 1), // 회색 테두리
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0), // 버튼 모서리 둥글게
+                ),
+              ),
+              child: Text(
+                '작성 취소',
+                style: TextStyle(
+                  color: Colors.red, // 버튼 글자 색상
+                  fontSize: 14.0,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // 알림창 닫기
+                Navigator.of(context).pop(); // 이전 화면으로 돌아가기
+              },
+            ),
+          ],
+          actionsPadding: EdgeInsets.only(bottom: 20.0), // 액션 버튼의 하단 패딩 조정
+        );
+      },
+    );
+  }
+}
