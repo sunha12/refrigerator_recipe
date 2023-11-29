@@ -434,6 +434,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
   List<Map<String, dynamic>> selectData = [];
 
+  //선택한 재료 저장
   void saveIngredients(Map<String, dynamic> newData) async {
     // 이전 데이터 불러오기
     String savedData = await loadData('saveIngredients');
@@ -451,12 +452,40 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
       // 합쳐진 데이터를 저장
       String mergedDataString = json.encode(existingData);
       saveData('saveIngredients', mergedDataString);
+
+      loadIngredients();
     } catch (e) {
       // 오류 처리
     }
   }
 
-  // // //선택한 재료 로드
+// 선택한 재료 삭제
+  void delIngredients(Map<String, dynamic> dataToRemove) async {
+    String savedData = await loadData('saveIngredients');
+
+    try {
+      List<Map<String, dynamic>> existingData = [];
+
+      if (savedData != null && savedData.isNotEmpty) {
+        existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
+
+        // 데이터에서 삭제할 아이템 찾기
+        existingData.removeWhere((item) =>
+            item['title'] == dataToRemove['title'] &&
+            item['file_nm'] == dataToRemove['file_nm']);
+
+        // 수정된 데이터 저장
+        String updatedDataString = json.encode(existingData);
+        saveData('saveIngredients', updatedDataString);
+
+        loadIngredients(); // 수정된 데이터 로드
+      }
+    } catch (e) {
+      // 오류 처리
+    }
+  }
+
+  //선택한 재료 로드
   void loadIngredients() async {
     String date = await loadData('saveIngredients');
 
@@ -513,58 +542,94 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                 PageView(
                   children: [
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //선택된 재료 필드
                         selectData.isNotEmpty
                             ? Container(
                                 height: MediaHeight(context, 0.09),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  itemCount: selectData.length,
-                                  itemBuilder: (context, index) {
-                                    Map<String, dynamic> data =
-                                        selectData[index];
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          width: 50,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(100)),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Color(0xffEBEBEB),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      50), // 둥근 모서리 반지름 값
-                                              child: Image.network(
-                                                // 'https://api.gooodall.com/files/${widget.images}',
-                                                data['file_nm'],
-                                              ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                        Text(
-                                          data['title'],
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: AppTheme.gray_4A),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  // // 스크롤 제어
-                                  controller: _scrollController,
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
                                 ),
                               )
                             : SizedBox(),
