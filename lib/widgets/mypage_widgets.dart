@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:refrigerator_recipe_app/screens/mypage_recently_viewed_recipes_screens.dart';
+import 'package:refrigerator_recipe_app/screens/recipe_select_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_scrap_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_recipe_registration_screens.dart';
 
@@ -15,7 +15,11 @@ class MypageWidget extends StatelessWidget {
           label: "최근 본 레시피",
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => RecentlyViewedRecipes()),
+              MaterialPageRoute(
+                  //예시 데이터 삽입
+                  builder: (context) => RecipeSelectScreens(
+                        title: "최근 본 레시피",
+                      )),
             );
           },
         ),
@@ -24,9 +28,11 @@ class MypageWidget extends StatelessWidget {
           icon: Icons.star,
           label: "스크랩",
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ScrapRecipesPage()),
-            );
+            Navigator.of(context).push(MaterialPageRoute(
+                //예시 데이터 삽입
+                builder: (context) => RecipeSelectScreens(
+                      title: "스크랩",
+                    )));
           },
         ),
         _buildIconColumn(
@@ -62,8 +68,9 @@ class MypageWidget extends StatelessWidget {
           ],
         ),
       ),
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.black,
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
       ),
     );
   }
