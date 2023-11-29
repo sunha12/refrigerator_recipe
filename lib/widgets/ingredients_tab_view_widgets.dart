@@ -11,7 +11,8 @@ import 'package:refrigerator_recipe_app/widgets/ingredient_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/search_widgets.dart';
 
 class IngredientsTabViewWidgets extends StatefulWidget {
-  const IngredientsTabViewWidgets({super.key});
+  final selectDate;
+  const IngredientsTabViewWidgets({required this.selectDate, super.key});
 
   @override
   State<IngredientsTabViewWidgets> createState() =>
@@ -95,17 +96,12 @@ class _IngredientsTabViewWidgetsState extends State<IngredientsTabViewWidgets> {
         'file_nm': 'assets/images/img_asparagus.png',
       },
     ];
-    List<Map<String, dynamic>> selectData = [];
+    // List<Map<String, dynamic>> selectData = [];
 
     TextEditingController _searchController = TextEditingController();
     ScrollController _scrollController = ScrollController();
 
-    @override
-    void initState() {
-      super.initState();
-      print(':::::');
-      // loadIngredients();
-    }
+    print(':::::::::::::ddddddd:::::Ddddd::::${widget.selectDate}');
 
     void saveIngredients(Map<String, dynamic> newData) async {
       // 이전 데이터 불러오기
@@ -130,25 +126,25 @@ class _IngredientsTabViewWidgetsState extends State<IngredientsTabViewWidgets> {
     }
 
     // //선택한 재료 로드
-    void loadIngredients() async {
-      String date = await loadData('saveIngredients');
+    // void loadIngredients() async {
+    //   String date = await loadData('saveIngredients');
 
-      try {
-        if (date != null && date.isNotEmpty) {
-          // JSON 문자열을 List<Map<String, dynamic>>으로 변환
-          List<dynamic> decodedData = jsonDecode(date);
-          List<Map<String, dynamic>> searchList =
-              decodedData.cast<Map<String, dynamic>>();
+    //   try {
+    //     if (date != null && date.isNotEmpty) {
+    //       // JSON 문자열을 List<Map<String, dynamic>>으로 변환
+    //       List<dynamic> decodedData = jsonDecode(date);
+    //       List<Map<String, dynamic>> searchList =
+    //           decodedData.cast<Map<String, dynamic>>();
 
-          setState(() {
-            selectData = searchList;
-            print(':::::::::::2222222222${selectData}');
-          });
-        }
-      } catch (e) {
-        print(':::::${e}');
-      }
-    }
+    //       setState(() {
+    //         selectData = searchList;
+    //         print(':::::::::::2222222222${selectData}');
+    //       });
+    //     }
+    //   } catch (e) {
+    //     print(':::::${e}');
+    //   }
+    // }
 
     @override
     void dispose() {
@@ -159,15 +155,15 @@ class _IngredientsTabViewWidgetsState extends State<IngredientsTabViewWidgets> {
     return Column(
       children: [
         //선택된 재료 필드
-        selectData.isEmpty
+        widget.selectDate.isNotEmpty
             ? Container(
                 height: MediaHeight(context, 0.09),
                 child: ListView.builder(
                   shrinkWrap: true,
                   // physics: NeverScrollableScrollPhysics(),
-                  itemCount: selectData.length,
+                  itemCount: widget.selectDate.length,
                   itemBuilder: (context, index) {
-                    Map<String, dynamic> data = selectData[index];
+                    Map<String, dynamic> data = widget.selectDate[index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -215,12 +211,12 @@ class _IngredientsTabViewWidgetsState extends State<IngredientsTabViewWidgets> {
         ),
         //재료 필드
         Container(
-          // height: selectData.isEmpty
-          //     ? MediaHeight(context, 0.57)
-          //     : MediaHeight(context, 0.48),
-          height: selectData.isNotEmpty
+          height: widget.selectDate.isEmpty
               ? MediaHeight(context, 0.57)
               : MediaHeight(context, 0.48),
+          // height: widget.selectDate.isNotEmpty
+          //     ? MediaHeight(context, 0.57)
+          //     : MediaHeight(context, 0.48),
           child: GridView.builder(
             physics: ScrollPhysics(),
             shrinkWrap: true,
@@ -236,8 +232,8 @@ class _IngredientsTabViewWidgetsState extends State<IngredientsTabViewWidgets> {
                 children: [
                   InkWell(
                     onTap: () {
-                      // saveIngredients(listData1[index]);
-                      loadIngredients();
+                      saveIngredients(listData1[index]);
+                      // loadIngredients();
                     },
                     child: Container(
                       width: 75,
