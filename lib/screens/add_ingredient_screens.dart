@@ -71,10 +71,25 @@ class _AddIngredientScreensState extends State<AddIngredientScreens> {
                     child: ClipOval(
                       child: Image.network(
                         // 'https://api.gooodall.com/files/${widget.images}',
+                        // 'assets/images/img_dessert.jpg',
                         '',
                         fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
                         width: 170,
                         height: 170,
+                        errorBuilder: (context, error, stackTrace) {
+                          return ClipOval(
+                            child: Container(
+                              width: 170,
+                              height: 170,
+                              color: AppTheme.gray_D4,
+                              child: Icon(
+                                Icons.photo_size_select_actual_outlined,
+                                size: 22,
+                                color: AppTheme.gray_4A,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),

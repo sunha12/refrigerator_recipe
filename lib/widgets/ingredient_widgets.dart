@@ -33,6 +33,9 @@ class _IngredientWidgetsState extends State<IngredientWidgets> {
     return TextButton(
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(Colors.white),
+        //자동 패딩 제거
+        minimumSize: MaterialStateProperty.all(Size.zero),
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
       ),
       onPressed: widget.onPressed,
       child: Padding(

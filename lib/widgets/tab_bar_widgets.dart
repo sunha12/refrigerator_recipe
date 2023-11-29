@@ -6,7 +6,9 @@ import 'package:refrigerator_recipe_app/styles/theme.dart'; // style
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/ingredient_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/ingredients_tab_view_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/search_widgets.dart';
 
 //탭이 네개인 탭바
@@ -341,19 +343,12 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
   // 탭바 선언
   TabController? _tabController;
 
-  TextEditingController _searchController = TextEditingController();
   ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 6, vsync: this, initialIndex: 0);
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 
   @override
@@ -391,55 +386,37 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                 // 첫 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
                 // 두 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
                 // 세 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
                 // 네 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
                 // 다섯 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
                 // 여섯 번째 탭뷰
                 PageView(
                   children: [
-                    SearchWidgets(
-                      controller: _searchController,
-                      onPressed: () {},
-                    ),
+                    IngredientsTabViewWidgets(),
                   ],
                 ),
               ],

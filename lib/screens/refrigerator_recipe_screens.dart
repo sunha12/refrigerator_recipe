@@ -6,6 +6,7 @@ import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/registration_mod_widgets.dart';
 
 class RefrigeratorRecipeScreens extends StatefulWidget {
   const RefrigeratorRecipeScreens({super.key});
@@ -106,7 +107,19 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
             //재료 추가
             IngredientAddButtonWidgets(
               text: '재료 추가',
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: MediaHeight(context, 0.88),
+                      child: AddIngredientsModalWidgets(),
+                    );
+                  },
+                );
+              },
             ),
             //조미료 추가
             IngredientAddButtonWidgets(

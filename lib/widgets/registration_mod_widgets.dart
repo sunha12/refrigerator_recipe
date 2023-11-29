@@ -19,13 +19,10 @@ class AddIngredientsModalWidgets extends StatefulWidget {
 
 class _AddIngredientsModalWidgetsState
     extends State<AddIngredientsModalWidgets> {
-  String gbn_idx = '1000000';
   String searchText = '';
 
-  List<dynamic> _dataList = []; //펫 데이터
+  List<dynamic> _dataList = []; //데이터
   List<bool> _checkedList = []; //체크 여부 리스트
-  List<String> _searchTextList = []; //최근 검색어 5개
-  List<dynamic> _vogueSearchText = []; //인기 검색어
 
   @override
   void initState() {

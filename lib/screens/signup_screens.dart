@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/screens/home_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
@@ -274,11 +275,11 @@ class _SignupScreensState extends State<SignupScreens> {
                           onPressed: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => PasswordResetScreens()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreens()),
+                            );
                           },
                           buttonText: '확인',
                           alertText: '가입이 완료되었습니다.');
