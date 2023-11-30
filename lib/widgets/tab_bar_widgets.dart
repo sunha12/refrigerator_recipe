@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart'; // 기본 위젯 테마 요소 사용
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:refrigerator_recipe_app/provider/ingredient.dart';
 import 'package:refrigerator_recipe_app/screens/ingredient_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart'; // style
 import 'package:refrigerator_recipe_app/constants/constants.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/ingredient_widgets.dart';
-import 'package:refrigerator_recipe_app/widgets/ingredients_tab_view_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/search_widgets.dart';
 
 //탭이 네개인 탭바
@@ -334,7 +334,12 @@ class _fourTabBarWidgetsState extends State<fourTabBarWidgets>
 
 //식재료 탭바
 class IngredientsTabBarWidgets extends StatefulWidget {
-  const IngredientsTabBarWidgets({super.key});
+  final bool remember;
+
+  const IngredientsTabBarWidgets({
+    super.key,
+    required this.remember,
+  });
   @override
   _IngredientsTabBarWidgetsState createState() =>
       _IngredientsTabBarWidgetsState();
@@ -342,6 +347,8 @@ class IngredientsTabBarWidgets extends StatefulWidget {
 
 class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     with SingleTickerProviderStateMixin {
+  final Ingredient _ingredientDate = Get.put(Ingredient());
+
   int _selectedPageIndex = 0; // 현재 선택된 탭 인덱스
   // 탭바 선언
   TabController? _tabController;
@@ -353,7 +360,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
   void initState() {
     super.initState();
     _tabController = TabController(length: 6, vsync: this, initialIndex: 0);
-    print(':::::::::::::::::');
     loadIngredients();
   }
 
@@ -454,6 +460,10 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
       saveData('saveIngredients', mergedDataString);
 
       loadIngredients();
+
+      if (widget.remember == true) {
+        saveData('ingredients', mergedDataString);
+      }
     } catch (e) {
       // 오류 처리
     }
@@ -479,6 +489,10 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
         saveData('saveIngredients', updatedDataString);
 
         loadIngredients(); // 수정된 데이터 로드
+
+        if (widget.remember == true) {
+          saveData('ingredients', updatedDataString);
+        }
       }
     } catch (e) {
       // 오류 처리
@@ -498,7 +512,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
         setState(() {
           selectData = searchList;
-          print(':::::::::::2222222222${selectData}');
+          // print(':::::::::::2222222222${selectData}');
         });
       }
     } catch (e) {
@@ -706,7 +720,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",
@@ -876,7 +894,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",
@@ -1046,7 +1068,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",
@@ -1216,7 +1242,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",
@@ -1386,7 +1416,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",
@@ -1556,7 +1590,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
                         //추가 버튼
                         LongButtonWidgets(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (widget.remember == true) {
+                              _ingredientDate.loadIngredients();
+                            }
+                          },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
                           iconUrl: "",

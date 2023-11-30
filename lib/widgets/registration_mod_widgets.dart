@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/models/api_helper.dart';
+import 'package:refrigerator_recipe_app/provider/ingredient.dart';
 import 'package:refrigerator_recipe_app/screens/add_ingredient_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
@@ -112,7 +113,7 @@ class _AddIngredientsModalWidgetsState
               ),
               SizedBox(height: 20),
               Expanded(
-                child: IngredientsTabBarWidgets(),
+                child: IngredientsTabBarWidgets(remember: widget.remember),
               )
             ],
           ),
@@ -134,6 +135,8 @@ class AddCondimentModalWidgets extends StatefulWidget {
 }
 
 class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
+  final Ingredient _ingredientDate = Get.put(Ingredient());
+
   @override
   void initState() {
     super.initState();
@@ -186,6 +189,10 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
       saveData('saveCondiment', mergedDataString);
 
       loadIngredients();
+
+      if (widget.remember == true) {
+        saveData('condiment', mergedDataString);
+      }
     } catch (e) {
       // 오류 처리
     }
@@ -211,6 +218,10 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
         saveData('saveCondiment', updatedDataString);
 
         loadIngredients(); // 수정된 데이터 로드
+
+        if (widget.remember == true) {
+          saveData('condiment', updatedDataString);
+        }
       }
     } catch (e) {
       // 오류 처리
@@ -478,7 +489,11 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
 
                     //추가 버튼
                     LongButtonWidgets(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (widget.remember == true) {
+                          _ingredientDate.loadIngredients();
+                        }
+                      },
                       colorId: AppTheme.orange,
                       buttonText: "추가하기",
                       iconUrl: "",

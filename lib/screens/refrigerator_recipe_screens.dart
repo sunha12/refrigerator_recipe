@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/provider/ingredient.dart';
 import 'package:refrigerator_recipe_app/screens/refrigerator_recipe_search_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
+import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
@@ -17,6 +22,12 @@ class RefrigeratorRecipeScreens extends StatefulWidget {
 }
 
 class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
+  final Ingredient _ingredientDate = Get.put(Ingredient());
+
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -130,7 +141,30 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                   child: Container(
                     width: MediaWidth(context, 0.70),
                     height: 70,
-                    color: Colors.pink,
+                    child: GridView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 6,
+                        childAspectRatio: 1.5,
+                      ),
+                      itemCount: _ingredientDate.ingredientsDate.value.length,
+                      itemBuilder: (context, index) {
+                        Map<String, dynamic> data =
+                            _ingredientDate.ingredientsDate.value[index];
+                        return Container(
+                          width: 30,
+                          height: 30,
+                          child: Image.network(
+                            // 'https://api.gooodall.com/files/${widget.images}',
+                            data['file_nm'],
+                            fit: BoxFit.fitHeight,
+                            width: 30,
+                            height: 30,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
               ],
@@ -162,7 +196,30 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                   child: Container(
                     width: MediaWidth(context, 0.70),
                     height: 70,
-                    color: Colors.pink,
+                    child: GridView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 6,
+                        childAspectRatio: 1.5,
+                      ),
+                      itemCount: _ingredientDate.condimentDate.value.length,
+                      itemBuilder: (context, index) {
+                        Map<String, dynamic> data =
+                            _ingredientDate.condimentDate.value[index];
+                        return Container(
+                          width: 30,
+                          height: 30,
+                          child: Image.network(
+                            // 'https://api.gooodall.com/files/${widget.images}',
+                            data['file_nm'],
+                            fit: BoxFit.fitHeight,
+                            width: 30,
+                            height: 30,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
               ],

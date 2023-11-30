@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:get/get.dart';
+import 'package:refrigerator_recipe_app/provider/ingredient.dart';
 import 'package:refrigerator_recipe_app/provider/time_update.dart';
 import 'package:refrigerator_recipe_app/screens/home_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_screens.dart';
@@ -20,6 +21,7 @@ void main() {
         builder: (context) => const MyApp()), //디바이스 패키지 관련 추가
   );
   Get.put(TimerUpdate()); // TimerUpdate 클래스 등록
+  Get.put(Ingredient()); // IngredientS 클래스 등록
 }
 
 class MyApp extends StatelessWidget {
