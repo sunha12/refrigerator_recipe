@@ -86,7 +86,7 @@ class _HomeScreensState extends State<HomeScreens> {
                     builder: (BuildContext context) {
                       return SizedBox(
                         height: MediaHeight(context, 0.88),
-                        child: AddIngredientsModalWidgets(),
+                        child: AddIngredientsModalWidgets(remember: false),
                       );
                     },
                   );

@@ -8,10 +8,15 @@ import 'package:refrigerator_recipe_app/models/api_helper.dart';
 import 'package:refrigerator_recipe_app/screens/add_ingredient_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
+import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/search_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/tab_bar_widgets.dart';
 
 //식재료 추가
 class AddIngredientsModalWidgets extends StatefulWidget {
+  final bool remember;
+
+  const AddIngredientsModalWidgets({super.key, required this.remember});
   @override
   _AddIngredientsModalWidgetsState createState() =>
       _AddIngredientsModalWidgetsState();
@@ -19,44 +24,12 @@ class AddIngredientsModalWidgets extends StatefulWidget {
 
 class _AddIngredientsModalWidgetsState
     extends State<AddIngredientsModalWidgets> {
-  String searchText = '';
-
-  List<dynamic> _dataList = []; //데이터
-  List<bool> _checkedList = []; //체크 여부 리스트
-
   @override
   void initState() {
     super.initState();
     // _searchController.addListener(_onSearchChanged);
     // _initCheckedList();
     // vogueTextDate();
-  }
-
-  void _initCheckedList() {
-    _checkedList = List<bool>.filled(_dataList.length, false);
-  }
-
-  void _handleTextSelection(int selectedText) {
-    print(selectedText);
-  }
-
-  void _handleCheckboxSelection(int index, bool value) {
-    setState(() {
-      _checkedList[index] = value;
-      if (value) {
-        _handleTextSelection(_dataList[index]['cate_idx']);
-      }
-    });
-  }
-
-  //체크된 아이템이 있는지 확인
-  bool hasTrueValue(List<bool> list) {
-    for (var value in list) {
-      if (value == true) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @override
@@ -112,7 +85,8 @@ class _AddIngredientsModalWidgetsState
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddIngredientScreens(),
+                            builder: (context) =>
+                                AddIngredientScreens(remember: widget.remember),
                           ),
                         );
                       },
@@ -150,22 +124,16 @@ class _AddIngredientsModalWidgetsState
 
 //조미료 추가
 class AddCondimentModalWidgets extends StatefulWidget {
+  final bool remember;
+
+  const AddCondimentModalWidgets({super.key, required this.remember});
+
   @override
   _AddCondimentModalWidgetsState createState() =>
       _AddCondimentModalWidgetsState();
 }
 
 class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
-  String _address = '';
-  String gbn_idx = '1000000';
-  String searchText = '';
-
-  TextEditingController _searchController = TextEditingController();
-  List<dynamic> _dataList = []; //펫 데이터
-  List<bool> _checkedList = []; //체크 여부 리스트
-  List<String> _searchTextList = []; //최근 검색어 5개
-  List<dynamic> _vogueSearchText = []; //인기 검색어
-
   @override
   void initState() {
     super.initState();
@@ -174,48 +142,106 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
     // vogueTextDate();
   }
 
-  void _onSearchChanged() {
-    if (_searchController.text.isEmpty) {
-      setState(() {
-        _dataList = [];
-      });
-    }
+  TextEditingController _searchController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
 
-    setState(() {
-      _initCheckedList();
-    });
-  }
+  final List<Map<String, dynamic>> listData1 = [
+    {
+      'title': '소금',
+      'file_nm': 'assets/images/img_salt.png',
+    },
+    {
+      'title': '설탕',
+      'file_nm': 'assets/images/img_sugar.png',
+    },
+    {
+      'title': '간장',
+      'file_nm': 'assets/images/img_soysauce.png',
+    },
+    {
+      'title': '다시다',
+      'file_nm': 'assets/images/img_dasida.png',
+    },
+  ];
 
-  void _initCheckedList() {
-    _checkedList = List<bool>.filled(_dataList.length, false);
-  }
+  List<Map<String, dynamic>> selectData = [];
 
-  void _handleTextSelection(int selectedText) {
-    print(selectedText);
-  }
+  //선택한 재료 저장
+  void saveCondiment(Map<String, dynamic> newData) async {
+    // 이전 데이터 불러오기
+    String savedData = await loadData('saveCondiment');
 
-  void _handleCheckboxSelection(int index, bool value) {
-    setState(() {
-      _checkedList[index] = value;
-      if (value) {
-        _handleTextSelection(_dataList[index]['cate_idx']);
+    try {
+      List<Map<String, dynamic>> existingData = [];
+
+      if (savedData != null && savedData.isNotEmpty) {
+        existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
       }
-    });
+
+      // 기존 데이터와 새로운 데이터 합치기
+      existingData.add(newData);
+
+      // 합쳐진 데이터를 저장
+      String mergedDataString = json.encode(existingData);
+      saveData('saveCondiment', mergedDataString);
+
+      loadIngredients();
+    } catch (e) {
+      // 오류 처리
+    }
   }
 
-  //체크된 아이템이 있는지 확인
-  bool hasTrueValue(List<bool> list) {
-    for (var value in list) {
-      if (value == true) {
-        return true;
+// 선택한 재료 삭제
+  void delIngredients(Map<String, dynamic> dataToRemove) async {
+    String savedData = await loadData('saveCondiment');
+
+    try {
+      List<Map<String, dynamic>> existingData = [];
+
+      if (savedData != null && savedData.isNotEmpty) {
+        existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
+
+        // 데이터에서 삭제할 아이템 찾기
+        existingData.removeWhere((item) =>
+            item['title'] == dataToRemove['title'] &&
+            item['file_nm'] == dataToRemove['file_nm']);
+
+        // 수정된 데이터 저장
+        String updatedDataString = json.encode(existingData);
+        saveData('saveCondiment', updatedDataString);
+
+        loadIngredients(); // 수정된 데이터 로드
       }
+    } catch (e) {
+      // 오류 처리
     }
-    return false;
+  }
+
+  //선택한 재료 로드
+  void loadIngredients() async {
+    String date = await loadData('saveCondiment');
+
+    try {
+      if (date != null && date.isNotEmpty) {
+        // JSON 문자열을 List<Map<String, dynamic>>으로 변환
+        List<dynamic> decodedData = jsonDecode(date);
+        List<Map<String, dynamic>> searchList =
+            decodedData.cast<Map<String, dynamic>>();
+
+        setState(() {
+          selectData = searchList;
+          print(':::::::::::2222222222${selectData}');
+        });
+      }
+    } catch (e) {
+      print(':::::${e}');
+    }
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
+    //종료되면 데이터 리셋
+    saveData('saveCondiment', '');
     super.dispose();
   }
 
@@ -254,7 +280,7 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: 15, left: 20),
                     child: Text(
                       '조미료 추가',
                       style: TextStyle(
@@ -269,7 +295,14 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     padding: EdgeInsets.only(top: 15, right: 20),
                     child: TextButton(
                       onPressed: () {
-                        //
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddIngredientScreens(
+                              remember: widget.remember,
+                            ),
+                          ),
+                        );
                       },
                       child: Text(
                         '직접 입력',
@@ -291,130 +324,168 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              // 주소 검색 입력 창
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
+              Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: '검색',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: AppTheme.gray_D9),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: AppTheme.gray_D9),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        suffixIcon:
-                            //검색
-                            IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset("assets/icons/ico_search.svg"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: MediaWidth(context, 0.04)),
-                      child: Text(
-                        '최근 검색어',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppTheme.gray_4A,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaWidth(context, 0.04), bottom: 18, top: 10),
-                    child: Container(
-                      height: MediaHeight(context, 0.05),
-                      child: ListView.builder(
-                        // physics: BouncingScrollPhysics(), //튕겨나가며, 배경이 늘어남
-                        physics:
-                            RangeMaintainingScrollPhysics(), //전체 길이만큼만 움직여짐
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _searchTextList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 3),
-                                child: TextButton(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        _searchTextList[index],
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: AppTheme.gray_4A,
+                    //선택된 재료 필드
+                    selectData.isNotEmpty
+                        ? Container(
+                            height: MediaHeight(context, 0.09),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: MediaWidth(context, 0.04)),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                // physics: NeverScrollableScrollPhysics(),
+                                itemCount: selectData.length,
+                                itemBuilder: (context, index) {
+                                  Map<String, dynamic> data = selectData[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(100)),
+                                                border: Border.all(
+                                                  width: 1,
+                                                  color: Color(0xffEBEBEB),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50), // 둥근 모서리 반지름 값
+                                                  child: Image.network(
+                                                    // 'https://api.gooodall.com/files/${widget.images}',
+                                                    data['file_nm'],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 0,
+                                              right: 0,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  delIngredients(
+                                                      selectData[index]);
+                                                },
+                                                child: Opacity(
+                                                  opacity: 0.4,
+                                                  child: Icon(
+                                                    Icons.cancel_rounded,
+                                                    color: Colors.black87,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _searchTextList.removeAt(index);
-                                          });
-                                        },
-                                        icon: SvgPicture.asset(
-                                            'assets/icons/ico_cancel.svg'),
-                                        padding: EdgeInsets.zero, // 패딩 설정
-                                        constraints: BoxConstraints(),
-                                        color: Colors.transparent,
-                                      ),
-                                    ],
+                                        Text(
+                                          data['title'],
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: AppTheme.gray_4A),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                // // 스크롤 제어
+                                controller: _scrollController,
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
+                    //검색
+                    SearchWidgets(
+                      controller: _searchController,
+                      onPressed: () {},
+                    ),
+                    //재료 필드
+                    Container(
+                      height: selectData.isEmpty
+                          ? MediaHeight(context, 0.66)
+                          : MediaHeight(context, 0.57),
+                      child: GridView.builder(
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          childAspectRatio: 0.9,
+                        ),
+                        itemCount: listData1.length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> data = listData1[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  saveCondiment(listData1[index]);
+                                  // loadIngredients();
+                                },
+                                child: Container(
+                                  width: 75,
+                                  height: 75,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(100)),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Color(0xffEBEBEB),
+                                    ),
                                   ),
-                                  onPressed: () {
-                                    _searchController.text =
-                                        _searchTextList[index];
-                                  },
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        side: BorderSide(
-                                            color: AppTheme.gray_D9, width: 1),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          50), // 둥근 모서리 반지름 값
+                                      child: Image.network(
+                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                        data['file_nm'],
                                       ),
-                                    ), //테두리
-                                    overlayColor: MaterialStateProperty.all(
-                                        Colors.white), //배경색
-                                    foregroundColor: MaterialStateProperty.all(
-                                        AppTheme.gray_4A), //글자색
-                                    //자동 패딩 제거
-                                    minimumSize:
-                                        MaterialStateProperty.all(Size.zero),
-                                    padding: MaterialStateProperty.all(
-                                        EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 10)),
+                                    ),
                                   ),
                                 ),
+                              ),
+                              Text(
+                                data['title'],
+                                style: TextStyle(
+                                    fontSize: 15, color: AppTheme.gray_4A),
                               ),
                             ],
                           );
                         },
                       ),
                     ),
-                  ),
-                ],
-              ),
+
+                    //추가 버튼
+                    LongButtonWidgets(
+                      onPressed: () {},
+                      colorId: AppTheme.orange,
+                      buttonText: "추가하기",
+                      iconUrl: "",
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

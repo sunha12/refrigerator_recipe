@@ -105,27 +105,69 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
               ),
             ),
             //재료 추가
-            IngredientAddButtonWidgets(
-              text: '재료 추가',
-              onPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SizedBox(
-                      height: MediaHeight(context, 0.88),
-                      child: AddIngredientsModalWidgets(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IngredientAddButtonWidgets(
+                  text: '식재료 추가',
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaHeight(context, 0.88),
+                          child: AddIngredientsModalWidgets(remember: true),
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Container(
+                    width: MediaWidth(context, 0.70),
+                    height: 70,
+                    color: Colors.pink,
+                  ),
+                )
+              ],
             ),
+
             //조미료 추가
-            IngredientAddButtonWidgets(
-              text: '조미료 추가',
-              onPressed: () {},
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IngredientAddButtonWidgets(
+                  text: '조미료 추가',
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaHeight(context, 0.88),
+                          child: AddCondimentModalWidgets(remember: true),
+                        );
+                      },
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Container(
+                    width: MediaWidth(context, 0.70),
+                    height: 70,
+                    color: Colors.pink,
+                  ),
+                )
+              ],
             ),
+
             Padding(
               padding: const EdgeInsets.only(top: 60),
               child: LongButtonWidgets(

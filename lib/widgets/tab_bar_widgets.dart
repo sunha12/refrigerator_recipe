@@ -507,6 +507,13 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
   }
 
   @override
+  void dispose() {
+    //종료되면 데이터 리셋
+    saveData('saveIngredients', '');
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -710,23 +717,853 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                 ),
                 // 두 번째 탭뷰
                 PageView(
-                  children: [],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //선택된 재료 필드
+                        selectData.isNotEmpty
+                            ? Container(
+                                height: MediaHeight(context, 0.09),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //검색
+                        SearchWidgets(
+                          controller: _searchController,
+                          onPressed: () {},
+                        ),
+                        //재료 필드
+                        Container(
+                          height: selectData.isEmpty
+                              ? MediaHeight(context, 0.57)
+                              : MediaHeight(context, 0.48),
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.9,
+                            ),
+                            itemCount: listData1.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data = listData1[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      saveIngredients(listData1[index]);
+                                      // loadIngredients();
+                                    },
+                                    child: Container(
+                                      width: 75,
+                                      height: 75,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100)),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Color(0xffEBEBEB),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // 둥근 모서리 반지름 값
+                                          child: Image.network(
+                                            // 'https://api.gooodall.com/files/${widget.images}',
+                                            data['file_nm'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    data['title'],
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppTheme.gray_4A),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+                        //추가 버튼
+                        LongButtonWidgets(
+                          onPressed: () {},
+                          colorId: AppTheme.orange,
+                          buttonText: "추가하기",
+                          iconUrl: "",
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 // 세 번째 탭뷰
                 PageView(
-                  children: [],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //선택된 재료 필드
+                        selectData.isNotEmpty
+                            ? Container(
+                                height: MediaHeight(context, 0.09),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //검색
+                        SearchWidgets(
+                          controller: _searchController,
+                          onPressed: () {},
+                        ),
+                        //재료 필드
+                        Container(
+                          height: selectData.isEmpty
+                              ? MediaHeight(context, 0.57)
+                              : MediaHeight(context, 0.48),
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.9,
+                            ),
+                            itemCount: listData1.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data = listData1[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      saveIngredients(listData1[index]);
+                                      // loadIngredients();
+                                    },
+                                    child: Container(
+                                      width: 75,
+                                      height: 75,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100)),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Color(0xffEBEBEB),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // 둥근 모서리 반지름 값
+                                          child: Image.network(
+                                            // 'https://api.gooodall.com/files/${widget.images}',
+                                            data['file_nm'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    data['title'],
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppTheme.gray_4A),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+                        //추가 버튼
+                        LongButtonWidgets(
+                          onPressed: () {},
+                          colorId: AppTheme.orange,
+                          buttonText: "추가하기",
+                          iconUrl: "",
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 // 네 번째 탭뷰
                 PageView(
-                  children: [],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //선택된 재료 필드
+                        selectData.isNotEmpty
+                            ? Container(
+                                height: MediaHeight(context, 0.09),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //검색
+                        SearchWidgets(
+                          controller: _searchController,
+                          onPressed: () {},
+                        ),
+                        //재료 필드
+                        Container(
+                          height: selectData.isEmpty
+                              ? MediaHeight(context, 0.57)
+                              : MediaHeight(context, 0.48),
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.9,
+                            ),
+                            itemCount: listData1.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data = listData1[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      saveIngredients(listData1[index]);
+                                      // loadIngredients();
+                                    },
+                                    child: Container(
+                                      width: 75,
+                                      height: 75,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100)),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Color(0xffEBEBEB),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // 둥근 모서리 반지름 값
+                                          child: Image.network(
+                                            // 'https://api.gooodall.com/files/${widget.images}',
+                                            data['file_nm'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    data['title'],
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppTheme.gray_4A),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+                        //추가 버튼
+                        LongButtonWidgets(
+                          onPressed: () {},
+                          colorId: AppTheme.orange,
+                          buttonText: "추가하기",
+                          iconUrl: "",
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 // 다섯 번째 탭뷰
                 PageView(
-                  children: [],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //선택된 재료 필드
+                        selectData.isNotEmpty
+                            ? Container(
+                                height: MediaHeight(context, 0.09),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //검색
+                        SearchWidgets(
+                          controller: _searchController,
+                          onPressed: () {},
+                        ),
+                        //재료 필드
+                        Container(
+                          height: selectData.isEmpty
+                              ? MediaHeight(context, 0.57)
+                              : MediaHeight(context, 0.48),
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.9,
+                            ),
+                            itemCount: listData1.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data = listData1[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      saveIngredients(listData1[index]);
+                                      // loadIngredients();
+                                    },
+                                    child: Container(
+                                      width: 75,
+                                      height: 75,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100)),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Color(0xffEBEBEB),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // 둥근 모서리 반지름 값
+                                          child: Image.network(
+                                            // 'https://api.gooodall.com/files/${widget.images}',
+                                            data['file_nm'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    data['title'],
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppTheme.gray_4A),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+                        //추가 버튼
+                        LongButtonWidgets(
+                          onPressed: () {},
+                          colorId: AppTheme.orange,
+                          buttonText: "추가하기",
+                          iconUrl: "",
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 // 여섯 번째 탭뷰
                 PageView(
-                  children: [],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //선택된 재료 필드
+                        selectData.isNotEmpty
+                            ? Container(
+                                height: MediaHeight(context, 0.09),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MediaWidth(context, 0.04)),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    // physics: NeverScrollableScrollPhysics(),
+                                    itemCount: selectData.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> data =
+                                          selectData[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100)),
+                                                    border: Border.all(
+                                                      width: 1,
+                                                      color: Color(0xffEBEBEB),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50), // 둥근 모서리 반지름 값
+                                                      child: Image.network(
+                                                        // 'https://api.gooodall.com/files/${widget.images}',
+                                                        data['file_nm'],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      delIngredients(
+                                                          selectData[index]);
+                                                    },
+                                                    child: Opacity(
+                                                      opacity: 0.4,
+                                                      child: Icon(
+                                                        Icons.cancel_rounded,
+                                                        color: Colors.black87,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              data['title'],
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppTheme.gray_4A),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    // // 스크롤 제어
+                                    controller: _scrollController,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //검색
+                        SearchWidgets(
+                          controller: _searchController,
+                          onPressed: () {},
+                        ),
+                        //재료 필드
+                        Container(
+                          height: selectData.isEmpty
+                              ? MediaHeight(context, 0.57)
+                              : MediaHeight(context, 0.48),
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.9,
+                            ),
+                            itemCount: listData1.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data = listData1[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      saveIngredients(listData1[index]);
+                                      // loadIngredients();
+                                    },
+                                    child: Container(
+                                      width: 75,
+                                      height: 75,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100)),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Color(0xffEBEBEB),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // 둥근 모서리 반지름 값
+                                          child: Image.network(
+                                            // 'https://api.gooodall.com/files/${widget.images}',
+                                            data['file_nm'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    data['title'],
+                                    style: TextStyle(
+                                        fontSize: 15, color: AppTheme.gray_4A),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+                        //추가 버튼
+                        LongButtonWidgets(
+                          onPressed: () {},
+                          colorId: AppTheme.orange,
+                          buttonText: "추가하기",
+                          iconUrl: "",
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),

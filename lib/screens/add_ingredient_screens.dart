@@ -12,7 +12,9 @@ import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 import 'package:refrigerator_recipe_app/provider/time_update.dart';
 
 class AddIngredientScreens extends StatefulWidget {
+  final bool remember;
   const AddIngredientScreens({
+    required this.remember,
     super.key,
   });
 

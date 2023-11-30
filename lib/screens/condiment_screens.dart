@@ -9,6 +9,7 @@ import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/ingredient_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/notification_window_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/policy_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/registration_mod_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/size_box_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 import 'package:refrigerator_recipe_app/provider/time_update.dart';
@@ -68,7 +69,19 @@ class _CondimentScreensState extends State<CondimentScreens> {
               ),
               child: AddBackButtonWidgets(
                 appBarText: '조미료',
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SizedBox(
+                        height: MediaHeight(context, 0.88),
+                        child: AddCondimentModalWidgets(remember: false),
+                      );
+                    },
+                  );
+                },
               ),
             ),
             ListView.builder(
