@@ -119,7 +119,8 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
                           );
                         },
                         buttonText: '확인',
-                        alertText: '인증되었습니다.');
+                        alertText: '인증되었습니다.',
+                        textColor: Colors.black);
                   },
                 );
               },

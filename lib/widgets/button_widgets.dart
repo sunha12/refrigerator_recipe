@@ -232,8 +232,8 @@ class _TextButtonWidgetsState extends State<TextButtonWidgets> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 1,
-            color: widget.bar == true ? AppTheme.line_thin : Colors.transparent,
+            width: 0.5,
+            color: widget.bar == true ? AppTheme.gray_D4 : Colors.transparent,
           ),
         ),
       ),

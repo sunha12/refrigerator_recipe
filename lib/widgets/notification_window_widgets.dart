@@ -7,11 +7,13 @@ import 'package:refrigerator_recipe_app/styles/theme.dart';
 //동작 버튼이 중앙에 한 개인 경우
 class NotificationWindowWidgets extends StatelessWidget {
   final String buttonText;
+  final Color textColor;
   final String alertText;
   final VoidCallback onPressed;
   const NotificationWindowWidgets({
     super.key,
     required this.buttonText,
+    required this.textColor,
     required this.alertText,
     required this.onPressed,
   });
@@ -50,6 +52,7 @@ class NotificationWindowWidgets extends StatelessWidget {
                     child: Text(
                       alertText,
                       style: TextStyle(fontSize: 17),
+                      textAlign: TextAlign.center,
                     )),
                 Align(
                   alignment: Alignment.center,
@@ -89,6 +92,7 @@ class NotificationWindowWidgets extends StatelessWidget {
                             horizontal: MediaWidth(context, 0.14)),
                         child: Text(
                           buttonText,
+                          style: TextStyle(color: textColor),
                         ),
                       ),
                     ),

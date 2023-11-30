@@ -272,17 +272,19 @@ class _SignupScreensState extends State<SignupScreens> {
                     context: context,
                     builder: (BuildContext context) {
                       return NotificationWindowWidgets(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreens()),
-                            );
-                          },
-                          buttonText: '확인',
-                          alertText: '가입이 완료되었습니다.');
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreens()),
+                          );
+                        },
+                        buttonText: '확인',
+                        alertText: '가입이 완료되었습니다.',
+                        textColor: Colors.black,
+                      );
                     },
                   );
                 },
