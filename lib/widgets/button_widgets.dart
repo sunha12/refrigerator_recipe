@@ -612,7 +612,7 @@ class _TimeButtonWidgetsState extends State<TimeButtonWidgets> {
     return Container(
       width: MediaWidth(context, 0.2),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
         boxShadow: [],
       ),
       child: TextButton(
