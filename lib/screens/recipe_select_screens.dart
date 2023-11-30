@@ -37,13 +37,6 @@ class _RecipeSelectScreensState extends State<RecipeSelectScreens> {
     },
   ];
 
-  String gbn = '';
-  String cate = '';
-  String gender = '';
-  String srchText = '';
-  String FilterOptions = '';
-  int pageNo = 1;
-
   //스크롤 감지
   bool _isLoading = false;
   ScrollController _scrollController = ScrollController();
