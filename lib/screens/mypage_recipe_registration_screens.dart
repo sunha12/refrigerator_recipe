@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
@@ -23,95 +24,95 @@ class RecipeRegistrationPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CancleButtonWidgets(appBarText: '레시피 등록'),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: double.infinity,
-                      height: 200, // 원하는 높이 설정
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300], // 회색 배경
-                      ),
-                      child: IconButton(
-                        icon: Icon(Icons.camera_alt, size: 50), // 카메라 아이콘
-                        onPressed: () {
-                          // 사진 업로드 로직
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('이름',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(height: 8.0),
-                    LongTextInputFildWidgets(
-                      hintText: '레시피 이름',
-                      onChanged: onNameChanged,
-                      inText: initialRecipeName,
-                    ),
-                    SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('레시피 소개',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(height: 8.0),
-                    LongTextInputFildWidgets(
-                      hintText: '레시피에 대한 간단한 설명을 입력하세요.',
-                      onChanged: onDescriptionChanged,
-                      inText: initialRecipeDescription,
-                    ),
-                    SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text('링크',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(height: 8.0),
-                    LongTextInputFildWidgets(
-                      hintText: '링크, 유튜브 등',
-                      onChanged: onLinkChanged,
-                      inText: initialRecipeLink,
-                    ),
-                    SizedBox(height: 16.0),
-                    IngredientAddButtonWidgets(
-                      text: '재료 추가',
-                      onPressed: () {
-                        // 재료 추가 로직
-                      },
-                    ),
-                    SizedBox(height: 16.0),
-                    IngredientAddButtonWidgets(
-                      text: '조미료 추가',
-                      onPressed: () {
-                        // 조미료 추가 로직
-                      },
-                    ),
-                    SizedBox(height: 24.0),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // 데이터 로직
-
-                          Navigator.pop(context);
-                        },
-                        child: Text('등록하기'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange,
-                          minimumSize: Size(double.infinity, 50),
-                        ),
-                      ),
-                    ),
-                  ],
+              Container(
+                width: double.infinity,
+                height: 300,
+                decoration: BoxDecoration(
+                    color: Color(0xffEFEFEF),
+                    border: Border.all(width: 1, color: AppTheme.gray_D4)),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.camera_alt_outlined,
+                    size: 20,
+                    color: AppTheme.gray_4A,
+                  ), // 카메라 아이콘
+                  onPressed: () {
+                    // 사진 업로드 로직
+                  },
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
+                    MediaWidth(context, 0.04), 5),
+                child: Text(
+                  '이름',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              LongTextInputFildWidgets(
+                hintText: '레시피 이름',
+                onChanged: onNameChanged,
+                inText: initialRecipeName,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
+                    MediaWidth(context, 0.04), 5),
+                child: Text(
+                  '레시피 소개',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              LongTextInputFildWidgets(
+                hintText: '레시피에 대한 간단한 설명을 입력하세요.',
+                onChanged: onDescriptionChanged,
+                inText: initialRecipeDescription,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
+                    MediaWidth(context, 0.04), 5),
+                child: Text(
+                  '링크',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              LongTextInputFildWidgets(
+                hintText: '블로그, 유튜브 등',
+                onChanged: onLinkChanged,
+                inText: initialRecipeLink,
+              ),
+              IngredientAddButtonWidgets(
+                text: '재료 추가',
+                onPressed: () {
+                  // 재료 추가 로직
+                },
+              ),
+              SizedBox(height: 16.0),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: IngredientAddButtonWidgets(
+                  text: '조미료 추가',
+                  onPressed: () {
+                    // 조미료 추가 로직
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: LongButtonWidgets(
+                    onPressed: () {},
+                    colorId: AppTheme.orange,
+                    buttonText: '등록하기',
+                    iconUrl: ''),
+              )
             ],
           ),
         ),

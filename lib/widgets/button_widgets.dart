@@ -556,7 +556,7 @@ class _TimeButtonWidgetsState extends State<TimeButtonWidgets> {
                     CupertinoButton(
                       child: Text(
                         '확인',
-                        style: TextStyle(color: Colors.green),
+                        style: TextStyle(color: Colors.orange),
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -610,9 +610,9 @@ class _TimeButtonWidgetsState extends State<TimeButtonWidgets> {
     ));
 
     return Container(
-      width: MediaWidth(context, 0.4),
+      width: MediaWidth(context, 0.2),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [],
       ),
       child: TextButton(

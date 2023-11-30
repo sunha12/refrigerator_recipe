@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 
 class NotificationSettingsScreens extends StatefulWidget {
   @override
@@ -84,6 +86,62 @@ class _NotificationSettingsScreensState
             buildNotificationSetting(
                 '방해 금지 설정', doNotDisturbEnabled, toggleDoNotDisturb,
                 subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.'),
+            doNotDisturbEnabled == true
+                ? Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10, horizontal: MediaWidth(context, 0.04)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: AppTheme.gray_white,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 14,
+                            horizontal: MediaWidth(context, 0.04)),
+                        child: Column(
+                          children: [
+                            //시작시간
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '시작 시간',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: AppTheme.gray_4A,
+                                    ),
+                                  ),
+                                  TimeButtonWidgets(),
+                                ],
+                              ),
+                            ),
+                            //종료시간
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '종료 시간',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppTheme.gray_4A,
+                                  ),
+                                ),
+                                TimeButtonWidgets(),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : SizedBox(),
           ],
         ),
       ),
