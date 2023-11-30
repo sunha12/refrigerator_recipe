@@ -34,6 +34,7 @@ class _MyPageScreensState extends State<MyPageScreens> {
         body: Column(
           children: [
             AppBar(
+              // 뒤로가기 숨김
               automaticallyImplyLeading: false,
               title: Text(
                 '마이페이지',
@@ -64,9 +65,10 @@ class _MyPageScreensState extends State<MyPageScreens> {
             ),
             SizedBox(height: 10.0),
             Center(
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage("assets/profile_image.jpg"),
+              child: Icon(
+                Icons.account_circle, // 사용자 프로필 아이콘으로 변경
+                size: 100, // 아이콘 크기 조절
+                color: Colors.grey, // 아이콘 색상 설정
               ),
             ),
             SizedBox(height: 10.0),

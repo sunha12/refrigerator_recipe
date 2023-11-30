@@ -56,7 +56,7 @@ class MypageWidget extends StatelessWidget {
     return TextButton(
       onPressed: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

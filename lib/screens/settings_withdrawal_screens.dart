@@ -27,8 +27,8 @@ class WithdrawalScreens extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              16.0, 8.0, 16.0, 8.0), // 좌우 간격 추가
+                          padding:
+                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
                           child: Text('이메일',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
@@ -54,8 +54,7 @@ class WithdrawalScreens extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 4.0, left: 16.0), // 좌측 간격 추가
+                          padding: const EdgeInsets.only(top: 4.0, left: 16.0),
                           child: Text(
                             '이메일을 정확히 입력해주세요.',
                             style: TextStyle(fontSize: 12, color: Colors.red),
@@ -68,9 +67,9 @@ class WithdrawalScreens extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              16.0, 8.0, 16.0, 8.0), // 좌우 간격 추가
-                          child: Text('이메일',
+                          padding:
+                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+                          child: Text('인증 번호',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         Row(
@@ -95,14 +94,29 @@ class WithdrawalScreens extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 4.0, left: 16.0), // 좌측 간격 추가
+                          padding: const EdgeInsets.only(top: 4.0, left: 16.0),
                           child: Text(
                             '인증 번호가 일치하지 않습니다.',
                             style: TextStyle(fontSize: 12, color: Colors.red),
                           ),
                         ),
                       ],
+                    ),
+                    SizedBox(height: 24),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(fontSize: 14.0, color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: '계정을 삭제하기 전에 확인해주세요.\n',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(
+                              text: ' · 계정 정보가 삭제되면 계정을 복구할 수 없습니다\n' +
+                                  ' · 개인정보는 개인정보처리방침에 따라 관리됩니다.\n' +
+                                  ' · 작성하신 콘텐츠는 자동으로 삭제되지 않습니다.\n' +
+                                  '탈퇴 후 복구 및 수정, 삭제가 어렵습니다.'),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 24),
                     LongButtonWidgets(
@@ -118,7 +132,10 @@ class WithdrawalScreens extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text("취소"),
+                                  child: Text(
+                                    "취소",
+                                    style: TextStyle(color: AppTheme.orange),
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -128,7 +145,10 @@ class WithdrawalScreens extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  child: Text("계정 삭제"),
+                                  child: Text(
+                                    "계정 삭제",
+                                    style: TextStyle(color: AppTheme.orange),
+                                  ),
                                 ),
                               ],
                             );

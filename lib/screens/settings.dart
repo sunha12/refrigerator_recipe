@@ -150,13 +150,16 @@ class Settings extends StatelessWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text("로그아웃"),
-                      content: Text("로그아웃 하시겠습니까?"),
+                      content: Text("로그아웃하시겠습니까?"),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("취소"),
+                          child: Text(
+                            "취소",
+                            style: TextStyle(color: Colors.orange),
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
@@ -166,7 +169,10 @@ class Settings extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text("로그아웃"),
+                          child: Text(
+                            "로그아웃",
+                            style: TextStyle(color: Colors.orange),
+                          ),
                         ),
                       ],
                     );

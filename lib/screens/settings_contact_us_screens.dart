@@ -61,11 +61,11 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
                 ),
               ),
             ),
-            buildContactTypeDropdown(), // 문의 유형 선택 드롭다운
-            buildInputField('문의하실 내용을 입력해주세요', 358, 232), // 문의 내용 입력 박스
-            buildImageUploader(), // 이미지 업로더
-            buildEmailInputField(), // 이메일 입력 필드
-            buildSendButton(), // 보내기 버튼
+            buildContactTypeDropdown(),
+            buildInputField(' 문의하실 내용을 입력해주세요', 358, 232),
+            buildImageUploader(),
+            buildEmailInputField(),
+            buildSendButton(),
           ],
         ),
       ),
@@ -103,11 +103,11 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
         decoration: InputDecoration(
           border: OutlineInputBorder(
             // 기본 테두리 색상 설정
-            borderSide: BorderSide(color: Colors.orange),
+            borderSide: BorderSide(color: AppTheme.orange),
           ),
           focusedBorder: OutlineInputBorder(
             // 포커스 시 테두리 색상 설정
-            borderSide: BorderSide(color: Colors.orange),
+            borderSide: BorderSide(color: AppTheme.orange),
           ),
         ),
       ),
@@ -137,7 +137,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               decoration: InputDecoration(
                 hintText: hintText,
                 border: InputBorder.none,
-                counterText: '', // 내장 카운터 비활성화
+                counterText: '',
               ),
               style: TextStyle(
                 fontSize: 14.0,
