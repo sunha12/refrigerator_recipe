@@ -26,6 +26,16 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
 
   void initState() {
     super.initState();
+    print('::::::::::::::::::::1${_ingredientDate.ingredientsDate}');
+    print('::::::::::::::::::::2${_ingredientDate.condimentDate}');
+  }
+
+  @override
+  void dispose() {
+    //종료되면 데이터 리셋
+    saveData('ingredients', '');
+    saveData('condiment', '');
+    super.dispose();
   }
 
   @override

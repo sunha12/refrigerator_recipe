@@ -520,6 +520,10 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     }
   }
 
+  void lode() {
+    _ingredientDate.loadIngredients();
+  }
+
   @override
   void dispose() {
     //종료되면 데이터 리셋
@@ -721,8 +725,11 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
+                            try {
                               _ingredientDate.loadIngredients();
+                              Navigator.pop(context);
+                            } catch (e) {
+                              print(e);
                             }
                           },
                           colorId: AppTheme.orange,
@@ -895,9 +902,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
-                              _ingredientDate.loadIngredients();
-                            }
+                            Navigator.pop(context);
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1069,9 +1074,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
-                              _ingredientDate.loadIngredients();
-                            }
+                            Navigator.pop(context);
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1243,9 +1246,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
-                              _ingredientDate.loadIngredients();
-                            }
+                            Navigator.pop(context);
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1417,9 +1418,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
-                              _ingredientDate.loadIngredients();
-                            }
+                            Navigator.pop(context);
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1591,9 +1590,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            if (widget.remember == true) {
-                              _ingredientDate.loadIngredients();
-                            }
+                            Navigator.pop(context);
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",

@@ -24,6 +24,7 @@ class Ingredient extends GetxController {
 
     condimentDate.assignAll(condimentList);
 
+    print(':::::::::::::::loadIngredients');
     update();
   }
 }
