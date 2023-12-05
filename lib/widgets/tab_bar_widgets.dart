@@ -360,7 +360,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
   void initState() {
     super.initState();
     _tabController = TabController(length: 6, vsync: this, initialIndex: 0);
-    loadIngredients();
+    init();
   }
 
   final List<Map<String, dynamic>> listData1 = [
@@ -440,6 +440,16 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
 
   List<Map<String, dynamic>> selectData = [];
 
+  void init() {
+    if (widget.remember == true) {
+      setState(() {
+        selectData = ingredientDate.ingredientsDate.value;
+      });
+      String stringData = json.encode(ingredientDate.ingredientsDate.value);
+      saveData('saveIngredients', stringData);
+    }
+  }
+
   //선택한 재료 저장
   void saveIngredients(Map<String, dynamic> newData) async {
     // 이전 데이터 불러오기
@@ -460,10 +470,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
       saveData('saveIngredients', mergedDataString);
 
       loadIngredients();
-
-      if (widget.remember == true) {
-        ingredientDate.loadIngredient(existingData);
-      }
     } catch (e) {
       // 오류 처리
     }
@@ -489,10 +495,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
         saveData('saveIngredients', updatedDataString);
 
         loadIngredients(); // 수정된 데이터 로드
-
-        if (widget.remember == true) {
-          ingredientDate.loadIngredient(existingData);
-        }
       }
     } catch (e) {
       // 오류 처리
@@ -504,14 +506,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     String date = await loadData('saveIngredients');
 
     try {
-      if (widget.remember == true) {
-        setState(() {
-          selectData = ingredientDate.ingredientsDate.value;
-        });
-        String stringData = json.encode(ingredientDate.ingredientsDate.value);
-        saveData('saveIngredients', stringData);
-      }
-
       if (date != null && date.isNotEmpty) {
         // JSON 문자열을 List<Map<String, dynamic>>으로 변환
         List<dynamic> decodedData = jsonDecode(date);
@@ -525,6 +519,25 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
       }
     } catch (e) {
       print(':::::${e}');
+    }
+  }
+
+  //재료 임시저장
+  void save() async {
+    // 이전 데이터 불러오기
+    String savedData = await loadData('saveIngredients');
+
+    try {
+      List<Map<String, dynamic>> existingData = [];
+
+      if (savedData != null &&
+          savedData.isNotEmpty &&
+          widget.remember == true) {
+        existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
+        ingredientDate.loadIngredient(existingData);
+      }
+    } catch (e) {
+      // 오류 처리
     }
   }
 
@@ -729,11 +742,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //추가 버튼
                         LongButtonWidgets(
                           onPressed: () {
-                            try {
-                              Navigator.pop(context);
-                            } catch (e) {
-                              print(e);
-                            }
+                            Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -906,6 +916,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1078,6 +1089,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1250,6 +1262,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1422,6 +1435,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",
@@ -1594,6 +1608,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             Navigator.pop(context);
+                            save();
                           },
                           colorId: AppTheme.orange,
                           buttonText: "추가하기",

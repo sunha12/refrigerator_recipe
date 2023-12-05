@@ -60,9 +60,6 @@ class _AddIngredientsModalWidgetsState
                     padding: EdgeInsets.only(top: 15, left: 20),
                     onPressed: () {
                       Navigator.pop(context);
-                      //데이터 리셋
-                      ingredientDate.loadIngredient(<Map<String, dynamic>>[]);
-                      ingredientDate.loadCondiment(<Map<String, dynamic>>[]);
                     },
                     icon: Icon(
                       Icons.close,
@@ -156,7 +153,7 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
   @override
   void initState() {
     super.initState();
-    loadIngredients();
+    init();
   }
 
   TextEditingController _searchController = TextEditingController();
@@ -183,6 +180,16 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
 
   List<Map<String, dynamic>> selectData = [];
 
+  void init() {
+    if (widget.remember == true) {
+      setState(() {
+        selectData = ingredientDate.condimentDate.value;
+      });
+      String stringData = json.encode(ingredientDate.condimentDate.value);
+      saveData('saveCondiment', stringData);
+    }
+  }
+
   //선택한 재료 저장
   void saveCondiment(Map<String, dynamic> newData) async {
     // 이전 데이터 불러오기
@@ -207,11 +214,9 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
 
       loadIngredients();
 
-      if (widget.remember == true) {
-        print(':::::::::${existingData}');
-        ingredientDate.loadCondiment(existingData);
-        print(':::::::::${ingredientDate.condimentDate.value}');
-      }
+      // if (widget.remember == true) {
+      //   ingredientDate.loadCondiment(existingData);
+      // }
     } catch (e) {
       // 오류 처리
     }
@@ -238,10 +243,9 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
 
         loadIngredients(); // 수정된 데이터 로드
 
-        if (widget.remember == true) {
-          print(':::::::::${existingData}');
-          ingredientDate.loadCondiment(existingData);
-        }
+        // if (widget.remember == true) {
+        //   ingredientDate.loadCondiment(existingData);
+        // }
       }
     } catch (e) {
       // 오류 처리
@@ -253,14 +257,6 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
     String date = await loadData('saveCondiment');
 
     try {
-      if (widget.remember == true) {
-        setState(() {
-          selectData = ingredientDate.condimentDate.value;
-        });
-        String stringData = json.encode(ingredientDate.condimentDate.value);
-        saveData('saveCondiment', stringData);
-      }
-
       if (date != null && date.isNotEmpty) {
         // JSON 문자열을 List<Map<String, dynamic>>으로 변환
         List<dynamic> decodedData = jsonDecode(date);
@@ -273,6 +269,25 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
       }
     } catch (e) {
       print(':::::${e}');
+    }
+  }
+
+  //재료 임시저장
+  void save() async {
+    // 이전 데이터 불러오기
+    String savedData = await loadData('saveCondiment');
+
+    try {
+      List<Map<String, dynamic>> existingData = [];
+
+      if (savedData != null &&
+          savedData.isNotEmpty &&
+          widget.remember == true) {
+        existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
+        ingredientDate.loadCondiment(existingData);
+      }
+    } catch (e) {
+      // 오류 처리
     }
   }
 
@@ -311,9 +326,6 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     padding: EdgeInsets.only(top: 15, left: 20),
                     onPressed: () {
                       Navigator.pop(context);
-                      //데이터 리셋
-                      ingredientDate.loadIngredient(<Map<String, dynamic>>[]);
-                      ingredientDate.loadCondiment(<Map<String, dynamic>>[]);
                     },
                     icon: Icon(
                       Icons.close,
@@ -533,6 +545,7 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     LongButtonWidgets(
                       onPressed: () {
                         Navigator.pop(context);
+                        save();
                       },
                       colorId: AppTheme.orange,
                       buttonText: "추가하기",
