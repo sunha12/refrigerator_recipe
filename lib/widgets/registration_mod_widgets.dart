@@ -28,13 +28,12 @@ class _AddIngredientsModalWidgetsState
   @override
   void initState() {
     super.initState();
-    // _searchController.addListener(_onSearchChanged);
-    // _initCheckedList();
-    // vogueTextDate();
   }
 
   @override
   Widget build(BuildContext context) {
+    final Ingredient ingredientDate = Get.put(Ingredient());
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Align(
@@ -61,6 +60,9 @@ class _AddIngredientsModalWidgetsState
                     padding: EdgeInsets.only(top: 15, left: 20),
                     onPressed: () {
                       Navigator.pop(context);
+                      //데이터 리셋
+                      ingredientDate.loadIngredient(<Map<String, dynamic>>[]);
+                      ingredientDate.loadCondiment(<Map<String, dynamic>>[]);
                     },
                     icon: Icon(
                       Icons.close,
@@ -79,41 +81,55 @@ class _AddIngredientsModalWidgetsState
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 15, right: 20),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                AddIngredientScreens(remember: widget.remember),
+                  widget.remember != true
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 15, right: 20),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddIngredientScreens(
+                                      remember: widget.remember),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '직접 입력',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppTheme.gray_4A,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.all(
+                                  Colors.transparent), //배경색
+                              foregroundColor: MaterialStateProperty.all(
+                                  AppTheme.gray_4A), //글자색
+                              //자동 패딩 제거
+                              minimumSize: MaterialStateProperty.all(Size.zero),
+                              padding:
+                                  MaterialStateProperty.all(EdgeInsets.zero),
+                            ),
                           ),
-                        );
-                      },
-                      child: Text(
-                        '직접 입력',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppTheme.gray_4A,
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: 15, right: 20),
+                          child: Text(
+                            '직접입력',
+                            style: TextStyle(
+                              color: Colors.transparent,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
-                      ),
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent), //배경색
-                        foregroundColor:
-                            MaterialStateProperty.all(AppTheme.gray_4A), //글자색
-                        //자동 패딩 제거
-                        minimumSize: MaterialStateProperty.all(Size.zero),
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                    ),
-                  ),
                 ],
               ),
               SizedBox(height: 20),
               Expanded(
-                child: IngredientsTabBarWidgets(remember: widget.remember),
+                child: IngredientsTabBarWidgets(
+                  remember: widget.remember,
+                ),
               )
             ],
           ),
@@ -135,14 +151,12 @@ class AddCondimentModalWidgets extends StatefulWidget {
 }
 
 class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
-  final Ingredient _ingredientDate = Get.put(Ingredient());
+  final Ingredient ingredientDate = Get.put(Ingredient());
 
   @override
   void initState() {
     super.initState();
-    // _searchController.addListener(_onSearchChanged);
-    // _initCheckedList();
-    // vogueTextDate();
+    loadIngredients();
   }
 
   TextEditingController _searchController = TextEditingController();
@@ -178,6 +192,9 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
       List<Map<String, dynamic>> existingData = [];
 
       if (savedData != null && savedData.isNotEmpty) {
+        setState(() {
+          selectData = ingredientDate.condimentDate.value;
+        });
         existingData = jsonDecode(savedData).cast<Map<String, dynamic>>();
       }
 
@@ -191,7 +208,9 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
       loadIngredients();
 
       if (widget.remember == true) {
-        saveData('condiment', mergedDataString);
+        print(':::::::::${existingData}');
+        ingredientDate.loadCondiment(existingData);
+        print(':::::::::${ingredientDate.condimentDate.value}');
       }
     } catch (e) {
       // 오류 처리
@@ -220,7 +239,8 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
         loadIngredients(); // 수정된 데이터 로드
 
         if (widget.remember == true) {
-          saveData('condiment', updatedDataString);
+          print(':::::::::${existingData}');
+          ingredientDate.loadCondiment(existingData);
         }
       }
     } catch (e) {
@@ -233,6 +253,14 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
     String date = await loadData('saveCondiment');
 
     try {
+      if (widget.remember == true) {
+        setState(() {
+          selectData = ingredientDate.condimentDate.value;
+        });
+        String stringData = json.encode(ingredientDate.condimentDate.value);
+        saveData('saveCondiment', stringData);
+      }
+
       if (date != null && date.isNotEmpty) {
         // JSON 문자열을 List<Map<String, dynamic>>으로 변환
         List<dynamic> decodedData = jsonDecode(date);
@@ -241,7 +269,6 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
 
         setState(() {
           selectData = searchList;
-          print(':::::::::::2222222222${selectData}');
         });
       }
     } catch (e) {
@@ -284,6 +311,9 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     padding: EdgeInsets.only(top: 15, left: 20),
                     onPressed: () {
                       Navigator.pop(context);
+                      //데이터 리셋
+                      ingredientDate.loadIngredient(<Map<String, dynamic>>[]);
+                      ingredientDate.loadCondiment(<Map<String, dynamic>>[]);
                     },
                     icon: Icon(
                       Icons.close,
@@ -302,37 +332,49 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 15, right: 20),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddIngredientScreens(
-                              remember: widget.remember,
+                  widget.remember != true
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 15, right: 20),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddIngredientScreens(
+                                    remember: widget.remember,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '직접 입력',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppTheme.gray_4A,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.all(
+                                  Colors.transparent), //배경색
+                              foregroundColor: MaterialStateProperty.all(
+                                  AppTheme.gray_4A), //글자색
+                              //자동 패딩 제거
+                              minimumSize: MaterialStateProperty.all(Size.zero),
+                              padding:
+                                  MaterialStateProperty.all(EdgeInsets.zero),
                             ),
                           ),
-                        );
-                      },
-                      child: Text(
-                        '직접 입력',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppTheme.gray_4A,
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: 15, right: 20),
+                          child: Text(
+                            '직접입력',
+                            style: TextStyle(
+                              color: Colors.transparent,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
-                      ),
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent), //배경색
-                        foregroundColor:
-                            MaterialStateProperty.all(AppTheme.gray_4A), //글자색
-                        //자동 패딩 제거
-                        minimumSize: MaterialStateProperty.all(Size.zero),
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                    ),
-                  ),
                 ],
               ),
               Expanded(
@@ -490,9 +532,7 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     //추가 버튼
                     LongButtonWidgets(
                       onPressed: () {
-                        if (widget.remember == true) {
-                          _ingredientDate.loadIngredients();
-                        }
+                        Navigator.pop(context);
                       },
                       colorId: AppTheme.orange,
                       buttonText: "추가하기",

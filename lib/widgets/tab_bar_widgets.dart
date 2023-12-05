@@ -347,7 +347,7 @@ class IngredientsTabBarWidgets extends StatefulWidget {
 
 class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     with SingleTickerProviderStateMixin {
-  final Ingredient _ingredientDate = Get.put(Ingredient());
+  final Ingredient ingredientDate = Get.put(Ingredient());
 
   int _selectedPageIndex = 0; // 현재 선택된 탭 인덱스
   // 탭바 선언
@@ -462,7 +462,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
       loadIngredients();
 
       if (widget.remember == true) {
-        saveData('ingredients', mergedDataString);
+        ingredientDate.loadIngredient(existingData);
       }
     } catch (e) {
       // 오류 처리
@@ -491,7 +491,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
         loadIngredients(); // 수정된 데이터 로드
 
         if (widget.remember == true) {
-          saveData('ingredients', updatedDataString);
+          ingredientDate.loadIngredient(existingData);
         }
       }
     } catch (e) {
@@ -504,6 +504,14 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     String date = await loadData('saveIngredients');
 
     try {
+      if (widget.remember == true) {
+        setState(() {
+          selectData = ingredientDate.ingredientsDate.value;
+        });
+        String stringData = json.encode(ingredientDate.ingredientsDate.value);
+        saveData('saveIngredients', stringData);
+      }
+
       if (date != null && date.isNotEmpty) {
         // JSON 문자열을 List<Map<String, dynamic>>으로 변환
         List<dynamic> decodedData = jsonDecode(date);
@@ -518,10 +526,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
     } catch (e) {
       print(':::::${e}');
     }
-  }
-
-  void lode() {
-    _ingredientDate.loadIngredients();
   }
 
   @override
@@ -726,7 +730,6 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         LongButtonWidgets(
                           onPressed: () {
                             try {
-                              _ingredientDate.loadIngredients();
                               Navigator.pop(context);
                             } catch (e) {
                               print(e);

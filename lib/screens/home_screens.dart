@@ -81,6 +81,7 @@ class _HomeScreensState extends State<HomeScreens> {
                 onPressed: () {
                   showModalBottomSheet(
                     isScrollControlled: true,
+                    isDismissible: false,
                     backgroundColor: Colors.transparent,
                     context: context,
                     builder: (BuildContext context) {

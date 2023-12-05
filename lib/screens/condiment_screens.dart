@@ -72,6 +72,7 @@ class _CondimentScreensState extends State<CondimentScreens> {
                 onPressed: () {
                   showModalBottomSheet(
                     isScrollControlled: true,
+                    isDismissible: false,
                     backgroundColor: Colors.transparent,
                     context: context,
                     builder: (BuildContext context) {
