@@ -60,7 +60,8 @@ class _IngredientWidgetsState extends State<IngredientWidgets> {
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(50), // 둥근 모서리 반지름 값
-                      child: Image.network(
+                      // child: Image.network(
+                      child: Image.asset(
                         // 'https://api.gooodall.com/files/${widget.images}',
                         widget.images,
                         // fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정

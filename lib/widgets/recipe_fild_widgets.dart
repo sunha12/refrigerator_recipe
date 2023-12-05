@@ -40,7 +40,8 @@ class _RecipeFildWidgetsState extends State<RecipeFildWidgets> {
                   padding: EdgeInsets.only(left: MediaWidth(context, 0.04)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10), // 둥근 모서리 반지름 값
-                    child: Image.network(
+                    // child: Image.network(
+                    child: Image.asset(
                       // 'https://api.gooodall.com/files/${widget.images}',
                       widget.images,
                       fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
@@ -109,7 +110,8 @@ class _RecipeWidgetsState extends State<RecipeWidgets> {
               padding: EdgeInsets.only(left: MediaWidth(context, 0.04)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10), // 둥근 모서리 반지름 값
-                child: Image.network(
+                // child: Image.network(
+                child: Image.asset(
                   // 'https://api.gooodall.com/files/${widget.images}',
                   widget.images,
                   fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정

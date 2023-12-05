@@ -35,6 +35,7 @@ class BackButtonWidgets extends StatelessWidget {
           },
         ),
         elevation: 0,
+        centerTitle: true,
       ),
     );
   }
@@ -104,6 +105,7 @@ class SettingBackButtonWidgets extends StatelessWidget {
           },
         ),
         elevation: 0,
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -157,6 +159,7 @@ class AddBackButtonWidgets extends StatelessWidget {
           },
         ),
         elevation: 0,
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -201,6 +204,8 @@ class AppBerWidgets extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
     );
   }
@@ -226,43 +231,33 @@ class CancellationBackButtonWidgets extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: AppTheme.gray_D4),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.white),
-                  foregroundColor: MaterialStateProperty.all(AppTheme.gray_4A),
-                  //보더 둥글게
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: AppTheme.gray_D4),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: InkResponse(
+                  onTap: onPressed1,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 3, vertical: 5),
+                        child: Image.asset(
+                          'assets/images/img_condiment.png',
+                        ),
+                      ),
+                      Text(
+                        '조미료 ',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: AppTheme.gray_4A,
+                          // fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  //자동 패딩 제거
-                  minimumSize: MaterialStateProperty.all(Size.zero),
-                  padding: MaterialStateProperty.all(EdgeInsets.zero),
-                ),
-                onPressed: onPressed1,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 3, vertical: 6),
-                      child: Image.asset(
-                        'assets/images/img_condiment.png',
-                      ),
-                    ),
-                    Text(
-                      '조미료 ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: AppTheme.gray_4A,
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
@@ -274,51 +269,40 @@ class CancellationBackButtonWidgets extends StatelessWidget {
                 // fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: AppTheme.gray_D4),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: TextButton(
-                  style: ButtonStyle(
-                    overlayColor: MaterialStateProperty.all(Colors.white),
-                    foregroundColor:
-                        MaterialStateProperty.all(AppTheme.gray_4A),
-                    //보더 둥글게
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    //자동 패딩 제거
-                    minimumSize: MaterialStateProperty.all(Size.zero),
-                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  ),
-                  onPressed: onPressed2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 1),
-                        child: Image.asset(
-                          'assets/images/img_receipt.png',
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 3, vertical: 0),
-                        child: Text(
-                          '영수증 등록',
-                          style: TextStyle(
-                            fontSize: 8,
-                            color: AppTheme.gray_4A,
-                            fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: AppTheme.gray_D4),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: InkResponse(
+                    onTap: onPressed2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 1),
+                          child: Image.asset(
+                            'assets/images/img_receipt.png',
                           ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 3, vertical: 0),
+                          child: Text(
+                            '영수증 등록',
+                            style: TextStyle(
+                              fontSize: 8,
+                              color: AppTheme.gray_4A,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -375,6 +359,7 @@ class temporaryStorageBackButtonWidgets extends StatelessWidget {
           onPressed: onPressed1,
         ),
         elevation: 0,
+        centerTitle: true,
         actions: [
           isSave == true
               ? Padding(

@@ -52,6 +52,8 @@ class _RecipeCategoryScreensState extends State<RecipeCategoryScreens> {
           ),
           backgroundColor: Colors.white,
           elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

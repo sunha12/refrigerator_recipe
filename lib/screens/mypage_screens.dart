@@ -37,6 +37,7 @@ class _MyPageScreensState extends State<MyPageScreens> {
             AppBar(
               // 뒤로가기 숨김
               automaticallyImplyLeading: false,
+              centerTitle: true,
               title: Text(
                 '마이페이지',
                 style: TextStyle(
@@ -66,7 +67,8 @@ class _MyPageScreensState extends State<MyPageScreens> {
             ),
             SizedBox(height: 10.0),
             Center(
-              child: Image.network(
+              // child: Image.network(
+              child: Image.asset(
                 // 'https://api.gooodall.com/files/${widget.images}',
                 // 'assets/images/img_dessert.jpg',
                 '',
@@ -158,7 +160,8 @@ class _MyPageScreensState extends State<MyPageScreens> {
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(10), // 둥근 모서리 반지름 값
-                            child: Image.network(
+                            // child: Image.network(
+                            child: Image.asset(
                               // 'https://api.gooodall.com/files/${widget.images}',
                               myRecipes[index]['image'].toString(),
                               fit: BoxFit.cover,

@@ -207,7 +207,7 @@ class _LongButtonWidgetsState extends State<LongButtonWidgets> {
   }
 }
 
-//아이콘 포함된 버튼 (업체 프로필)
+//아이콘 포함된 버튼
 class TextButtonWidgets extends StatefulWidget {
   final String buttonText;
   final String icon;
@@ -241,6 +241,9 @@ class _TextButtonWidgetsState extends State<TextButtonWidgets> {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all<double>(0), // 그림자 제거
           overlayColor: MaterialStateProperty.all<Color>(Colors.white),
+          //자동 패딩 제거
+          minimumSize: MaterialStateProperty.all(Size.zero),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
         ),
         onPressed: widget.onPressed,
         child: Align(

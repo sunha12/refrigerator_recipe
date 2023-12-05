@@ -632,7 +632,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      //child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -683,8 +684,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -720,7 +721,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),
@@ -805,7 +807,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      //child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -856,8 +859,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -893,7 +896,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),
@@ -978,7 +982,7 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -1029,8 +1033,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -1066,7 +1070,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),
@@ -1151,7 +1156,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      //child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -1202,8 +1208,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -1239,7 +1245,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),
@@ -1324,7 +1331,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      //child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -1375,8 +1383,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -1412,7 +1420,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),
@@ -1497,7 +1506,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               50), // 둥근 모서리 반지름 값
-                                                      child: Image.network(
+                                                      //child: Image.network(
+                                                      child: Image.asset(
                                                         // 'https://api.gooodall.com/files/${widget.images}',
                                                         data['file_nm'],
                                                       ),
@@ -1548,8 +1558,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                         //재료 필드
                         Container(
                           height: selectData.isEmpty
-                              ? MediaHeight(context, 0.57)
-                              : MediaHeight(context, 0.48),
+                              ? MediaHeight(context, 0.56)
+                              : MediaHeight(context, 0.47),
                           child: GridView.builder(
                             physics: ScrollPhysics(),
                             shrinkWrap: true,
@@ -1585,7 +1595,8 @@ class _IngredientsTabBarWidgetsState extends State<IngredientsTabBarWidgets>
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               50), // 둥근 모서리 반지름 값
-                                          child: Image.network(
+                                          //child: Image.network(
+                                          child: Image.asset(
                                             // 'https://api.gooodall.com/files/${widget.images}',
                                             data['file_nm'],
                                           ),

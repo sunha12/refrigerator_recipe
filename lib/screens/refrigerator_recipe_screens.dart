@@ -129,59 +129,65 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
               ),
 
               //재료 추가
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IngredientAddButtonWidgets(
-                    text: '식재료 추가',
-                    onPressed: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        isDismissible: false,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            height: MediaHeight(context, 0.88),
-                            child: AddIngredientsModalWidgets(remember: true),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Container(
-                      width: MediaWidth(context, 0.70),
-                      height: 70,
-                      child: GridView.builder(
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 6,
-                          childAspectRatio: 1.5,
-                        ),
-                        itemCount: ingredientDate.ingredientsDate.value.length,
-                        itemBuilder: (context, index) {
-                          Map<String, dynamic> data =
-                              ingredientDate.ingredientsDate.value[index];
-                          return Container(
-                            width: 30,
-                            height: 30,
-                            child: Image.network(
-                              // 'https://api.gooodall.com/files/${widget.images}',
-                              data['file_nm'],
-                              fit: BoxFit.fitHeight,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IngredientAddButtonWidgets(
+                      text: '식재료 추가',
+                      onPressed: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          isDismissible: false,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              height: MediaHeight(context, 0.88),
+                              child: AddIngredientsModalWidgets(remember: true),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: Container(
+                        width: MediaWidth(context, 0.70),
+                        height: 70,
+                        child: GridView.builder(
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 6,
+                            childAspectRatio: 1.5,
+                          ),
+                          itemCount:
+                              ingredientDate.ingredientsDate.value.length,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> data =
+                                ingredientDate.ingredientsDate.value[index];
+                            return Container(
                               width: 30,
                               height: 30,
-                            ),
-                          );
-                        },
+                              // child: Image.network(
+                              child: Image.asset(
+                                // 'https://api.gooodall.com/files/${widget.images}',
+                                data['file_nm'],
+                                fit: BoxFit.fitHeight,
+                                width: 30,
+                                height: 30,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
 
               //조미료 추가
@@ -223,7 +229,8 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                           return Container(
                             width: 30,
                             height: 30,
-                            child: Image.network(
+                            // child: Image.network(
+                            child: Image.asset(
                               // 'https://api.gooodall.com/files/${widget.images}',
                               ingredientDate.condimentDate.value[index]
                                   ['file_nm'],

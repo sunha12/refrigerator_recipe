@@ -153,7 +153,8 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                             return Container(
                               width: 30,
                               height: 30,
-                              child: Image.network(
+                              // child: Image.network(
+                              child: Image.asset(
                                 // 'https://api.gooodall.com/files/${widget.images}',
                                 data['file_nm'],
                                 fit: BoxFit.fitHeight,
@@ -208,7 +209,8 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                             return Container(
                               width: 30,
                               height: 30,
-                              child: Image.network(
+                              // child: Image.network(
+                              child: Image.asset(
                                 // 'https://api.gooodall.com/files/${widget.images}',
                                 ingredientDate.condimentDate.value[index]
                                     ['file_nm'],

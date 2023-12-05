@@ -81,8 +81,8 @@ class _AddIngredientsModalWidgetsState
                   widget.remember != true
                       ? Padding(
                           padding: EdgeInsets.only(top: 15, right: 20),
-                          child: TextButton(
-                            onPressed: () {
+                          child: InkResponse(
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -97,16 +97,6 @@ class _AddIngredientsModalWidgetsState
                                 fontSize: 14,
                                 color: AppTheme.gray_4A,
                               ),
-                            ),
-                            style: ButtonStyle(
-                              overlayColor: MaterialStateProperty.all(
-                                  Colors.transparent), //배경색
-                              foregroundColor: MaterialStateProperty.all(
-                                  AppTheme.gray_4A), //글자색
-                              //자동 패딩 제거
-                              minimumSize: MaterialStateProperty.all(Size.zero),
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.zero),
                             ),
                           ),
                         )
@@ -347,8 +337,8 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                   widget.remember != true
                       ? Padding(
                           padding: EdgeInsets.only(top: 15, right: 20),
-                          child: TextButton(
-                            onPressed: () {
+                          child: InkResponse(
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -364,16 +354,6 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                                 fontSize: 14,
                                 color: AppTheme.gray_4A,
                               ),
-                            ),
-                            style: ButtonStyle(
-                              overlayColor: MaterialStateProperty.all(
-                                  Colors.transparent), //배경색
-                              foregroundColor: MaterialStateProperty.all(
-                                  AppTheme.gray_4A), //글자색
-                              //자동 패딩 제거
-                              minimumSize: MaterialStateProperty.all(Size.zero),
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.zero),
                             ),
                           ),
                         )
@@ -435,7 +415,8 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           50), // 둥근 모서리 반지름 값
-                                                  child: Image.network(
+                                                  // child: Image.network(
+                                                  child: Image.asset(
                                                     // 'https://api.gooodall.com/files/${widget.images}',
                                                     data['file_nm'],
                                                   ),
@@ -486,8 +467,8 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                     //재료 필드
                     Container(
                       height: selectData.isEmpty
-                          ? MediaHeight(context, 0.66)
-                          : MediaHeight(context, 0.57),
+                          ? MediaHeight(context, 0.64)
+                          : MediaHeight(context, 0.55),
                       child: GridView.builder(
                         physics: ScrollPhysics(),
                         shrinkWrap: true,
@@ -522,7 +503,8 @@ class _AddCondimentModalWidgetsState extends State<AddCondimentModalWidgets> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(
                                           50), // 둥근 모서리 반지름 값
-                                      child: Image.network(
+                                      // child: Image.network(
+                                      child: Image.asset(
                                         // 'https://api.gooodall.com/files/${widget.images}',
                                         data['file_nm'],
                                       ),

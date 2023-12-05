@@ -82,7 +82,8 @@ class _IngredientScreensState extends State<IngredientScreens> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ClipOval(
-                        child: Image.network(
+                        // child: Image.network(
+                        child: Image.asset(
                           // 'https://api.gooodall.com/files/${widget.images}',
                           widget.img,
                           // fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
@@ -108,7 +109,7 @@ class _IngredientScreensState extends State<IngredientScreens> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.7),
-                              blurRadius: 15.0, //그림자 세기
+                              blurRadius: 5.0, //그림자 세기
                               spreadRadius: 0.0,
                               offset:
                                   const Offset(0, 0), // x, y 값을 받아서 그림자 위치를 조절
