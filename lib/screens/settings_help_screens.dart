@@ -12,7 +12,7 @@ class HelpScreens extends StatelessWidget {
       question: '[레시피] 레시피 등록이 안돼요',
       answer: '내용을 추가하세요 내용을 추가하세요 내용을 추가하세요 내용을 추가하세요 내용을 추가하세요 ',
     ),
-    // 다른 질문과 답변 항목 추가 가능
+    // 다른 질문과 답변 항목 추가
   ];
 
   @override

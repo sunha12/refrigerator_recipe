@@ -104,7 +104,6 @@ class _NotificationSettingsScreensState
                             horizontal: MediaWidth(context, 0.04)),
                         child: Column(
                           children: [
-                            //시작시간
                             Padding(
                               padding: EdgeInsets.only(bottom: 20),
                               child: Row(
@@ -122,7 +121,6 @@ class _NotificationSettingsScreensState
                                 ],
                               ),
                             ),
-                            //종료시간
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -151,37 +149,44 @@ class _NotificationSettingsScreensState
   Widget buildNotificationSetting(
       String title, bool value, Function(bool) onChanged,
       {Widget? child, String subTitle = ''}) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text(
-            title,
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0), // 좌우 패딩
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              title,
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          subtitle: Text(
-            subTitle,
-            style: TextStyle(
-              fontSize: 12.0,
-              color: AppTheme.gray_97,
+            subtitle: Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text(
+                subTitle,
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: AppTheme.gray_97,
+                ),
+              ),
             ),
+            trailing: Switch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: Color(0xFFFF9100),
+            ),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            onTap: () {
+              if (child != null) {
+                onChanged(!value);
+              }
+            },
+            tileColor: Colors.transparent,
           ),
-          trailing: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: Colors.orange,
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          onTap: () {
-            if (child != null) {
-              onChanged(!value);
-            }
-          },
-          tileColor: Colors.transparent,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

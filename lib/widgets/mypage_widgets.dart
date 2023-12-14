@@ -19,7 +19,6 @@ class MypageWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                  //예시 데이터 삽입
                   builder: (context) => RecentlyRecipeViewScreens()),
             );
           },
@@ -30,9 +29,7 @@ class MypageWidget extends StatelessWidget {
           label: "스크랩",
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(
-                  //예시 데이터 삽입
-                  builder: (context) => ScrepRecipeScreens()),
+              MaterialPageRoute(builder: (context) => ScrepRecipeScreens()),
             );
           },
         ),

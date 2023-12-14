@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 
 class ContactUsScreens extends StatefulWidget {
   @override
@@ -8,9 +9,17 @@ class ContactUsScreens extends StatefulWidget {
 }
 
 class _ContactUsScreensState extends State<ContactUsScreens> {
-  String selectedType = '앱 사용 관련'; // 기본 선택값
+  String selectedType = '유형을 선택해주세요.';
   TextEditingController _inputController = TextEditingController();
   int _inputLength = 0;
+
+  final List<String> contactTypes = [
+    '앱 사용 관련',
+    '이벤트 관련',
+    '제휴 관련',
+    '오류 제보',
+    '기타 문의',
+  ];
 
   @override
   void initState() {
@@ -47,8 +56,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -61,8 +69,8 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
                 ),
               ),
             ),
-            buildContactTypeDropdown(),
-            buildInputField(' 문의하실 내용을 입력해주세요', 358, 232),
+            buildContactTypeListButton(),
+            buildInputField(' 문의 내용', 16.0, 8.0),
             buildImageUploader(),
             buildEmailInputField(),
             buildSendButton(),
@@ -72,63 +80,91 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
     );
   }
 
-  Widget buildContactTypeDropdown() {
+  Widget buildContactTypeListButton() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: DropdownButtonFormField<String>(
-        value: selectedType,
-        items: [
-          '앱 사용 관련',
-          '이벤트 관련',
-          '제휴 관련',
-          '오류 제보',
-          '기타 문의',
-        ].map((String type) {
-          return DropdownMenuItem<String>(
-            value: type,
-            child: Text(
-              type,
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? value) {
-          setState(() {
-            selectedType = value ?? '앱 사용 관련';
-          });
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      child: InkWell(
+        onTap: () {
+          _showContactTypeList();
         },
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            // 기본 테두리 색상 설정
-            borderSide: BorderSide(color: AppTheme.orange),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppTheme.gray_97,
+              width: 0.5,
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            // 포커스 시 테두리 색상 설정
-            borderSide: BorderSide(color: AppTheme.orange),
+          padding: EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                selectedType,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Icon(Icons.arrow_drop_down),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget buildInputField(String hintText, double width, double height) {
+  void _showContactTypeList() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: ListView.builder(
+            itemCount: contactTypes.length,
+            itemBuilder: (context, index) {
+              final contactType = contactTypes[index];
+              return ListTile(
+                title: Text(contactType),
+                onTap: () {
+                  setState(() {
+                    selectedType = contactType;
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildInputField(
+      String hintText, double horizontalPadding, double verticalPadding) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 12.0),
+          Text(
+            '문의하실 내용을 입력해주세요.',
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 12.0),
           Container(
-            width: width,
-            height: height,
+            width: double.infinity,
+            height: 200.0,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppTheme.gray_97,
                 width: 0.5,
               ),
             ),
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: TextFormField(
               controller: _inputController,
               maxLength: 1000,
@@ -147,13 +183,14 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
             child: Text(
-              '$_inputLength / 1000', // 입력 글자 수 표시
+              '$_inputLength / 1000',
               style: TextStyle(
                 fontSize: 12.0,
                 color: Colors.grey,
               ),
             ),
           ),
+          SizedBox(height: 8.0),
         ],
       ),
     );
@@ -182,14 +219,14 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               alignment: Alignment.center,
               children: [
                 Icon(
-                  Icons.image, // 이미지 아이콘
+                  Icons.image,
                   size: 24.0,
                   color: Colors.grey,
                 ),
                 Positioned(
                   bottom: 8.0,
                   child: Text(
-                    '0/3', // 업로드된 이미지 수/최대 이미지 수
+                    '0/3',
                     style: TextStyle(
                       fontSize: 12.0,
                       color: Colors.grey,
@@ -206,30 +243,33 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
 
   Widget buildEmailInputField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: '수신 이메일',
-          labelStyle: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey, // 기본 레이블 색상
+      padding: EdgeInsets.only(bottom: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+            child: Text(
+              '수신이메일',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.orange), // 포커스 시 테두리 색상
+          LongTextInputFildWidgets(
+            hintText: '이메일을 입력하세요.',
+            onChanged: (value) {},
+            inText: '',
           ),
-          focusColor: Colors.orange, // 포커스 시 레이블 색상
-        ),
-        style: TextStyle(
-          fontSize: 14.0,
-        ),
+        ],
       ),
     );
   }
 
   Widget buildSendButton() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: ElevatedButton(
         onPressed: () {
           // 보내기 버튼 클릭 시 처리 로직 추가
@@ -244,7 +284,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.orange,
-          minimumSize: Size(double.infinity, 50.0), // 버튼 크기 설정
+          minimumSize: Size(double.infinity, 50.0),
         ),
       ),
     );
