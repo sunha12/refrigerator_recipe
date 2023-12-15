@@ -10,7 +10,17 @@ class DeveloperScreens extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            BackButtonWidgets(appBarText: '개발자'),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black.withOpacity(0.1),
+                    width: 2.0,
+                  ),
+                ),
+              ),
+              child: BackButtonWidgets(appBarText: '개발자'),
+            ),
             Expanded(
               // 나머지 내용을 Expanded 위젯으로 감싸서 중앙 정렬
               child: Center(

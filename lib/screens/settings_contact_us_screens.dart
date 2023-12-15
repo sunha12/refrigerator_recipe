@@ -56,7 +56,8 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: EdgeInsets.only(
+                  left: 18.0, right: 16.0, top: 20.0, bottom: 0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -70,7 +71,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
               ),
             ),
             buildContactTypeListButton(),
-            buildInputField(' 문의 내용', 16.0, 8.0),
+            buildInputField('문의 내용', 16.0, 21.0),
             buildImageUploader(),
             buildEmailInputField(),
             buildSendButton(),
@@ -82,7 +83,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
 
   Widget buildContactTypeListButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 9.0, bottom: 4.0),
       child: InkWell(
         onTap: () {
           _showContactTypeList();
@@ -141,20 +142,22 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
   Widget buildInputField(
       String hintText, double horizontalPadding, double verticalPadding) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding, vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding)
+          .copyWith(top: verticalPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 12.0),
-          Text(
-            '문의하실 내용을 입력해주세요.',
-            style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Text(
+              '문의하실 내용을 입력해주세요.',
+              style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          SizedBox(height: 12.0),
+          SizedBox(height: 5.0),
           Container(
             width: double.infinity,
             height: 200.0,
@@ -182,11 +185,14 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: Text(
-              '$_inputLength / 1000',
-              style: TextStyle(
-                fontSize: 12.0,
-                color: Colors.grey,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$_inputLength / 1000',
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),

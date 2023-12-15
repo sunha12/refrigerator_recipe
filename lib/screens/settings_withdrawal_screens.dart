@@ -17,12 +17,23 @@ class WithdrawalScreens extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            BackButtonWidgets(appBarText: '회원탈퇴'),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black.withOpacity(0.1),
+                    width: 2.0,
+                  ),
+                ),
+              ),
+              child: BackButtonWidgets(appBarText: '회원탈퇴'),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(width: 16),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
                       child: Text(

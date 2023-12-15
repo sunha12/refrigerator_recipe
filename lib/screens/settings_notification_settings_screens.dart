@@ -77,15 +77,42 @@ class _NotificationSettingsScreensState
                 ),
               ),
             ),
-            buildNotificationSetting(
-                '알림 켜기', notificationEnabled, toggleNotification,
-                subTitle: '알람을 켜거나 끌 수 있습니다.'),
-            buildNotificationSetting(
-                '이벤트 알림', eventNotificationsEnabled, toggleEventNotifications,
-                subTitle: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.'),
-            buildNotificationSetting(
-                '방해 금지 설정', doNotDisturbEnabled, toggleDoNotDisturb,
-                subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.'),
+            MouseRegion(
+              // 호버 상태에서의 색상 설정
+              onHover: (_) {
+                // 아무 동작도 하지 않도록 비워 둡니다.
+              },
+              child: buildNotificationSetting(
+                '알림 켜기',
+                notificationEnabled,
+                toggleNotification,
+                subTitle: '알람을 켜거나 끌 수 있습니다.',
+              ),
+            ),
+            MouseRegion(
+              // 호버 상태에서의 색상 설정
+              onHover: (_) {
+                // 아무 동작도 하지 않도록 비워 둡니다.
+              },
+              child: buildNotificationSetting(
+                '이벤트 알림',
+                eventNotificationsEnabled,
+                toggleEventNotifications,
+                subTitle: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.',
+              ),
+            ),
+            MouseRegion(
+              // 호버 상태에서의 색상 설정
+              onHover: (_) {
+                // 아무 동작도 하지 않도록 비워 둡니다.
+              },
+              child: buildNotificationSetting(
+                '방해 금지 설정',
+                doNotDisturbEnabled,
+                toggleDoNotDisturb,
+                subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.',
+              ),
+            ),
             doNotDisturbEnabled == true
                 ? Padding(
                     padding: EdgeInsets.symmetric(

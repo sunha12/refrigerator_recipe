@@ -46,27 +46,46 @@ class ProfileEditScreens extends StatelessWidget {
             children: [
               SizedBox(height: 40.0),
               Stack(
-                alignment: Alignment.bottomRight,
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.transparent,
-                    child: Icon(
-                      Icons.account_circle_rounded,
-                      size: 120,
-                      color: Color(0xffD4D4D4),
+                  Center(
+                    child: CircleAvatar(
+                      radius: 80,
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.account_circle_rounded,
+                        size: 160,
+                        color: Color(0xffD4D4D4),
+                      ),
                     ),
                   ),
                   Positioned(
-                    right: 30.0, // 조절 가능한 우측 여백
-                    bottom: 30.0, // 조절 가능한 하단 여백
-                    child: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.camera_alt,
-                        size: 18.0,
-                        color: Colors.grey,
+                    bottom: 8,
+                    right: MediaQuery.of(context).size.width / 2 - 80,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 201, 201, 201), // 그림자 색상
+                            blurRadius: 2, // 그림자의 흐림 정도
+                            spreadRadius: 1, // 그림자의 확산 정도
+                            offset: Offset(1, 2), // 그림자 위치
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 23,
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: Colors.grey[400],
+                            size: 30,
+                          ),
+                        ),
                       ),
                     ),
                   ),
