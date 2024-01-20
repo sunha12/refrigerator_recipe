@@ -124,14 +124,14 @@ class _RecipeWidgetsState extends State<RecipeWidgets> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: MediaWidth(context, 0.04)),
-                        child: Text(
+                  padding: EdgeInsets.only(
+                      bottom: 3, left: MediaWidth(context, 0.04)),
+                  child: Container(
+                    width: MediaWidth(context, 0.63),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
                           widget.recipeName,
                           style: TextStyle(
                             fontSize: 14,
@@ -139,18 +139,14 @@ class _RecipeWidgetsState extends State<RecipeWidgets> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: MediaWidth(context, 0.47)),
-                        child: InkWell(
+                        InkWell(
                           onTap: () {
                             // 클릭 이벤트 처리
                           },
                           child: SvgPicture.asset('assets/icons/ico_scrap.svg'),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -158,7 +154,7 @@ class _RecipeWidgetsState extends State<RecipeWidgets> {
                     left: MediaWidth(context, 0.04),
                   ),
                   child: Container(
-                    width: MediaWidth(context, 0.65),
+                    width: MediaWidth(context, 0.63),
                     child: Text(
                       widget.info,
                       maxLines: 2,
