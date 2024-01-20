@@ -74,6 +74,7 @@ class _HelpScreenssDetailScreensState extends State<HelpScreenssDetailScreens> {
                           widget.questionsTitle,
                           style: TextStyle(
                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.left,
                         ),

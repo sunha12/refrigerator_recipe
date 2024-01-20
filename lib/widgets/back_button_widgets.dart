@@ -118,7 +118,7 @@ class SettingBackButtonWidgets extends StatelessWidget {
               child: Text(
                 '저장',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: AppTheme.gray_4A,
                 ),
               ),

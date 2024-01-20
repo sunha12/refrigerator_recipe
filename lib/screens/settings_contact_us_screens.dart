@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
+import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 
 class ContactUsScreens extends StatefulWidget {
@@ -9,35 +11,12 @@ class ContactUsScreens extends StatefulWidget {
 }
 
 class _ContactUsScreensState extends State<ContactUsScreens> {
-  String selectedType = '유형을 선택해주세요.';
-  TextEditingController _inputController = TextEditingController();
-  int _inputLength = 0;
+  String _seviceInfor = '';
 
-  final List<String> contactTypes = [
-    '앱 사용 관련',
-    '이벤트 관련',
-    '제휴 관련',
-    '오류 제보',
-    '기타 문의',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _inputController.addListener(_updateInputLength);
-  }
-
-  void _updateInputLength() {
+  void _seviceInforText(String text) {
     setState(() {
-      _inputLength = _inputController.text.length;
+      _seviceInfor = text;
     });
-  }
-
-  @override
-  void dispose() {
-    _inputController.removeListener(_updateInputLength);
-    _inputController.dispose();
-    super.dispose();
   }
 
   @override
@@ -57,7 +36,7 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                  left: 18.0, right: 16.0, top: 20.0, bottom: 0),
+                  left: 18.0, right: 16.0, top: 20.0, bottom: 4),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -70,227 +49,239 @@ class _ContactUsScreensState extends State<ContactUsScreens> {
                 ),
               ),
             ),
-            buildContactTypeListButton(),
-            buildInputField('문의 내용', 16.0, 21.0),
-            buildImageUploader(),
-            buildEmailInputField(),
-            buildSendButton(),
+            TypeButtonWidgets(
+              text: '유형을 선택해주세요.',
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  isDismissible: false,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: MediaHeight(context, 0.4),
+                      child: buildImageUploader(),
+                    );
+                  },
+                );
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: 18.0, right: 16.0, top: 20.0, bottom: 4),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '문의하실 내용을 입력해주세요.',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            BigTextInputFildWidgets(
+              inText: '',
+              hintText: '내용을 입력해주세요',
+              onChanged: _seviceInforText,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: MediaWidth(context, 0.045)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white, // 배경 색상을 흰색으로 설정
+                      border: Border.all(width: 1, color: AppTheme.gray_D4),
+                    ),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        minimumSize: MaterialStateProperty.all(Size.zero),
+                        padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(30),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.photo_size_select_actual_outlined,
+                              weight: 17,
+                              color: AppTheme.gray_4A,
+                            ),
+                            Text(
+                              '0/3',
+                              style: TextStyle(
+                                color: Color(0xffA8A8A8),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 40),
+                //   child: Container(
+                //     width: MediaWidth(context, 0.70),
+                //     height: 70,
+                //     child: GridView.builder(
+                //       physics: ScrollPhysics(),
+                //       shrinkWrap: true,
+                //       gridDelegate:
+                //           SliverGridDelegateWithFixedCrossAxisCount(
+                //         crossAxisCount: 6,
+                //         childAspectRatio: 1.5,
+                //       ),
+                //       itemCount:
+                //           ingredientDate.ingredientsDate.value.length,
+                //       itemBuilder: (context, index) {
+                //         Map<String, dynamic> data =
+                //             ingredientDate.ingredientsDate.value[index];
+                //         return Container(
+                //           width: 30,
+                //           height: 30,
+                //           // child: Image.network(
+                //           child: Image.asset(
+                //             // 'https://api.gooodall.com/files/${widget.images}',
+                //             data['file_nm'],
+                //             fit: BoxFit.fitHeight,
+                //             width: 30,
+                //             height: 30,
+                //           ),
+                //         );
+                //       },
+                //     ),
+                //   ),
+                // )
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+                    child: Text(
+                      '수신 이메일',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.gray_4A,
+                      ),
+                    ),
+                  ),
+                  LongTextInputFildWidgets(
+                    hintText: '',
+                    onChanged: (value) {},
+                    inText: '',
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: LongButtonWidgets(
+                onPressed: () {},
+                colorId: AppTheme.orange,
+                buttonText: "보내기",
+                iconUrl: "",
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildContactTypeListButton() {
-    return Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 9.0, bottom: 4.0),
-      child: InkWell(
-        onTap: () {
-          _showContactTypeList();
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppTheme.gray_97,
-              width: 0.5,
-            ),
-          ),
-          padding: EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                selectedType,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Icon(Icons.arrow_drop_down),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showContactTypeList() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: ListView.builder(
-            itemCount: contactTypes.length,
-            itemBuilder: (context, index) {
-              final contactType = contactTypes[index];
-              return ListTile(
-                title: Text(contactType),
-                onTap: () {
-                  setState(() {
-                    selectedType = contactType;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  Widget buildInputField(
-      String hintText, double horizontalPadding, double verticalPadding) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding)
-          .copyWith(top: verticalPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Text(
-              '문의하실 내용을 입력해주세요.',
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 5.0),
-          Container(
-            width: double.infinity,
-            height: 200.0,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppTheme.gray_97,
-                width: 0.5,
-              ),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: TextFormField(
-              controller: _inputController,
-              maxLength: 1000,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              decoration: InputDecoration(
-                hintText: hintText,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(
-                fontSize: 14.0,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 4.0),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                '$_inputLength / 1000',
-                style: TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 8.0),
-        ],
-      ),
-    );
-  }
-
   Widget buildImageUploader() {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: InkWell(
-          onTap: () {
-            // 이미지 업로더 로직을 여기에 추가
-          },
-          child: Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.grey,
-                width: 2.0,
-              ),
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: MediaHeight(context, 0.4),
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
             ),
-            child: Stack(
-              alignment: Alignment.center,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.image,
-                  size: 24.0,
-                  color: Colors.grey,
+                IconButton(
+                  padding: EdgeInsets.only(top: 15, left: 20),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: AppTheme.gray_4A,
+                  ),
                 ),
-                Positioned(
-                  bottom: 8.0,
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 15, left: MediaWidth(context, 0.3), bottom: 20),
                   child: Text(
-                    '0/3',
+                    '유형 선택',
                     style: TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.grey,
+                      fontSize: 16,
+                      color: AppTheme.gray_4A,
+                      fontWeight: FontWeight.bold,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildEmailInputField() {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-            child: Text(
-              '수신이메일',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '앱 사용 관련',
+              icon: '',
             ),
-          ),
-          LongTextInputFildWidgets(
-            hintText: '이메일을 입력하세요.',
-            onChanged: (value) {},
-            inText: '',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSendButton() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      child: ElevatedButton(
-        onPressed: () {
-          // 보내기 버튼 클릭 시 처리 로직 추가
-        },
-        child: Text(
-          '보내기',
-          style: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
-          minimumSize: Size(double.infinity, 50.0),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '제휴 관련',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '오류 관련',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '오류 제보',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '기타 문의',
+              icon: '',
+            ),
+          ],
         ),
       ),
     );

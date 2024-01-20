@@ -266,8 +266,8 @@ class _BigTextInputFildWidgetsState extends State<BigTextInputFildWidgets> {
               ),
             ),
             maxLines: 12, // 최대 행 수
-            minLines: 3, // 최소 라인 수
-            // maxLength: 1000, //최대 글자수
+            // minLines: 3, // 최소 라인 수
+            maxLength: 1000, //최대 글자수
             controller: _controller,
             style: TextStyle(
               fontSize: 12,

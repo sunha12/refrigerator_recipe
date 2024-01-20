@@ -311,6 +311,12 @@ class _TextButtonNotBorderWidgetsState
       children: [
         Expanded(
           child: Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    top: BorderSide(
+              color: Color(0xffE4E4E4),
+              width: 0.5,
+            ))),
             child: TextButton(
               style: ButtonStyle(
                 elevation: MaterialStateProperty.all<double>(0), // 그림자 제거
@@ -324,7 +330,7 @@ class _TextButtonNotBorderWidgetsState
                       vertical: 15, horizontal: MediaWidth(context, 0.04)),
                   child: Row(
                     //위젯 양쪽 정렬
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         child: Row(
@@ -348,7 +354,6 @@ class _TextButtonNotBorderWidgetsState
                           ],
                         ),
                       ),
-                      SvgPicture.asset('assets/icons/ico_next.svg'),
                     ],
                   ),
                 ),
@@ -458,10 +463,10 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
+      padding: EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.03)),
       child: Container(
         child: TextButton(
-          onPressed: widget.onPressed,
+          onPressed: () {},
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Row(
@@ -498,6 +503,7 @@ class _ProfileSettingWidgetsState extends State<ProfileSettingWidgets> {
                             onChanged: (value) {
                               setState(() {
                                 switchValue = value;
+                                widget.onPressed();
                               });
                             }),
                       ),
@@ -742,57 +748,52 @@ class IngredientAddButtonWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.05), 17,
-                    MediaWidth(context, 0.05), 7),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    color: AppTheme.gray_4A,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+                MediaWidth(context, 0.05), 17, MediaWidth(context, 0.05), 7),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: AppTheme.gray_4A,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: MediaWidth(context, 0.045)),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white, // 배경 색상을 흰색으로 설정
-                    border: Border.all(width: 1, color: AppTheme.gray_D4),
-                  ),
-                  child: TextButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      overlayColor: MaterialStateProperty.all(Colors.white),
-                      minimumSize: MaterialStateProperty.all(Size.zero),
-                      padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Icon(
-                        Icons.add_box_outlined,
-                        weight: 17,
-                        color: AppTheme.gray_4A,
-                      ),
-                    ),
-                    onPressed: onPressed,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-          //추가된 재료가 보여질 영역
+          Padding(
+            padding: EdgeInsets.only(left: MediaWidth(context, 0.045)),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white, // 배경 색상을 흰색으로 설정
+                border: Border.all(width: 1, color: AppTheme.gray_D4),
+              ),
+              child: TextButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                  overlayColor: MaterialStateProperty.all(Colors.white),
+                  minimumSize: MaterialStateProperty.all(Size.zero),
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Icon(
+                    Icons.add_box_outlined,
+                    weight: 17,
+                    color: AppTheme.gray_4A,
+                  ),
+                ),
+                onPressed: onPressed,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -888,6 +889,71 @@ class _SelectDateButtonWidgetsState extends State<SelectDateButtonWidgets> {
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//문의 유형
+class TypeButtonWidgets extends StatefulWidget {
+  final VoidCallback onPressed;
+  final String text;
+  const TypeButtonWidgets({
+    Key? key,
+    required this.onPressed,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  State<TypeButtonWidgets> createState() => _TypeButtonWidgetsState();
+}
+
+class _TypeButtonWidgetsState extends State<TypeButtonWidgets> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: MediaWidth(context, 0.04)),
+      child: Container(
+        color: Colors.white,
+        width: MediaWidth(context, 1),
+        child: TextButton(
+          onPressed: widget.onPressed,
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.white),
+            foregroundColor: MaterialStateProperty.all(AppTheme.gray_4A),
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+            side: MaterialStateProperty.all(BorderSide(
+              color: AppTheme.gray_D4,
+              width: 1.0,
+            )),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+            ),
+            elevation: MaterialStateProperty.all(0), // 그림자 제거
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 12, 0, 12),
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: AppTheme.gray_4A,
+                  ),
+                ),
+              ),
+              Icon(
+                Icons.arrow_drop_down,
+                size: 22,
+                color: AppTheme.gray_4A,
+              ),
+            ],
           ),
         ),
       ),

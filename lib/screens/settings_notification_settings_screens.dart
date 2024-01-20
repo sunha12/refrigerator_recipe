@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
@@ -30,9 +32,9 @@ class _NotificationSettingsScreensState
     });
   }
 
-  void toggleDoNotDisturb(bool value) {
+  void toggleDoNotDisturb() {
     setState(() {
-      doNotDisturbEnabled = value;
+      doNotDisturbEnabled = !doNotDisturbEnabled;
     });
   }
 
@@ -77,41 +79,25 @@ class _NotificationSettingsScreensState
                 ),
               ),
             ),
-            MouseRegion(
-              // 호버 상태에서의 색상 설정
-              onHover: (_) {
-                // 아무 동작도 하지 않도록 비워 둡니다.
-              },
-              child: buildNotificationSetting(
-                '알림 켜기',
-                notificationEnabled,
-                toggleNotification,
-                subTitle: '알람을 켜거나 끌 수 있습니다.',
-              ),
+            ProfileSettingWidgets(
+              titleText: '알림 켜기',
+              bodyText: '알림을 켜거나 끌 수 있습니다.',
+              onPressed: () {},
+              setting: true,
             ),
-            MouseRegion(
-              // 호버 상태에서의 색상 설정
-              onHover: (_) {
-                // 아무 동작도 하지 않도록 비워 둡니다.
-              },
-              child: buildNotificationSetting(
-                '이벤트 알림',
-                eventNotificationsEnabled,
-                toggleEventNotifications,
-                subTitle: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.',
-              ),
+            ProfileSettingWidgets(
+              titleText: '이벤트 알림',
+              bodyText: '이벤트 정보와 다양한 혜택을 받아볼 수 있습니다.',
+              onPressed: () {},
+              setting: true,
             ),
-            MouseRegion(
-              // 호버 상태에서의 색상 설정
-              onHover: (_) {
-                // 아무 동작도 하지 않도록 비워 둡니다.
+            ProfileSettingWidgets(
+              titleText: '방해 금지 설정',
+              bodyText: '알림이 울리지 않는 시간대를 설정할 수 있습니다.',
+              onPressed: () {
+                toggleDoNotDisturb();
               },
-              child: buildNotificationSetting(
-                '방해 금지 설정',
-                doNotDisturbEnabled,
-                toggleDoNotDisturb,
-                subTitle: '알림이 울리지 않는 시간대를 설정할 수 있습니다.',
-              ),
+              setting: true,
             ),
             doNotDisturbEnabled == true
                 ? Padding(
