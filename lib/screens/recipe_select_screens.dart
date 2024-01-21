@@ -7,6 +7,7 @@ import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/recipe_fild_widgets.dart';
+import 'receipt_view_screens.dart';
 
 class RecipeSelectScreens extends StatefulWidget {
   final title;
@@ -70,15 +71,12 @@ class _RecipeSelectScreensState extends State<RecipeSelectScreens> {
                     images: data['file_nm'],
                     info: data['info'],
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => DetailScreens(
-                      //       parameter: data['p_uuid'],
-                      //       owner: true,
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReceiptViewScreens(),
+                        ),
+                      );
                     },
                   );
                 },

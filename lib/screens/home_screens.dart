@@ -66,34 +66,39 @@ class _HomeScreensState extends State<HomeScreens> {
               bottom: 20,
               right: 20,
               child: TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
-                  //보더 둥글게
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    //보더 둥글게
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                     ),
+                    //자동 패딩 제거
+                    minimumSize: MaterialStateProperty.all(Size.zero),
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
                   ),
-                  //자동 패딩 제거
-                  minimumSize: MaterialStateProperty.all(Size.zero),
-                  padding: MaterialStateProperty.all(EdgeInsets.zero),
-                ),
-                onPressed: () {
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    isDismissible: false,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SizedBox(
-                        height: MediaHeight(context, 0.88),
-                        child: AddIngredientsModalWidgets(remember: false),
-                      );
-                    },
-                  );
-                },
-                child: Image.asset('assets/images/img_add.png'),
-              ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaHeight(context, 0.88),
+                          child: AddIngredientsModalWidgets(remember: false),
+                        );
+                      },
+                    );
+                  },
+                  child: SvgPicture.string('''
+                  <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="27.5" cy="27.5" r="27.5" fill="#FF9100"/>
+                  <line x1="14" y1="28.4636" x2="40.8095" y2="28.4636" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="27.4624" y1="40.8096" x2="27.4624" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  ''')),
             ),
           ],
         ),

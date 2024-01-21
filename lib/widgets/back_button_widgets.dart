@@ -336,9 +336,9 @@ class temporaryStorageBackButtonWidgets extends StatelessWidget {
         title: Text(
           appBarText,
           style: TextStyle(
-            fontSize: 16,
-            color: AppTheme.gray_4A,
-            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 20,
+            // fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.white,
