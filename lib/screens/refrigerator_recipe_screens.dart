@@ -137,6 +137,7 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                   children: [
                     IngredientAddButtonWidgets(
                       text: '식재료 추가',
+                      essential: false,
                       onPressed: () {
                         showModalBottomSheet(
                           isScrollControlled: true,
@@ -197,6 +198,7 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                 children: [
                   IngredientAddButtonWidgets(
                     text: '조미료 추가',
+                    essential: false,
                     onPressed: () {
                       showModalBottomSheet(
                         isScrollControlled: true,

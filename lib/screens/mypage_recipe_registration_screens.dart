@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/provider/ingredient.dart';
+import 'package:refrigerator_recipe_app/screens/mypage_recipe_registration_two_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/registration_mod_widgets.dart';
@@ -44,7 +45,7 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
             () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CancleButtonWidgets(appBarText: '레시피 등록'),
+                CancleButtonWidgets(appBarText: '레시피 등록 (1/3)'),
                 Container(
                   width: double.infinity,
                   height: 300,
@@ -63,13 +64,28 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
-                      MediaWidth(context, 0.04), 5),
-                  child: Text(
-                    '이름',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.05), 25,
+                      MediaWidth(context, 0.05), 5),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '이름 ',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '*',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -79,13 +95,28 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                   inText: initialRecipeName,
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
-                      MediaWidth(context, 0.04), 5),
-                  child: Text(
-                    '레시피 소개',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.05), 25,
+                      MediaWidth(context, 0.05), 5),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '레시피 소개 ',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '*',
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -95,20 +126,50 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                   inText: initialRecipeDescription,
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.04), 25,
-                      MediaWidth(context, 0.04), 5),
-                  child: Text(
-                    '링크',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                  padding: EdgeInsets.fromLTRB(MediaWidth(context, 0.05), 25,
+                      MediaWidth(context, 0.05), 5),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '분류 ',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                LongTextInputFildWidgets(
-                  hintText: '블로그, 유튜브 등',
-                  onChanged: onLinkChanged,
-                  inText: initialRecipeLink,
+                TypeButtonWidgets(
+                  text: '유형을 선택해주세요.',
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaHeight(context, 0.5),
+                          child: buildImageUploader(),
+                        );
+                      },
+                    );
+                  },
                 ),
                 //재료 추가
                 Row(
@@ -117,6 +178,7 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                   children: [
                     IngredientAddButtonWidgets(
                       text: '식재료 추가',
+                      essential: true,
                       onPressed: () {
                         showModalBottomSheet(
                           isScrollControlled: true,
@@ -176,6 +238,7 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                   children: [
                     IngredientAddButtonWidgets(
                       text: '조미료 추가',
+                      essential: true,
                       onPressed: () {
                         showModalBottomSheet(
                           isScrollControlled: true,
@@ -228,14 +291,102 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: LongButtonWidgets(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  RecipeRegistrationPageTwo()),
+                        );
+                      },
                       colorId: AppTheme.orange,
-                      buttonText: '등록하기',
+                      buttonText: '다음으로',
                       iconUrl: ''),
                 )
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildImageUploader() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: MediaHeight(context, 0.5),
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  padding: EdgeInsets.only(top: 15, left: 20),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: AppTheme.gray_4A,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 15, left: MediaWidth(context, 0.3), bottom: 20),
+                  child: Text(
+                    '유형 선택',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppTheme.gray_4A,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '한식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '일식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '중식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '양식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '퓨전 음식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '디저트',
+              icon: '',
+            ),
+          ],
         ),
       ),
     );

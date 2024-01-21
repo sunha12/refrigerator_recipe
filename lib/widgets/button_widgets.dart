@@ -674,10 +674,13 @@ class _PlusButtonWidgetsState extends State<PlusButtonWidgets> {
           foregroundColor: MaterialStateProperty.all(AppTheme.gray_md),
         ),
         child: Center(
-          child: Icon(
-            Icons.add_circle_outline_rounded,
-            size: 18,
-            color: AppTheme.gray_md,
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Icon(
+              Icons.add_circle_outline_rounded,
+              size: 18,
+              color: AppTheme.gray_md,
+            ),
           ),
         ),
       ),
@@ -737,11 +740,13 @@ class _MoreButtonWidgetsState extends State<MoreButtonWidgets> {
 //재료, 조미료 추가 버튼 위젯
 class IngredientAddButtonWidgets extends StatelessWidget {
   final String text;
+  final bool essential;
   final VoidCallback onPressed;
 
   const IngredientAddButtonWidgets({
     required this.text,
     required this.onPressed,
+    required this.essential,
     super.key,
   });
 
@@ -754,14 +759,37 @@ class IngredientAddButtonWidgets extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(
                 MediaWidth(context, 0.05), 17, MediaWidth(context, 0.05), 7),
-            child: Text(
-              text,
-              style: TextStyle(
-                color: AppTheme.gray_4A,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: essential == true
+                ? RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: text,
+                          style: TextStyle(
+                            color: AppTheme.gray_4A,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' *',
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Text(
+                    text,
+                    style: TextStyle(
+                      color: AppTheme.gray_4A,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
           Padding(
             padding: EdgeInsets.only(left: MediaWidth(context, 0.045)),

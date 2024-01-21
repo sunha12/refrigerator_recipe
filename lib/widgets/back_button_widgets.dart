@@ -372,7 +372,7 @@ class temporaryStorageBackButtonWidgets extends StatelessWidget {
                     ),
                     onPressed: onPressed2,
                     child: Text(
-                      '임시 저장',
+                      '이전',
                       style: TextStyle(
                         fontSize: 14,
                         color: AppTheme.gray_4A,
