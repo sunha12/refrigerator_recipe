@@ -155,8 +155,8 @@ class _MyPageScreensState extends State<MyPageScreens> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 75,
-                          height: 75,
+                          width: 70,
+                          height: 70,
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(10), // 둥근 모서리 반지름 값
