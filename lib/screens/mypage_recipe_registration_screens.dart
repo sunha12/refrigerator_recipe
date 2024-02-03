@@ -173,7 +173,8 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                 ),
                 //재료 추가
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment:
+                      MainAxisAlignment.start, // 메인 축을 시작 부분으로 정렬
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IngredientAddButtonWidgets(
@@ -194,46 +195,46 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                         );
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Container(
-                        width: MediaWidth(context, 0.70),
-                        height: 70,
-                        child: GridView.builder(
-                          physics: ScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 6,
-                            childAspectRatio: 1.5,
-                          ),
-                          itemCount:
-                              ingredientDate.ingredientsDate.value.length,
-                          itemBuilder: (context, index) {
-                            Map<String, dynamic> data =
-                                ingredientDate.ingredientsDate.value[index];
-                            return Container(
-                              width: 30,
-                              height: 30,
-                              // child: Image.network(
-                              child: Image.asset(
-                                // 'https://api.gooodall.com/files/${widget.images}',
-                                data['file_nm'],
-                                fit: BoxFit.fitHeight,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Container(
+                          height: 70,
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 6,
+                              childAspectRatio: 1.5,
+                            ),
+                            itemCount:
+                                ingredientDate.ingredientsDate.value.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data =
+                                  ingredientDate.ingredientsDate.value[index];
+                              return Container(
                                 width: 30,
                                 height: 30,
-                              ),
-                            );
-                          },
+                                child: Image.asset(
+                                  data['file_nm'],
+                                  fit: BoxFit.fitHeight,
+                                  width: 30,
+                                  height: 30,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
+
                 SizedBox(height: 16.0),
                 //조미료 추가
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IngredientAddButtonWidgets(
@@ -254,40 +255,41 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                         );
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Container(
-                        width: MediaWidth(context, 0.70),
-                        height: 70,
-                        child: GridView.builder(
-                          physics: ScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 6,
-                            childAspectRatio: 1.5,
-                          ),
-                          itemCount: ingredientDate.condimentDate.value.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: 30,
-                              height: 30,
-                              // child: Image.network(
-                              child: Image.asset(
-                                // 'https://api.gooodall.com/files/${widget.images}',
-                                ingredientDate.condimentDate.value[index]
-                                    ['file_nm'],
-                                fit: BoxFit.fitHeight,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Container(
+                          height: 70,
+                          child: GridView.builder(
+                            physics: ScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 6,
+                              childAspectRatio: 1.5,
+                            ),
+                            itemCount:
+                                ingredientDate.condimentDate.value.length,
+                            itemBuilder: (context, index) {
+                              return Container(
                                 width: 30,
                                 height: 30,
-                              ),
-                            );
-                          },
+                                child: Image.asset(
+                                  ingredientDate.condimentDate.value[index]
+                                      ['file_nm'],
+                                  fit: BoxFit.fitHeight,
+                                  width: 30,
+                                  height: 30,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: LongButtonWidgets(
@@ -312,83 +314,86 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
 
   Widget buildImageUploader() {
     return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: MediaHeight(context, 0.5),
-        decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: MediaHeight(context, 0.5),
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              ),
             ),
           ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  padding: EdgeInsets.only(top: 15, left: 20),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.close,
-                    color: AppTheme.gray_4A,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 15, left: MediaWidth(context, 0.3), bottom: 20),
-                  child: Text(
-                    '유형 선택',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppTheme.gray_4A,
-                      fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            // SingleChildScrollView 추가
+            child: Column(
+              mainAxisSize:
+                  MainAxisSize.min, // 스크롤 가능한 내용에는 MainAxisSize.min이 적합
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      padding: EdgeInsets.only(top: 15, left: 20),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: AppTheme.gray_4A,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 15, left: MediaWidth(context, 0.3), bottom: 20),
+                      child: Text(
+                        '유형 선택',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppTheme.gray_4A,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '한식',
+                  icon: '',
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '일식',
+                  icon: '',
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '중식',
+                  icon: '',
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '양식',
+                  icon: '',
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '퓨전 음식',
+                  icon: '',
+                ),
+                TextButtonNotBorderWidgets(
+                  onPressed: () {},
+                  buttonText: '디저트',
+                  icon: '',
                 ),
               ],
             ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '한식',
-              icon: '',
-            ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '일식',
-              icon: '',
-            ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '중식',
-              icon: '',
-            ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '양식',
-              icon: '',
-            ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '퓨전 음식',
-              icon: '',
-            ),
-            TextButtonNotBorderWidgets(
-              onPressed: () {},
-              buttonText: '디저트',
-              icon: '',
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
