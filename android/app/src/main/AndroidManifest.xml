@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.refrigerator_recipe_app">
    <application
-        android:label="refrigerator_recipe_app"
+        android:label="냉장고 속 레시피"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
