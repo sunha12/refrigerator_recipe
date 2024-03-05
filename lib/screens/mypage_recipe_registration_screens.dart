@@ -164,8 +164,8 @@ class _RecipeRegistrationPageState extends State<RecipeRegistrationPage> {
                       context: context,
                       builder: (BuildContext context) {
                         return SizedBox(
-                          height: MediaHeight(context, 0.5),
-                          child: buildImageUploader(),
+                          height: MediaHeight(context, 0.57),
+                          child: ClassButtonWidgets(),
                         );
                       },
                     );

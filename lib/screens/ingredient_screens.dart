@@ -193,6 +193,44 @@ class _IngredientScreensState extends State<IngredientScreens> {
                     ],
                   )
                 : SizedBox(),
+            //분류
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaWidth(context, 0.07), top: 18, bottom: 5),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      textAlign: TextAlign.left,
+                      '분류',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.gray_4A,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+                TypeButtonWidgets(
+                  text: '유형을 선택해주세요.',
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaHeight(context, 0.57),
+                          child: ClassButtonWidgets(),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
             //유통기한
             Column(
               mainAxisAlignment: MainAxisAlignment.start,

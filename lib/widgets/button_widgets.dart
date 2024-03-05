@@ -988,3 +988,93 @@ class _TypeButtonWidgetsState extends State<TypeButtonWidgets> {
     );
   }
 }
+
+//분류 선택
+class ClassButtonWidgets extends StatelessWidget {
+  const ClassButtonWidgets({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: MediaHeight(context, 0.57),
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  padding: EdgeInsets.only(top: 15, left: 20),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: AppTheme.gray_4A,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 15, left: MediaWidth(context, 0.3), bottom: 20),
+                  child: Text(
+                    '유형 선택',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppTheme.gray_4A,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '한식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '일식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '중식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '양식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '퓨전 음식',
+              icon: '',
+            ),
+            TextButtonNotBorderWidgets(
+              onPressed: () {},
+              buttonText: '디저트',
+              icon: '',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
