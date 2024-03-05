@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/provider/ingredient.dart';
+import 'package:refrigerator_recipe_app/screens/recipe_select_screens.dart';
 import 'package:refrigerator_recipe_app/screens/refrigerator_recipe_search_screens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
@@ -255,8 +256,9 @@ class _RefrigeratorRecipeScreensState extends State<RefrigeratorRecipeScreens> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              RefrigeratorRecipeSearchScreens(),
+                          builder: (context) => RecipeSelectScreens(
+                            title: '냉장고 속 레시피',
+                          ),
                         ),
                       );
                     },
