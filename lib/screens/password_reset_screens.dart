@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:refrigerator_recipe_app/models/api_helper.dart';
+import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/notification_window_widgets.dart';
-import 'package:refrigerator_recipe_app/widgets/size_box_widgets.dart';
+import 'package:refrigerator_recipe_app/screens/loing_screens.dart';
 import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
-import 'package:refrigerator_recipe_app/provider/time_update.dart';
 
 class PasswordResetScreens extends StatefulWidget {
   const PasswordResetScreens({super.key});
@@ -18,11 +19,33 @@ class PasswordResetScreens extends StatefulWidget {
 }
 
 class _PasswordResetScreensState extends State<PasswordResetScreens> {
-  final TimerUpdate timerUpdate = Get.find(); // 등록된 TimerUpdate 인스턴스 가져오기
+  String password = ''; //비밀번호
+  String rePassword = ''; //비밀번호확인
 
-  void _onChanged(String text) {
+  bool passwordError = false; //비밀번호 오류
+
+  //비밀번호
+  void _setPassword(String text) {
     setState(() {
-      //상태 관리 코드
+      password = text;
+    });
+  }
+
+  //비밀번호확인
+  void _setRePassword(String text) {
+    setState(() {
+      rePassword = text;
+    });
+  }
+
+  //에러 체크
+  void _errorCheck() {
+    setState(() {
+      passwordError = false;
+
+      if (password != rePassword) {
+        passwordError = true;
+      }
     });
   }
 
@@ -72,7 +95,7 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
               LongTextInputFildWidgets(
                 inText: '',
                 hintText: "비밀번호",
-                onChanged: _onChanged,
+                onChanged: _setPassword,
               ),
             ],
           ),
@@ -81,7 +104,7 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
             child: LongTextInputFildWidgets(
               inText: '',
               hintText: "비밀번호 재확인",
-              onChanged: _onChanged,
+              onChanged: _setRePassword,
             ),
           ),
           Padding(
@@ -93,21 +116,68 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
                   horizontal: 22,
                   vertical: 6,
                 ),
-                child: Text(
-                  '비밀번호가 일치하지 않습니다.',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppTheme.red,
-                  ),
-                ),
+                child: passwordError
+                    ? Text(
+                        '비밀번호가 일치하지 않습니다.',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.red,
+                        ),
+                      )
+                    : Text(
+                        '',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.red,
+                        ),
+                      ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 27, 0, 0),
             child: LongButtonWidgets(
-              onPressed: () {},
-              colorId: AppTheme.gray_D9,
+              onPressed: () async {
+                _errorCheck();
+
+                if (!passwordError) {
+                  final res = await ApiClient(
+                          baseUrl: 'http://localhost:4513/login/passwd-change')
+                      // 'https://auth.refrigerator_recipe_app.co.kr/login/passwd-change')
+                      .post(
+                    '',
+                    {
+                      'user_idx': await loadData('user_idx'),
+                      'passwd': password,
+                    },
+                  );
+                  print(res);
+                  if (res['status'] == 200) {
+                    showDialog(
+                      barrierDismissible: false, // 외부를 터치해도 창이 사라지지 않도록 설정
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NotificationWindowWidgets(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoingScreens()),
+                              );
+                            },
+                            buttonText: '확인',
+                            alertText: '비밀번호가 변경되었습니다.',
+                            textColor: Colors.black);
+                      },
+                    );
+                  }
+                }
+              },
+              colorId: password != '' && rePassword != ''
+                  ? AppTheme.orange
+                  : AppTheme.gray_D9,
               // colorId: AppTheme.orange,
               buttonText: "비밀번호 변경하기",
               iconUrl: "",

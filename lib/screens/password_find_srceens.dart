@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
+import 'package:refrigerator_recipe_app/models/api_helper.dart';
+import 'package:refrigerator_recipe_app/utils/shared_preferences.dart';
 import 'package:refrigerator_recipe_app/screens/password_auth_srceens.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
@@ -14,9 +16,15 @@ class PasswordFindScreens extends StatefulWidget {
 }
 
 class _PasswordFindScreensState extends State<PasswordFindScreens> {
-  void _onChanged(String text) {
+  String _email = ''; //유저 이메일
+
+  //컨트롤러
+  TextEditingController _controller = TextEditingController();
+
+  //이메일
+  void _emailCheck(String text) {
     setState(() {
-      //상태 관리 코드
+      _email = text;
     });
   }
 
@@ -66,37 +74,51 @@ class _PasswordFindScreensState extends State<PasswordFindScreens> {
               LongTextInputFildWidgets(
                 inText: '',
                 hintText: "아이디 (이메일)",
-                onChanged: _onChanged,
+                onChanged: _emailCheck,
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 22,
-                vertical: 6,
-              ),
-              child: Text(
-                '이메일을 정확히 입력해주세요.',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppTheme.red,
-                ),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(
+          //       horizontal: 22,
+          //       vertical: 6,
+          //     ),
+          //     child: Text(
+          //       '이메일을 정확히 입력해주세요.',
+          //       style: TextStyle(
+          //         fontSize: 12,
+          //         color: AppTheme.red,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 27, 0, 0),
             child: LongButtonWidgets(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PasswordAuthScreens()),
+              onPressed: () async {
+                final res = await ApiClient(
+                        baseUrl: 'http://localhost:4513/login/changepw-email')
+                    // 'https://auth.refrigerator_recipe_app.co.kr/login/changepw-email')
+                    .post(
+                  '',
+                  {
+                    'email': _email,
+                  },
                 );
+                print(res);
+                if (res['status'] == 200) {
+                  saveData('email', _email);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PasswordAuthScreens()),
+                  );
+                }
               },
-              colorId: AppTheme.gray_D9,
+              colorId: _email != '' ? AppTheme.orange : AppTheme.gray_D9,
               // colorId: AppTheme.orange,
               buttonText: "인증하기",
               iconUrl: "",

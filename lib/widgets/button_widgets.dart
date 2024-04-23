@@ -415,7 +415,7 @@ class _TextButtonPolicyWidgetsState extends State<TextButtonPolicyWidgets> {
                         child: Icon(
                           Icons.check,
                           color:
-                              widget.isAgree ? Colors.green : AppTheme.gray_md,
+                              widget.isAgree ? Colors.orange : AppTheme.gray_md,
                           size: MediaWidth(context, 0.04),
                         ),
                       ),

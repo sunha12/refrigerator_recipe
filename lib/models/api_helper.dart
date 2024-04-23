@@ -234,8 +234,8 @@ class ApiClientAuth {
       body: json.encode(
         {
           'refresh_token': await lodeRefreshToken(),
-          'client_secret': 'c62d39d6f1e43c268a04f38c006155d2',
-          'client_id': 'gooodall.com',
+          'client_secret': '7f2a2dc7cc0e3b82606af07e1ffd96a7',
+          'client_id': 'refrigerator_recipe',
           'grant_type': 'refresh_token',
         },
       ),
