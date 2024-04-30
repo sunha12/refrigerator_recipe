@@ -7,7 +7,10 @@ import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/recipe_fild_widgets.dart';
 
 class ScrepRecipeScreens extends StatefulWidget {
-  const ScrepRecipeScreens({super.key});
+  final List<dynamic> recipes;
+
+  const ScrepRecipeScreens({super.key, required this.recipes});
+
 
   @override
   State<ScrepRecipeScreens> createState() => _ScrepRecipeScreensState();

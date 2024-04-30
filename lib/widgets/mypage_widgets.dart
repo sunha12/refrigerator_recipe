@@ -5,8 +5,12 @@ import 'package:refrigerator_recipe_app/screens/recipe_select_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_scrap_screens.dart';
 import 'package:refrigerator_recipe_app/screens/mypage_recipe_registration_screens.dart';
 import 'package:refrigerator_recipe_app/screens/screp_recipe_screens.dart';
+import 'dart:convert';
+import 'package:refrigerator_recipe_app/models/api_helper.dart';
 
 class MypageWidget extends StatelessWidget {
+  final ApiClient apiClient = ApiClient(baseUrl: 'http://localhost:3000');
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,10 +20,11 @@ class MypageWidget extends StatelessWidget {
           context,
           icon: Icons.remove_red_eye_rounded,
           label: "최근 본 레시피",
-          onTap: () {
+          onTap: () async {
+            var response = await apiClient.get('/recently-viewed?userIdx=1');
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => RecentlyRecipeViewScreens()),
+                  builder: (context) => RecentlyRecipeViewScreens(recipes: response['data'])),
             );
           },
         ),
@@ -27,9 +32,10 @@ class MypageWidget extends StatelessWidget {
           context,
           icon: Icons.bookmark_border,
           label: "스크랩",
-          onTap: () {
+          onTap: () async {
+            var response = await apiClient.get('/scraps?userIdx=1');
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ScrepRecipeScreens()),
+              MaterialPageRoute(builder: (context) => ScrepRecipeScreens(recipes: response['data'])),
             );
           },
         ),
@@ -37,9 +43,11 @@ class MypageWidget extends StatelessWidget {
           context,
           icon: Icons.mode_edit_outline_rounded,
           label: "레시피 등록",
-          onTap: () {
+          onTap: () async {
+            var newRecipe = {'userIdx': 1, 'rcpNm': '새로운 레시피', 'rcpImage': 'image_url'};
+            var response = await apiClient.post('/new-recipe', newRecipe);
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => RecipeRegistrationPage()),
+              MaterialPageRoute(builder: (context) => RecipeRegistrationPage(result: response)),
             );
           },
         ),

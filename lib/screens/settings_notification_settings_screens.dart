@@ -3,6 +3,8 @@ import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class NotificationSettingsScreens extends StatefulWidget {
   @override
@@ -18,22 +20,57 @@ class _NotificationSettingsScreensState
   TimeOfDay? doNotDisturbStartTime;
   TimeOfDay? doNotDisturbEndTime;
 
+  @override
+  void initState() {
+    super.initState();
+    fetchSettings();
+  }
+
+  Future<void> fetchSettings() async {
+    var response = await http.get(Uri.parse('http://localhost:4513/alarm-settings?userIdx=1'));
+    var data = json.decode(response.body);
+    setState(() {
+      notificationEnabled = data['alarm'];
+      eventNotificationsEnabled = data['event_alarm'];
+      doNotDisturbEnabled = data['al_no_stime'] != null;
+      doNotDisturbStartTime = TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_stime']));
+      doNotDisturbEndTime = TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_etime']));
+    });
+  }
+
+  Future<void> updateSettings() async {
+    await http.post(
+      Uri.parse('http://localhost:4513/update-alarm-settings'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'userIdx': 1,
+        'alarm': notificationEnabled,
+        'eventAlarm': eventNotificationsEnabled,
+        'alNoStime': doNotDisturbStartTime?.format(context),
+        'alNoEtime': doNotDisturbEndTime?.format(context),
+      }),
+    );
+  }
+
   void toggleNotification(bool value) {
     setState(() {
       notificationEnabled = value;
     });
+    updateSettings();
   }
 
   void toggleEventNotifications(bool value) {
     setState(() {
       eventNotificationsEnabled = value;
     });
+    updateSettings();
   }
 
   void toggleDoNotDisturb() {
     setState(() {
       doNotDisturbEnabled = !doNotDisturbEnabled;
     });
+    updateSettings();
   }
 
   Future<void> selectDoNotDisturbStartTime(BuildContext context) async {
@@ -203,6 +240,10 @@ class _NotificationSettingsScreensState
 }
 
 extension TimeOfDayExtension on TimeOfDay {
+  static TimeOfDay fromDateTime(DateTime dateTime) {
+    return TimeOfDay(hour: dateTime.hour, minute: dateTime.minute);
+  }
+
   String format(BuildContext context) {
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);

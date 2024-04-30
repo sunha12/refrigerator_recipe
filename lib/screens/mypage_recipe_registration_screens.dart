@@ -10,7 +10,10 @@ import 'package:refrigerator_recipe_app/widgets/text_input_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/button_widgets.dart';
 
 class RecipeRegistrationPage extends StatefulWidget {
-  const RecipeRegistrationPage({super.key});
+  final dynamic result;
+
+  const RecipeRegistrationPage({super.key, this.result});
+
 
   @override
   State<RecipeRegistrationPage> createState() => _RecipeRegistrationPageState();

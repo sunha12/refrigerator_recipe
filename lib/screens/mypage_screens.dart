@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:refrigerator_recipe_app/constants/constants.dart';
 import 'package:refrigerator_recipe_app/styles/theme.dart';
 import 'package:refrigerator_recipe_app/widgets/back_button_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/mypage_widgets.dart';
 import 'package:refrigerator_recipe_app/widgets/navigation_bar_widgets.dart';
-import 'package:refrigerator_recipe_app/screens/mypage_recently_viewed_recipes_screens.dart';
 import 'package:refrigerator_recipe_app/screens/settings.dart';
-import 'package:refrigerator_recipe_app/screens/mypage_scrap_screens.dart';
 
 class MyPageScreens extends StatefulWidget {
   const MyPageScreens({super.key});
@@ -17,15 +17,37 @@ class MyPageScreens extends StatefulWidget {
 }
 
 class _MyPageScreensState extends State<MyPageScreens> {
-  final List<Map<String, String>> myRecipes = List.generate(
-    16,
-    (index) => {
-      'image': index % 2 == 0
-          ? 'assets/images/img_dessert.jpg'
-          : 'assets/images/img_europe.jpg',
-      'name': '레시피 ${index + 1}'
-    },
-  );
+  List<Map<String, dynamic>> myRecipes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchMyRecipes();
+  }
+
+  Future<void> fetchMyRecipes() async {
+    var response = await http.get(
+      Uri.parse('http://localhost:4513/my-recipes?userIdx=1'),
+      headers: {
+        "Content-Type": "application/json",
+        // 필요하다면 인증 헤더 추가
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      setState(() {
+        myRecipes = List<Map<String, dynamic>>.from(
+          data.map((item) => {
+            'image': item['rcp_image'],
+            'name': item['rcp_nm'],
+          })
+        );
+      });
+    } else {
+      // 에러 처리 또는 에러 메시지 표시
+      print('레시피를 가져오는 데 실패했습니다.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,30 +57,19 @@ class _MyPageScreensState extends State<MyPageScreens> {
         body: Column(
           children: [
             AppBar(
-              // 뒤로가기 숨김
               automaticallyImplyLeading: false,
               centerTitle: true,
-              title: Text(
-                '마이페이지',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  // fontWeight: FontWeight.bold,
-                ),
-              ),
+              title: Text('마이페이지', style: TextStyle(color: Colors.black, fontSize: 20)),
               backgroundColor: Color(0xffffffff),
-              elevation: 0, // 그림자 제거
+              elevation: 0,
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 10),
                   child: IconButton(
                     icon: SvgPicture.asset('assets/icons/ico_setting.svg'),
-                    iconSize: 26,
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => Settings(),
-                        ),
+                        MaterialPageRoute(builder: (context) => Settings()),
                       );
                     },
                   ),
@@ -66,34 +77,9 @@ class _MyPageScreensState extends State<MyPageScreens> {
               ],
             ),
             SizedBox(height: 10.0),
-            Center(
-              // child: Image.network(
-              child: Image.asset(
-                // 'https://api.gooodall.com/files/${widget.images}',
-                // 'assets/images/img_dessert.jpg',
-                '',
-                fit: BoxFit.cover, // 이미지를 위젯 크기에 맞추기 위해 fit 설정
-                width: 95,
-                height: 95,
-                errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    Icons.account_circle_rounded, // 사용자 프로필 아이콘으로 변경
-                    size: 95, // 아이콘 크기 조절
-                    color: Color(0xffD4D4D4), // 아이콘 색상 설정
-                  );
-                },
-              ),
-            ),
+            Center(child: Image.asset('assets/images/img_dessert.jpg', width: 95, height: 95)),
             SizedBox(height: 8.0),
-            Center(
-              child: Text(
-                "닉네임",
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            Center(child: Text("닉네임", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))),
             SizedBox(height: 20.0),
             Container(
               width: double.infinity,
@@ -139,60 +125,48 @@ class _MyPageScreensState extends State<MyPageScreens> {
                 ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: GridView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1,
-                  ),
-                  itemCount: myRecipes.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 70,
-                          height: 70,
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(10), // 둥근 모서리 반지름 값
-                            // child: Image.network(
-                            child: Image.asset(
-                              // 'https://api.gooodall.com/files/${widget.images}',
-                              myRecipes[index]['image'].toString(),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          myRecipes[index]['name'].toString(),
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.gray_4A,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+           Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1,
                 ),
+                itemCount: myRecipes.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: NetworkImage(myRecipes[index]['image']),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        myRecipes[index]['name'],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.gray_4A,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          child: NavigationBarWidget(
-            selectedIndex: 4,
-            onItemTapped: _onItemTapped,
-          ),
-        ),
+        bottomNavigationBar: NavigationBarWidget(selectedIndex: 4, onItemTapped: _onItemTapped),
       ),
     );
   }
+
 
   void _onItemTapped(int index) {
     switch (index) {
