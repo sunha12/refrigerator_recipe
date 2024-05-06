@@ -142,8 +142,8 @@ class _PasswordResetScreensState extends State<PasswordResetScreens> {
 
                 if (!passwordError) {
                   final res = await ApiClient(
-                          baseUrl: 'http://localhost:4513/login/passwd-change')
-                      // 'https://auth.refrigerator_recipe_app.co.kr/login/passwd-change')
+                          baseUrl:
+                              'https://auth.codingduo.co.kr/login/passwd-change')
                       .post(
                     '',
                     {

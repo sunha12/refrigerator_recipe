@@ -219,8 +219,7 @@ class _LoingScreensState extends State<LoingScreens> {
                 onPressed: () async {
                   //로그인 요청
                   final login = await ApiClient(
-                          baseUrl: 'http://localhost:4513/login/')
-                      // 'https://auth.refrigerator_recipe_app.co.kr/login/')
+                          baseUrl: 'https://auth.codingduo.co.kr/login/')
                       .post(
                     '',
                     {

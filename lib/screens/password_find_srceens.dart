@@ -99,8 +99,8 @@ class _PasswordFindScreensState extends State<PasswordFindScreens> {
             child: LongButtonWidgets(
               onPressed: () async {
                 final res = await ApiClient(
-                        baseUrl: 'http://localhost:4513/login/changepw-email')
-                    // 'https://auth.refrigerator_recipe_app.co.kr/login/changepw-email')
+                        baseUrl:
+                            'https://auth.codingduo.co.kr/login/changepw-email')
                     .post(
                   '',
                   {

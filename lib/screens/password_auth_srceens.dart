@@ -80,8 +80,8 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
                 isvVsible: false, //인증번호
                 onPressed: () async {
                   final res = await ApiClient(
-                          baseUrl: 'http://localhost:4513/login/changepw-email')
-                      // 'https://auth.refrigerator_recipe_app.co.kr/login/changepw-email')
+                          baseUrl:
+                              'https://auth.codingduo.co.kr/login/changepw-email')
                       .post(
                     '',
                     {
@@ -127,8 +127,7 @@ class _PasswordAuthScreensState extends State<PasswordAuthScreens> {
               onPressed: () async {
                 final res = await ApiClient(
                         baseUrl:
-                            'http://localhost:4513/login/regi-passwd-cod-check')
-                    // 'https://auth.refrigerator_recipe_app.co.kr/login/regi-passwd-cod-check')
+                            'https://auth.codingduo.co.kr/login/regi-passwd-cod-check')
                     .get(
                   '?email=${await loadData('email')}&certnum=${_num}',
                 );

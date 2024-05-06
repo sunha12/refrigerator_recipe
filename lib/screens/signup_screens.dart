@@ -191,8 +191,8 @@ class _SignupScreensState extends State<SignupScreens> {
                       timerUpdate.startTimer();
 
                       final res = await ApiClient(
-                              baseUrl: 'http://localhost:4513/login/regi-email')
-                          // 'https://auth.refrigerator_recipe_app.co.kr/login/regi-email')
+                              baseUrl:
+                                  'https://auth.codingduo.co.kr/login/regi-email')
                           .post(
                         '',
                         {
@@ -274,8 +274,7 @@ class _SignupScreensState extends State<SignupScreens> {
                     if (numValid) {
                       final res = await ApiClient(
                               baseUrl:
-                                  'http://localhost:4513/login/regi-email-check')
-                          // 'https://auth.refrigerator_recipe_app.co.kr/login/regi-email-check')
+                                  'https://auth.codingduo.co.kr/login/regi-email-check')
                           .post(
                         '',
                         {
@@ -616,8 +615,8 @@ class _SignupScreensState extends State<SignupScreens> {
                 onPressed: () async {
                   if (complete) {
                     final res = await ApiClient(
-                            baseUrl: 'http://localhost:4513/login/regi-users')
-                        // 'https://auth.refrigerator_recipe_app.co.kr/login/regi-users')
+                            baseUrl:
+                                'https://auth.codingduo.co.kr/login/regi-users')
                         .post(
                       '',
                       {
