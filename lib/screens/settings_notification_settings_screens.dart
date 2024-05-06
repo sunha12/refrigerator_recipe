@@ -27,20 +27,23 @@ class _NotificationSettingsScreensState
   }
 
   Future<void> fetchSettings() async {
-    var response = await http.get(Uri.parse('http://localhost:4513/alarm-settings?userIdx=1'));
+    var response = await http
+        .get(Uri.parse('https://api.codingduo.co.kr/alarm-settings?userIdx=1'));
     var data = json.decode(response.body);
     setState(() {
       notificationEnabled = data['alarm'];
       eventNotificationsEnabled = data['event_alarm'];
       doNotDisturbEnabled = data['al_no_stime'] != null;
-      doNotDisturbStartTime = TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_stime']));
-      doNotDisturbEndTime = TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_etime']));
+      doNotDisturbStartTime =
+          TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_stime']));
+      doNotDisturbEndTime =
+          TimeOfDayExtension.fromDateTime(DateTime.parse(data['al_no_etime']));
     });
   }
 
   Future<void> updateSettings() async {
     await http.post(
-      Uri.parse('http://localhost:4513/update-alarm-settings'),
+      Uri.parse('https://api.codingduo.co.kr/update-alarm-settings'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'userIdx': 1,

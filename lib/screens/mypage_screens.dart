@@ -27,7 +27,7 @@ class _MyPageScreensState extends State<MyPageScreens> {
 
   Future<void> fetchMyRecipes() async {
     var response = await http.get(
-      Uri.parse('http://localhost:4513/my-recipes?userIdx=1'),
+      Uri.parse('https://api.codingduo.co.kr/my-recipes?userIdx=1'),
       headers: {
         "Content-Type": "application/json",
         // 필요하다면 인증 헤더 추가
@@ -36,12 +36,10 @@ class _MyPageScreensState extends State<MyPageScreens> {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       setState(() {
-        myRecipes = List<Map<String, dynamic>>.from(
-          data.map((item) => {
-            'image': item['rcp_image'],
-            'name': item['rcp_nm'],
-          })
-        );
+        myRecipes = List<Map<String, dynamic>>.from(data.map((item) => {
+              'image': item['rcp_image'],
+              'name': item['rcp_nm'],
+            }));
       });
     } else {
       // 에러 처리 또는 에러 메시지 표시
@@ -59,7 +57,8 @@ class _MyPageScreensState extends State<MyPageScreens> {
             AppBar(
               automaticallyImplyLeading: false,
               centerTitle: true,
-              title: Text('마이페이지', style: TextStyle(color: Colors.black, fontSize: 20)),
+              title: Text('마이페이지',
+                  style: TextStyle(color: Colors.black, fontSize: 20)),
               backgroundColor: Color(0xffffffff),
               elevation: 0,
               actions: [
@@ -77,9 +76,14 @@ class _MyPageScreensState extends State<MyPageScreens> {
               ],
             ),
             SizedBox(height: 10.0),
-            Center(child: Image.asset('assets/images/img_dessert.jpg', width: 95, height: 95)),
+            Center(
+                child: Image.asset('assets/images/img_dessert.jpg',
+                    width: 95, height: 95)),
             SizedBox(height: 8.0),
-            Center(child: Text("닉네임", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))),
+            Center(
+                child: Text("닉네임",
+                    style: TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold))),
             SizedBox(height: 20.0),
             Container(
               width: double.infinity,
@@ -125,7 +129,7 @@ class _MyPageScreensState extends State<MyPageScreens> {
                 ),
               ),
             ),
-           Expanded(
+            Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
@@ -162,11 +166,11 @@ class _MyPageScreensState extends State<MyPageScreens> {
             ),
           ],
         ),
-        bottomNavigationBar: NavigationBarWidget(selectedIndex: 4, onItemTapped: _onItemTapped),
+        bottomNavigationBar:
+            NavigationBarWidget(selectedIndex: 4, onItemTapped: _onItemTapped),
       ),
     );
   }
-
 
   void _onItemTapped(int index) {
     switch (index) {
