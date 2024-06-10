@@ -34,18 +34,8 @@
                 <img src="https://i.ibb.co/YQZdrgH/5.gif" style="width: 80%; margin-bottom: 100px;" alt="5" border="0">
             </div>
         </div>
-        ## 🔥 Key Features
-
-### ⭐️ 간편한 재료 입력
-<img width="700" alt="스크린샷 2024-06-11 오전 2 39 00" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/28e86996-a751-4943-a1ec-c8846f8ca72e">
-
-### ⭐️ 원하는 재료와 정확히 일치하는 레시피
-<img width="700" alt="스크린샷 2024-06-11 오전 2 36 44" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/6c0150d3-a00d-463e-9817-00d66174c60b">
-
-### ⭐️ 레시피 저장 및 공유
-<img width="700" alt="스크린샷 2024-06-11 오전 2 37 15" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/7c33697c-5815-4d1f-b5f7-eaef2d715b45">
-
 ---
+
 ## 📱 Screen configuration
 | 메인 화면  |  홈  |  냉장고 파먹기  |
 | :-------------------------------------------: | :------------: | :-------------------: |
