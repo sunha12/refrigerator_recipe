@@ -12,7 +12,7 @@
             </div>
         </div>
         <div style="text-align: left;">
-            <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🌮 서비스 소개 </h2> <br> 
+            <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🌮 서비스 소개 </h2>
             <div  align= "center"> 
                 <div style="font-weight: bold; margin-bottom: 50px; text-align: left;">
                     <h3>냉장고 속 레시피란, 냉장고 속에 있는 요리 재료만으로 만들 수 있는 레시피를 제공하기 위한 서비스입니다.</h3><br />
