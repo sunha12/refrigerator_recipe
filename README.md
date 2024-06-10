@@ -34,7 +34,6 @@
                 <img src="https://i.ibb.co/YQZdrgH/5.gif" style="width: 80%; margin-bottom: 100px;" alt="5" border="0">
             </div>
         </div>
-<img width="200" alt="박선하" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/4dd17f53-054d-4d2e-be3b-c1c76d1dbdd6"> | <img width="200" alt="장정운" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/5238a7b5-67f0-4828-a7f6-2b8b0be38e39">
         <div style="text-align: left;">
             <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🍅 시스템 아키텍처 </h2> <br> 
             <div  align= "center"> 
@@ -66,5 +65,5 @@
 # 🧑‍🤝‍🧑 Members
 [박선하](https://github.com/sunha12) | [장정운](https://github.com/devwoon)
 ------|------
-
+<img width="200" alt="박선하" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/4dd17f53-054d-4d2e-be3b-c1c76d1dbdd6"> | <img width="200" alt="장정운" src="https://github.com/sunha12/refrigerator_recipe_app/assets/105585664/5238a7b5-67f0-4828-a7f6-2b8b0be38e39">
     
