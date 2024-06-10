@@ -1,4 +1,4 @@
-# refrigerator_recipe_app
+# 냉장고 속 레시피
 
 A new Flutter project.
 
