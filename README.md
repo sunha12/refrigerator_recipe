@@ -42,6 +42,7 @@
         </div>
         <div style="text-align: left;">
             <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🍍 TEST 영상 </h2> <br> 
+                    <a href="https://youtube.com/shorts/WA2-s6A9d_o?si=5eKEoA9Tf12cMLq_">시연 영상 바로가기<a>
             <div  align= "center">
             </div>
         </div>
