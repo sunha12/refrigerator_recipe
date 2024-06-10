@@ -25,14 +25,11 @@
         <div style="text-align: left;">
             <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🍩 Big 3 </h2> <br> 
             <div  align= "center"> 
-
                 <h3 style="text-align: left;">핵심 기능 3가지입니다. 간편한 재료 입력 기능, 원하는 식재료로만 만들 수 있는 레시피 정보, 사용자 개인의 레시피를 저장 및 공유할 수 있는 기능입니다.</h3><br />
                 <h3 style="text-align: left; margin-bottom: 30px;">냉장고 속 레시피에서는 두가지 재료 입력 방식을 제공하고 있습니다. 화면에 보이는 바와 같이 아이콘을 선택하여 재료를 추가하거나, 영수증 사진을 찍어 올리면 이미지 인식 api를 사용하여 영수증 안에 적혀있는 재료를 자동으로 추가하여줍니다.</h3><br />
                 <img src="https://i.ibb.co/mC5QyvX/3.gif" style="width: 80%; margin-bottom: 100px;" alt="3" border="0">
-                
                 <h3 style="text-align: left; margin-bottom: 30px;">원하는 재료를 기반으로 한 레시피 검색 기능입니다. 사용자가 사용하고자 하는 식재료와 조미료를 선택하고 버튼을 클릭하면 해당 재료를 기반으로 만들 수 있는 레시피 리스트가 출력됩니다. 제목과 설명을 읽고 원하는 레시피를 클릭하면 레시피 상세 페이지로 이동하여 자세한 조리과정에 대한 정보를 얻을 수 있습니다.</h3><br />
                 <img src="https://i.ibb.co/Wc9JjJn/4.gif" style="width: 80%; margin-bottom: 100px;" alt="4" border="0"><br />
-
                 <h3 style="text-align: left; margin-bottom: 30px;">레시피 저장 및 공유 기능입니다. 냉장고 속 레시피에서 기본적으로 제공하고 있는 레시피들 외에 사용자가 직접 본인만의 레시피를 등록하고 공유할 수 있습니다.</h3><br />
                 <img src="https://i.ibb.co/YQZdrgH/5.gif" style="width: 80%; margin-bottom: 100px;" alt="5" border="0">
             </div>
@@ -45,8 +42,7 @@
         </div>
         <div style="text-align: left;">
             <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> 🍍 TEST 영상 </h2> <br> 
-            <div  align= "center"> 
-                
+            <div  align= "center">
             </div>
         </div>
     
